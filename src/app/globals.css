@@ -1,0 +1,250 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+ * Yasso Store — Luxury Design Tokens
+ * Light/dark values are expressed with light-dark(); the active scheme follows
+ * the system preference by default and can be forced with .light / .dark on
+ * <html>.
+ * ------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: light dark;
+
+  /* Core palette */
+  --background: light-dark(#cdb49e, #14110e);
+  --surface: light-dark(#e9ddcd, #1e1915);
+  --surface-elevated: light-dark(#ffffff, #292219);
+  --foreground: light-dark(#111111, #f4efe8);
+  --muted: light-dark(#6b7280, #a39d94);
+
+  --primary: light-dark(#000000, #f4efe8);
+  --primary-foreground: light-dark(#ffffff, #141110);
+  --secondary: light-dark(#ad7d56, #c2916a);
+  --secondary-foreground: #ffffff;
+
+  --border: light-dark(rgba(0, 0, 0, 0.08), rgba(255, 255, 255, 0.1));
+  --ring: light-dark(#ad7d56, #c2916a);
+  --overlay: light-dark(rgba(20, 17, 14, 0.45), rgba(0, 0, 0, 0.65));
+
+  /* Status */
+  --success: light-dark(#3f7a4e, #8bc39a);
+  --warning: light-dark(#9a6b1f, #d9a554);
+  --danger: light-dark(#b3402f, #e08575);
+  --info: light-dark(#4f6b85, #9db2c4);
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+.light {
+  color-scheme: light;
+}
+
+@theme inline {
+  /* Colors */
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-overlay: var(--overlay);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+
+  /* Typography */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Motion — smooth 250ms everywhere by default */
+  --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
+  --default-transition-duration: 250ms;
+  --default-transition-timing-function: var(--ease-luxury);
+
+  /* Soft elegant shadows */
+  --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.04), 0 4px 16px rgb(0 0 0 / 0.06);
+  --shadow-elevated: 0 2px 4px rgb(0 0 0 / 0.05), 0 12px 32px rgb(0 0 0 / 0.1);
+  --shadow-lift: 0 4px 8px rgb(0 0 0 / 0.06), 0 20px 48px rgb(0 0 0 / 0.14);
+
+  /* Animations */
+  --animate-fade-in: fade-in 250ms var(--ease-luxury) both;
+  --animate-fade-out: fade-out 200ms var(--ease-luxury) both;
+  --animate-scale-in: scale-in 250ms var(--ease-luxury) both;
+  --animate-slide-up: slide-up 300ms var(--ease-luxury) both;
+  --animate-slide-down: slide-down 300ms var(--ease-luxury) both;
+  --animate-slide-in-right: slide-in-right 300ms var(--ease-luxury) both;
+  --animate-slide-in-left: slide-in-left 300ms var(--ease-luxury) both;
+  --animate-slide-in-bottom: slide-in-bottom 300ms var(--ease-luxury) both;
+  --animate-shimmer: shimmer 1.8s linear infinite;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes slide-down {
+    from {
+      opacity: 0;
+      transform: translateY(-16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes slide-in-right {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  @keyframes slide-in-left {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  @keyframes slide-in-bottom {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  @keyframes shimmer {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+}
+
+/* --------------------------------- Base ---------------------------------- */
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Large, bold, tightly-tracked headings */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold tracking-tight text-balance;
+  }
+  h1 {
+    @apply text-4xl font-bold sm:text-5xl lg:text-6xl;
+  }
+  h2 {
+    @apply text-3xl font-bold sm:text-4xl;
+  }
+  h3 {
+    @apply text-2xl sm:text-3xl;
+  }
+  h4 {
+    @apply text-xl sm:text-2xl;
+  }
+
+  ::selection {
+    background: var(--secondary);
+    color: var(--secondary-foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ------------------------------- Utilities ------------------------------- */
+
+/* Glassmorphism — use sparingly (sticky headers, overlaid panels) */
+@utility glass {
+  background: color-mix(in srgb, var(--surface-elevated) 65%, transparent);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid var(--border);
+}
+
+/* Elegant hover lift for cards and tiles */
+@utility hover-lift {
+  transition:
+    transform 250ms var(--ease-luxury),
+    box-shadow 250ms var(--ease-luxury);
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
+  }
+}

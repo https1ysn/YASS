@@ -1,0 +1,47 @@
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Adds the elegant hover-lift animation for clickable cards. */
+  interactive?: boolean;
+}
+
+export function Card({ interactive = false, className, ...props }: CardProps) {
+  return (
+    <div
+      className={cn(
+        "border-border bg-surface shadow-soft rounded-2xl border",
+        interactive && "hover-lift",
+        className
+      )}
+      {...props}
+    />
+  );
+}
+
+export function CardHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("flex flex-col gap-1.5 p-6 sm:p-8 sm:pb-6", className)} {...props} />;
+}
+
+export function CardTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
+  return (
+    <h3 className={cn("text-xl font-semibold tracking-tight sm:text-2xl", className)} {...props} />
+  );
+}
+
+export function CardDescription({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLParagraphElement>) {
+  return <p className={cn("text-muted text-sm leading-relaxed", className)} {...props} />;
+}
+
+export function CardContent({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("p-6 pt-0 sm:p-8 sm:pt-0", className)} {...props} />;
+}
+
+export function CardFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div className={cn("flex items-center gap-3 p-6 pt-0 sm:p-8 sm:pt-0", className)} {...props} />
+  );
+}
