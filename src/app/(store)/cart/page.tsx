@@ -3,7 +3,6 @@ import { Container } from "@/components/ui/container";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { CartView } from "@/components/cart";
 import { ProductRail } from "@/components/product";
-import { demoCartLines, demoSavedLines } from "@/constants/cart";
 import { getProducts } from "@/lib/supabase/queries";
 
 export const revalidate = 60;
@@ -14,12 +13,9 @@ export const metadata: Metadata = {
 };
 
 export default async function CartPage() {
+  // The cart lives on the client, so the rail is a static curated pick.
   const products = await getProducts();
-  const inCart = new Set([
-    ...demoCartLines.map((line) => line.product.slug),
-    ...demoSavedLines.map((line) => line.product.slug),
-  ]);
-  const recommended = products.filter((product) => !inCart.has(product.slug)).slice(0, 4);
+  const recommended = products.slice(0, 4);
 
   return (
     <>

@@ -19,7 +19,7 @@ export function CallToAction() {
                 One hour with our stylists — in boutique or over video — to build a wardrobe around
                 what you already own. Unhurried, personal, complimentary.
               </p>
-              <ButtonLink href="/appointments" variant="secondary" size="lg" className="mt-2">
+              <ButtonLink href="/shop" variant="secondary" size="lg" className="mt-2">
                 Book an appointment
               </ButtonLink>
             </div>

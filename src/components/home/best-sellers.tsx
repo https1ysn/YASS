@@ -30,7 +30,7 @@ export function BestSellers({
         ))}
       </div>
       <Reveal className="mt-10 flex justify-center sm:mt-14">
-        <ButtonLink href="/collections/best-sellers" variant="outline">
+        <ButtonLink href="/shop" variant="outline">
           Shop all best sellers
         </ButtonLink>
       </Reveal>

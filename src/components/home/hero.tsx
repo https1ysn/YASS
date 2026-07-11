@@ -19,7 +19,7 @@ export function Hero() {
               leather, finished by hand in our ateliers.
             </p>
             <div className="animate-slide-up flex flex-col gap-3 self-stretch [animation-delay:300ms] sm:flex-row sm:self-auto">
-              <ButtonLink href="/collections/new" size="lg">
+              <ButtonLink href="/shop" size="lg">
                 Shop New Arrivals
               </ButtonLink>
               <ButtonLink href="/collections" variant="outline" size="lg">

@@ -42,7 +42,7 @@ export function BrandStory() {
                 </div>
               ))}
             </dl>
-            <ButtonLink href="/about" variant="outline">
+            <ButtonLink href="/collections" variant="outline">
               Discover our story
             </ButtonLink>
           </Reveal>

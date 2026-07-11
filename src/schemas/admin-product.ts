@@ -1,4 +1,11 @@
 import { z } from "zod";
+import { filterColors } from "@/constants/shop";
+
+export const HEX_COLOR_RE = /^#(?:[0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/;
+
+/** Colors saved before the free color picker existed are named tokens
+ * ("sand", "noir", …) — they stay valid so existing products keep saving. */
+const legacyColorValues = new Set<string>(filterColors.map((color) => color.value));
 
 /** Validation for the admin product form — shared by client and server action. */
 export const adminProductSchema = z
@@ -27,7 +34,16 @@ export const adminProductSchema = z
       .nullable(),
     availability: z.enum(["in-stock", "made-to-order"]),
     badge: z.enum(["New", "Best Seller", "Sale"]).nullable(),
-    colors: z.array(z.string()).default([]),
+    colors: z
+      .array(
+        z
+          .string()
+          .trim()
+          .refine((value) => HEX_COLOR_RE.test(value) || legacyColorValues.has(value), {
+            message: "Colors must be valid HEX values (e.g. #AD7D56).",
+          })
+      )
+      .default([]),
     sizes: z.array(z.string().trim().min(1)).min(1, "Add at least one size."),
     isFeatured: z.boolean().default(false),
   })

@@ -5,7 +5,6 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import type { Product } from "@/types/product";
 import type { CartLine } from "@/types/cart";
-import { demoCartLines, demoSavedLines } from "@/constants/cart";
 
 const MAX_QUANTITY = 9;
 
@@ -34,15 +33,15 @@ function lineId(product: Product, size: string, color: string) {
 }
 
 /**
- * Client cart, persisted to localStorage. Seeded with the demo bag on first
- * visit so the experience matches the original design; from then on it is the
- * single source of truth for the cart page, mini cart and checkout.
+ * Client cart, persisted to localStorage. Starts empty for new visitors; a
+ * previously saved cart is rehydrated after mount. It is the single source of
+ * truth for the cart page, mini cart and checkout.
  */
 export const useCartStore = create<CartState>()(
   persist(
     (set) => ({
-      lines: demoCartLines,
-      saved: demoSavedLines,
+      lines: [],
+      saved: [],
       hydrated: false,
 
       addLine: (product, { size, color, quantity = 1 }) =>

@@ -25,7 +25,7 @@ export function FeaturedProducts({
         ))}
       </div>
       <Reveal className="mt-10 flex justify-center sm:mt-14">
-        <ButtonLink href="/collections/new" variant="outline">
+        <ButtonLink href="/shop" variant="outline">
           View all new arrivals
         </ButtonLink>
       </Reveal>

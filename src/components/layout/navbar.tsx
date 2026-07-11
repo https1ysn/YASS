@@ -7,9 +7,7 @@ import { Container } from "@/components/ui/container";
 import { DesktopNav } from "./desktop-nav";
 import { MobileNav } from "./mobile-nav";
 import { SearchBar } from "./search-bar";
-import { WishlistButton } from "./wishlist-button";
 import { CartButton } from "./cart-button";
-import { AccountMenu } from "./account-menu";
 
 export function Navbar() {
   return (
@@ -33,8 +31,6 @@ export function Navbar() {
 
         <div className="flex items-center gap-0.5 sm:gap-1">
           <SearchBar />
-          <WishlistButton className="hidden sm:inline-flex" />
-          <AccountMenu className="hidden sm:block" />
           <CartButton />
         </div>
       </nav>

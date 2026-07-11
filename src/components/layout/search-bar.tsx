@@ -23,7 +23,8 @@ export function SearchBar() {
     if (!q) return;
     setOpen(false);
     setQuery("");
-    router.push(`/search?q=${encodeURIComponent(q)}`);
+    // No dedicated search-results page yet — send shoppers to the full catalog.
+    router.push("/shop");
   }
 
   return (

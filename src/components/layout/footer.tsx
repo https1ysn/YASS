@@ -13,7 +13,7 @@ export function Footer() {
           <NewsletterSection />
         </div>
 
-        <div className="grid grid-cols-2 gap-10 pb-14 sm:grid-cols-[1.4fr_repeat(3,1fr)] sm:gap-8">
+        <div className="grid grid-cols-2 gap-10 pb-14 sm:grid-cols-[2fr_1fr] sm:gap-8">
           <div className="col-span-2 flex max-w-sm flex-col gap-4 sm:col-span-1">
             <Link
               href="/"

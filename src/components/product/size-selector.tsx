@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 export interface SizeSelectorProps {
@@ -18,12 +17,6 @@ export function SizeSelector({ sizes, value, onChange, className }: SizeSelector
         <p className="text-muted text-xs font-medium tracking-[0.15em] uppercase">
           Size{value && <span className="normal-case"> — {value}</span>}
         </p>
-        <Link
-          href="/size-guide"
-          className="text-muted hover:text-foreground text-xs underline-offset-4 transition-colors hover:underline"
-        >
-          Size guide
-        </Link>
       </div>
       <div className="flex flex-wrap gap-2">
         {sizes.map((size) => (

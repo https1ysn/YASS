@@ -19,7 +19,7 @@ export function FinalCtaBanner() {
             Pieces that outlast seasons and trends — made slowly, worn often, kept forever.
           </p>
           <div className="mt-2 flex flex-col gap-3 self-stretch sm:flex-row sm:justify-center sm:self-auto">
-            <ButtonLink href="/collections/new" variant="secondary" size="lg">
+            <ButtonLink href="/shop" variant="secondary" size="lg">
               Shop the new season
             </ButtonLink>
             <ButtonLink

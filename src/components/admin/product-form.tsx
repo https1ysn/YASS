@@ -11,11 +11,35 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select } from "@/components/ui/select";
 import { toast } from "@/components/ui/toast";
 import { filterColors } from "@/constants/shop";
-import { adminProductSchema } from "@/schemas/admin-product";
+import { adminProductSchema, HEX_COLOR_RE } from "@/schemas/admin-product";
 import type { AdminCategory, AdminProduct } from "@/lib/supabase/admin";
 import { saveProduct } from "@/app/admin/(panel)/products/actions";
 
 type BadgeValue = "New" | "Best Seller" | "Sale" | null;
+
+const DEFAULT_PICKER_COLOR = "#ad7d56";
+
+/** "#abc" → "#aabbcc", lowercased — one canonical form for storage and
+ * duplicate checks. Non-hex values (legacy tokens) pass through untouched. */
+function normalizeHex(value: string): string {
+  const trimmed = value.trim().toLowerCase();
+  if (/^#[0-9a-f]{3}$/.test(trimmed)) {
+    return `#${[...trimmed.slice(1)].map((ch) => ch + ch).join("")}`;
+  }
+  return trimmed;
+}
+
+/** Swatch color for a stored value — HEX as-is, legacy tokens via the old palette. */
+function swatchHex(value: string): string {
+  if (value.startsWith("#")) return value;
+  return filterColors.find((color) => color.value === value)?.hex ?? DEFAULT_PICKER_COLOR;
+}
+
+/** Human label — legacy tokens keep their name, HEX values read as HEX. */
+function swatchLabel(value: string): string {
+  if (value.startsWith("#")) return value.toUpperCase();
+  return filterColors.find((color) => color.value === value)?.label ?? value;
+}
 
 interface FormState {
   name: string;
@@ -99,6 +123,11 @@ export function ProductForm({ categories, product }: ProductFormProps) {
   const [saving, setSaving] = React.useState(false);
   const slugTouched = React.useRef(Boolean(product));
 
+  // Color picker — the swatch input always holds a valid HEX; the text field
+  // may briefly hold a partial value while typing.
+  const [pickerColor, setPickerColor] = React.useState(DEFAULT_PICKER_COLOR);
+  const [hexInput, setHexInput] = React.useState(DEFAULT_PICKER_COLOR);
+
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
@@ -107,13 +136,37 @@ export function ProductForm({ categories, product }: ProductFormProps) {
     update("badge", checked ? value : null);
   }
 
-  function toggleColor(value: string) {
-    setForm((prev) => ({
-      ...prev,
-      colors: prev.colors.includes(value)
-        ? prev.colors.filter((color) => color !== value)
-        : [...prev.colors, value],
-    }));
+  function setPicker(value: string) {
+    setPickerColor(value);
+    setHexInput(value);
+  }
+
+  function addColor() {
+    const value = normalizeHex(hexInput);
+    if (!HEX_COLOR_RE.test(value)) {
+      toast({
+        title: "Enter a valid HEX color",
+        description: "e.g. #AD7D56 or #FA0",
+        variant: "warning",
+      });
+      return;
+    }
+    const duplicate = form.colors.some(
+      (color) => normalizeHex(swatchHex(color)) === value || normalizeHex(color) === value
+    );
+    if (duplicate) {
+      toast({ title: "Color already added", description: value.toUpperCase(), variant: "info" });
+      return;
+    }
+    update("colors", [...form.colors, value]);
+    setPicker(value);
+  }
+
+  function removeColor(value: string) {
+    update(
+      "colors",
+      form.colors.filter((color) => color !== value)
+    );
   }
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -263,28 +316,83 @@ export function ProductForm({ categories, product }: ProductFormProps) {
       <FormSection title="Variants">
         <div className="flex flex-col gap-3">
           <p className="text-muted text-xs font-medium tracking-[0.15em] uppercase">Colors</p>
-          <div className="flex flex-wrap gap-3">
-            {filterColors.map((color) => {
-              const selected = form.colors.includes(color.value);
-              return (
-                <button
-                  key={color.value}
-                  type="button"
-                  aria-pressed={selected}
-                  title={color.label}
-                  onClick={() => toggleColor(color.value)}
-                  style={{ backgroundColor: color.hex }}
-                  className={cn(
-                    "border-border size-9 rounded-full border transition-all hover:scale-110",
-                    "focus-visible:ring-ring focus-visible:ring-offset-background focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none",
-                    selected && "ring-ring ring-offset-background ring-2 ring-offset-2"
-                  )}
-                >
-                  <span className="sr-only">{color.label}</span>
-                </button>
-              );
-            })}
+
+          <div className="flex flex-wrap items-center gap-3">
+            <input
+              type="color"
+              value={pickerColor}
+              onChange={(event) => setPicker(event.target.value)}
+              aria-label="Pick a color"
+              className={cn(
+                "border-border bg-surface-elevated shadow-soft h-11 w-14 shrink-0 cursor-pointer rounded-xl border p-1.5 transition-all hover:scale-105",
+                "focus-visible:ring-ring focus-visible:ring-2 focus-visible:outline-none"
+              )}
+            />
+            <div className="w-32">
+              <Input
+                value={hexInput}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  setHexInput(value);
+                  if (HEX_COLOR_RE.test(value.trim())) setPickerColor(normalizeHex(value));
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    event.preventDefault();
+                    addColor();
+                  }
+                }}
+                placeholder="#AD7D56"
+                aria-label="HEX color value"
+                className="h-11 font-mono text-sm uppercase"
+              />
+            </div>
+            <Button type="button" variant="outline" onClick={addColor}>
+              Add color
+            </Button>
           </div>
+
+          {form.colors.length > 0 ? (
+            <ul className="flex flex-wrap gap-3 pt-1" aria-label="Selected colors">
+              {form.colors.map((color) => {
+                const label = swatchLabel(color);
+                return (
+                  <li key={color} className="group animate-scale-in relative">
+                    <span
+                      title={label}
+                      style={{ backgroundColor: swatchHex(color) }}
+                      className="border-border shadow-soft block size-9 rounded-full border transition-transform duration-200 group-hover:scale-110"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeColor(color)}
+                      aria-label={`Remove color ${label}`}
+                      className={cn(
+                        "bg-danger absolute -top-1.5 -right-1.5 grid size-4.5 place-items-center rounded-full text-white",
+                        "shadow-soft transition-all duration-200 hover:scale-110",
+                        "sm:scale-75 sm:opacity-0 sm:group-hover:scale-100 sm:group-hover:opacity-100 sm:focus-visible:scale-100 sm:focus-visible:opacity-100",
+                        "focus-visible:ring-ring focus-visible:ring-2 focus-visible:outline-none"
+                      )}
+                    >
+                      <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" className="size-2.5">
+                        <path
+                          d="M5 5 15 15M15 5 5 15"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p className="text-muted text-xs leading-relaxed">
+              No colors yet — pick one above and add it.
+            </p>
+          )}
+          {errors.colors && <p className="text-danger text-sm">{errors.colors}</p>}
         </div>
 
         <Input
