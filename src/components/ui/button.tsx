@@ -20,6 +20,27 @@ const sizes = {
   icon: "size-11",
 } as const;
 
+export type ButtonVariant = keyof typeof variants;
+export type ButtonSize = keyof typeof sizes;
+
+/** Shared classes so links (ButtonLink) can look identical to buttons. */
+export function buttonClasses(
+  variant: ButtonVariant = "primary",
+  size: ButtonSize = "md",
+  fullWidth = false,
+  className?: string
+) {
+  return cn(
+    "inline-flex items-center justify-center rounded-2xl font-medium tracking-wide whitespace-nowrap transition-all select-none",
+    "focus-visible:ring-ring focus-visible:ring-offset-background focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none",
+    "active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50",
+    variants[variant],
+    sizes[size],
+    fullWidth && "w-full",
+    className
+  );
+}
+
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: keyof typeof variants;
   size?: keyof typeof sizes;
@@ -50,15 +71,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       ref={ref}
       type={type}
       disabled={disabled || isLoading}
-      className={cn(
-        "inline-flex items-center justify-center rounded-2xl font-medium tracking-wide whitespace-nowrap transition-all select-none",
-        "focus-visible:ring-ring focus-visible:ring-offset-background focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none",
-        "active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50",
-        variants[variant],
-        sizes[size],
-        fullWidth && "w-full",
-        className
-      )}
+      className={buttonClasses(variant, size, fullWidth, className)}
       {...props}
     >
       {isLoading ? <Spinner size="sm" /> : leftIcon}

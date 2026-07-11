@@ -1,0 +1,53 @@
+"use client";
+
+import * as React from "react";
+import { cn } from "@/lib/utils";
+import type { Product } from "@/types/product";
+import { ProductCard } from "@/components/ui/product-card";
+import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/shared/reveal";
+import { ProductQuickView } from "@/components/product/quick-view";
+
+export interface ProductGridProps {
+  products: Product[];
+  className?: string;
+}
+
+export function ProductGrid({ products, className }: ProductGridProps) {
+  const [quickView, setQuickView] = React.useState<Product | null>(null);
+
+  return (
+    <>
+      <div className={cn("grid grid-cols-2 gap-4 sm:gap-6 xl:grid-cols-3", className)}>
+        {products.map((product, index) => (
+          <Reveal key={product.slug} delay={Math.min(index, 5) * 60}>
+            <ProductCard
+              name={product.name}
+              href={product.href}
+              imageSrc={product.imageSrc}
+              imageAlt={product.imageAlt}
+              price={product.price}
+              compareAtPrice={product.compareAtPrice}
+              category={product.category}
+              badge={product.badge}
+              className="h-full"
+              footer={
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  fullWidth
+                  onClick={() => setQuickView(product)}
+                  className="border-border rounded-xl border"
+                >
+                  Quick view
+                </Button>
+              }
+            />
+          </Reveal>
+        ))}
+      </div>
+
+      <ProductQuickView product={quickView} onClose={() => setQuickView(null)} />
+    </>
+  );
+}

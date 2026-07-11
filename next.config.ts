@@ -6,8 +6,8 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
-      // Add the hosts your product images are served from, e.g.:
-      // { protocol: "https", hostname: "cdn.example.com" },
+      // Supabase Storage — product imagery uploaded from the admin.
+      { protocol: "https", hostname: "*.supabase.co", pathname: "/storage/v1/object/public/**" },
     ],
   },
 };
