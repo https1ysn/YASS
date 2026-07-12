@@ -2,14 +2,14 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { AnnouncementBar } from "./announcement-bar";
+import { AnnouncementBar, type AnnouncementSettings } from "./announcement-bar";
 import { Navbar } from "./navbar";
 
 /**
  * Site header: the announcement bar scrolls away, the navbar stays sticky and
  * turns glassy once the page is scrolled.
  */
-export function Header() {
+export function Header({ announcement }: { announcement?: AnnouncementSettings }) {
   const [scrolled, setScrolled] = React.useState(false);
 
   React.useEffect(() => {
@@ -21,7 +21,7 @@ export function Header() {
 
   return (
     <>
-      <AnnouncementBar />
+      <AnnouncementBar settings={announcement} />
       <header
         className={cn(
           "border-border sticky top-0 z-40 border-b transition-all",

@@ -9,7 +9,13 @@ import { toast } from "@/components/ui/toast";
  * Newsletter signup panel. Purely visual for now — submission shows a toast;
  * wire it to a real endpoint later.
  */
-export function NewsletterSection() {
+export function NewsletterSection({
+  title,
+  description,
+}: {
+  title?: string;
+  description?: string;
+} = {}) {
   const t = useTranslations("newsletter");
   const [email, setEmail] = React.useState("");
 
@@ -30,8 +36,8 @@ export function NewsletterSection() {
         <p className="text-[11px] font-medium tracking-[0.2em] uppercase opacity-70">
           {t("kicker")}
         </p>
-        <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">{t("title")}</h2>
-        <p className="text-sm leading-relaxed opacity-80">{t("description")}</p>
+        <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">{title || t("title")}</h2>
+        <p className="text-sm leading-relaxed opacity-80">{description || t("description")}</p>
       </div>
 
       <form

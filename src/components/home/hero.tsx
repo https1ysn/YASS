@@ -5,10 +5,20 @@ import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button-link";
 import { Badge } from "@/components/ui/badge";
 import { localeHref } from "@/i18n/alternates";
+import { getSiteSettings } from "@/lib/settings";
 
 export async function Hero() {
   const t = await getTranslations("home.hero");
   const locale = await getLocale();
+  const { homepage } = await getSiteSettings();
+
+  const title = homepage.heroTitle.trim() || t("title");
+  const description = homepage.heroSubtitle.trim() || t("description");
+  const primaryLabel = homepage.heroButtonText.trim() || t("shopNewArrivals");
+  const primaryHref = homepage.heroButtonLink.trim() || "/shop";
+  const primaryTo = /^(https?:)?\/\//.test(primaryHref)
+    ? primaryHref
+    : localeHref(locale, primaryHref.startsWith("/") ? primaryHref : `/${primaryHref}`);
 
   return (
     <section aria-label={t("sectionAriaLabel")} className="overflow-hidden">
@@ -18,13 +28,13 @@ export async function Hero() {
             <Badge variant="outline" className="animate-slide-up">
               {t("badge")}
             </Badge>
-            <h1 className="animate-slide-up [animation-delay:100ms]">{t("title")}</h1>
+            <h1 className="animate-slide-up [animation-delay:100ms]">{title}</h1>
             <p className="animate-slide-up text-muted text-base leading-relaxed [animation-delay:200ms] sm:text-lg">
-              {t("description")}
+              {description}
             </p>
             <div className="animate-slide-up flex flex-col gap-3 self-stretch [animation-delay:300ms] sm:flex-row sm:self-auto">
-              <ButtonLink href={localeHref(locale, "/shop")} size="lg">
-                {t("shopNewArrivals")}
+              <ButtonLink href={primaryTo} size="lg">
+                {primaryLabel}
               </ButtonLink>
               <ButtonLink href={localeHref(locale, "/collections")} variant="outline" size="lg">
                 {t("exploreCollections")}

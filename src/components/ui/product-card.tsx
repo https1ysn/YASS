@@ -1,7 +1,7 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn, formatPrice } from "@/lib/utils";
 import { Badge } from "./badge";
 
 export interface ProductCardProps {
@@ -20,10 +20,6 @@ export interface ProductCardProps {
   /** Slot rendered below the details — e.g. an add-to-cart button. */
   footer?: React.ReactNode;
   className?: string;
-}
-
-function formatPrice(value: number, currency: string, locale: string) {
-  return new Intl.NumberFormat(locale, { style: "currency", currency }).format(value);
 }
 
 export function ProductCard({

@@ -40,6 +40,12 @@ export function categoryImagePath(file: File): string {
   return `categories/${uniqueFileName(file)}`;
 }
 
+/** Unique, collision-safe path for a website-settings asset (logo, favicon…). */
+export function settingsImagePath(kind: string, file: File): string {
+  const safeKind = kind.replace(/[^a-z0-9-]/gi, "") || "asset";
+  return `settings/${safeKind}-${uniqueFileName(file)}`;
+}
+
 export const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp", "image/avif"];
 export const ACCEPTED_IMAGE_ATTR = ACCEPTED_IMAGE_TYPES.join(",");
 export const MAX_IMAGE_SIZE_MB = 5;

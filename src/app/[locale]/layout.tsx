@@ -6,6 +6,7 @@ import { getMessages, getTranslations, setRequestLocale } from "next-intl/server
 import { Toaster } from "@/components/ui/toast";
 import { routing, isRtlLocale } from "@/i18n/routing";
 import { getLocaleAlternates } from "@/i18n/alternates";
+import { getSiteSettings } from "@/lib/settings";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -36,15 +37,28 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "metadata" });
+  const { general, seo } = await getSiteSettings();
+
+  const siteName = general.storeName || t("siteName");
+  const templateName = seo.websiteTitle.trim() || siteName;
+  const defaultTitle = seo.metaTitle.trim() || t("defaultTitle");
+  const description = seo.metaDescription.trim() || t("defaultDescription");
 
   return {
     metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"),
     title: {
-      default: t("defaultTitle"),
-      template: `%s — ${t("siteName")}`,
+      default: defaultTitle,
+      template: `%s — ${templateName}`,
     },
-    description: t("defaultDescription"),
+    description,
     alternates: { languages: getLocaleAlternates("") },
+    icons: general.faviconUrl ? { icon: general.faviconUrl } : undefined,
+    openGraph: {
+      title: defaultTitle,
+      description,
+      siteName,
+      images: seo.ogImageUrl ? [{ url: seo.ogImageUrl }] : undefined,
+    },
   };
 }
 

@@ -21,6 +21,8 @@
   --primary-foreground: light-dark(#ffffff, #141110);
   --secondary: light-dark(#ad7d56, #c2916a);
   --secondary-foreground: #ffffff;
+  --accent: light-dark(#c2916a, #ad7d56);
+  --accent-foreground: #ffffff;
 
   --border: light-dark(rgba(0, 0, 0, 0.08), rgba(255, 255, 255, 0.1));
   --ring: light-dark(#ad7d56, #c2916a);
@@ -52,6 +54,8 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
   --color-border: var(--border);
   --color-ring: var(--ring);
   --color-overlay: var(--overlay);

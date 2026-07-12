@@ -86,6 +86,16 @@ const items: AdminNavItem[] = [
       </NavIcon>
     ),
   },
+  {
+    label: "Settings",
+    href: "/admin/settings",
+    icon: (
+      <NavIcon>
+        <circle cx="10" cy="10" r="2.5" />
+        <path d="M10 2.5v2M10 15.5v2M2.5 10h2M15.5 10h2M4.7 4.7l1.4 1.4M13.9 13.9l1.4 1.4M15.3 4.7l-1.4 1.4M6.1 13.9l-1.4 1.4" />
+      </NavIcon>
+    ),
+  },
 ];
 
 /** Sidebar / drawer navigation list — shared between desktop and mobile. */
