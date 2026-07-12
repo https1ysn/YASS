@@ -2,11 +2,13 @@
 
 import * as React from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { cn, formatPrice } from "@/lib/utils";
 import type { CartLine } from "@/types/cart";
 import { Button } from "@/components/ui/button";
 import { filterColors } from "@/constants/shop";
+import { intlTagByLocale, type AppLocale } from "@/i18n/routing";
 
 export interface SavedForLaterProps {
   lines: CartLine[];
@@ -17,17 +19,25 @@ export interface SavedForLaterProps {
 
 /** "Saved for later" list — UI only. */
 export function SavedForLater({ lines, onMoveToBag, onRemove, className }: SavedForLaterProps) {
+  const locale = useLocale() as AppLocale;
+  const t = useTranslations("cart");
+  const tSaved = useTranslations("cart.savedForLater");
+  const tColors = useTranslations("colors");
+  const price = (value: number) => formatPrice(value, "USD", intlTagByLocale[locale]);
+
   if (lines.length === 0) return null;
 
   return (
-    <section aria-label="Saved for later" className={cn("flex flex-col gap-2", className)}>
+    <section aria-label={tSaved("title")} className={cn("flex flex-col gap-2", className)}>
       <h2 className="text-lg font-semibold tracking-tight sm:text-xl">
-        Saved for later <span className="text-muted text-sm font-normal">({lines.length})</span>
+        {tSaved("title")}{" "}
+        <span className="text-muted text-sm font-normal">({lines.length})</span>
       </h2>
       <ul className="divide-border divide-y">
         {lines.map((line) => {
-          const colorLabel =
-            filterColors.find((color) => color.value === line.color)?.label ?? line.color;
+          const colorLabel = filterColors.some((c) => c.value === line.color)
+            ? tColors(line.color)
+            : line.color;
           return (
             <li key={line.id} className="animate-fade-in flex items-center gap-4 py-5 sm:gap-6">
               <Link
@@ -51,9 +61,9 @@ export function SavedForLater({ lines, onMoveToBag, onRemove, className }: Saved
                   {line.product.name}
                 </Link>
                 <p className="text-muted text-sm">
-                  {colorLabel} · Size {line.size}
+                  {t("lineMeta", { color: colorLabel, size: line.size })}
                 </p>
-                <p className="text-sm font-medium">{formatPrice(line.product.price)}</p>
+                <p className="text-sm font-medium">{price(line.product.price)}</p>
               </div>
               <div className="flex shrink-0 flex-col items-end gap-2 sm:flex-row sm:items-center sm:gap-4">
                 <Button
@@ -62,14 +72,14 @@ export function SavedForLater({ lines, onMoveToBag, onRemove, className }: Saved
                   onClick={() => onMoveToBag(line.id)}
                   className="rounded-xl"
                 >
-                  Move to bag
+                  {tSaved("moveToBag")}
                 </Button>
                 <button
                   type="button"
                   onClick={() => onRemove(line.id)}
                   className="text-muted hover:text-danger text-xs font-medium underline-offset-4 transition-colors hover:underline"
                 >
-                  Remove
+                  {tSaved("remove")}
                 </button>
               </div>
             </li>

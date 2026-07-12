@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Drawer } from "@/components/ui/drawer";
@@ -33,6 +34,8 @@ export interface ProductToolbarProps {
 export function ProductToolbar({ count, className }: ProductToolbarProps) {
   const [filtersOpen, setFiltersOpen] = React.useState(false);
   const { activeCount } = useFilters();
+  const t = useTranslations("shop.toolbar");
+  const tCommon = useTranslations("common");
 
   return (
     <div
@@ -43,7 +46,7 @@ export function ProductToolbar({ count, className }: ProductToolbarProps) {
     >
       <p className="text-muted text-sm">
         <span className="text-foreground font-semibold">{count}</span>{" "}
-        {count === 1 ? "piece" : "pieces"}
+        {count === 1 ? t("piece") : t("pieces")}
       </p>
 
       <div className="flex items-center gap-2">
@@ -54,7 +57,7 @@ export function ProductToolbar({ count, className }: ProductToolbarProps) {
           leftIcon={<FilterIcon />}
           className="h-10 rounded-xl lg:hidden"
         >
-          Filters{activeCount > 0 ? ` (${activeCount})` : ""}
+          {activeCount > 0 ? t("filtersWithCount", { count: activeCount }) : t("filters")}
         </Button>
         <SortDropdown />
       </div>
@@ -63,10 +66,11 @@ export function ProductToolbar({ count, className }: ProductToolbarProps) {
         open={filtersOpen}
         onClose={() => setFiltersOpen(false)}
         side="bottom"
-        title="Filter & Sort"
+        title={t("filterAndSort")}
+        closeLabel={tCommon("close")}
         footer={
           <Button fullWidth onClick={() => setFiltersOpen(false)}>
-            View results
+            {t("viewResults")}
           </Button>
         }
       >

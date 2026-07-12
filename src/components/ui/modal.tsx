@@ -21,6 +21,8 @@ export interface ModalProps {
   footer?: React.ReactNode;
   children?: React.ReactNode;
   className?: string;
+  /** aria-label for the close button — override with a translated string outside admin. */
+  closeLabel?: string;
 }
 
 export function Modal({
@@ -32,6 +34,7 @@ export function Modal({
   footer,
   children,
   className,
+  closeLabel = "Close",
 }: ModalProps) {
   const { panelRef, mounted } = useOverlay(open, onClose);
   const titleId = React.useId();
@@ -75,7 +78,7 @@ export function Modal({
           <button
             type="button"
             onClick={onClose}
-            aria-label="Close"
+            aria-label={closeLabel}
             className="text-muted hover:bg-foreground/5 hover:text-foreground -m-2 rounded-full p-2 transition-colors"
           >
             <CloseIcon />

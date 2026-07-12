@@ -1,29 +1,33 @@
 "use client";
 
 import * as React from "react";
-import { filterCategories } from "@/constants/shop";
+import { useTranslations } from "next-intl";
 import { useFilters } from "./filters-context";
 import { FilterGroup } from "./product-filters";
 
+/** Category checkboxes — sourced live from Supabase, never hardcoded. */
 export function CategoryFilter() {
-  const { state, toggle } = useFilters();
+  const { state, toggle, categories } = useFilters();
+  const t = useTranslations("shop.filters");
+
+  if (categories.length === 0) return null;
 
   return (
-    <FilterGroup title="Category">
+    <FilterGroup title={t("category")}>
       <div className="flex flex-col gap-3">
-        {filterCategories.map((category) => (
+        {categories.map((category) => (
           <label
-            key={category.value}
+            key={category.slug}
             className="text-foreground/80 hover:text-foreground flex cursor-pointer items-center gap-3 text-sm transition-colors"
           >
             <input
               type="checkbox"
-              checked={state.categories.includes(category.value)}
-              onChange={() => toggle("categories", category.value)}
+              checked={state.categories.includes(category.slug)}
+              onChange={() => toggle("categories", category.slug)}
               className="accent-secondary size-4 rounded"
             />
-            <span className="flex-1">{category.label}</span>
-            <span className="text-muted text-xs">{category.count}</span>
+            <span className="flex-1">{category.name}</span>
+            <span className="text-muted text-xs">{category.pieceCount}</span>
           </label>
         ))}
       </div>

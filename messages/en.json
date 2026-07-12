@@ -1,0 +1,553 @@
+{
+  "metadata": {
+    "siteName": "Yasso Store",
+    "defaultTitle": "Yasso Store",
+    "defaultDescription": "Premium e-commerce experience.",
+    "shopTitle": "Shop",
+    "shopDescription": "Shop the full Yasso catalog — considered pieces in warm neutral tones.",
+    "collectionsTitle": "Collections",
+    "collectionsDescription": "Explore the maison's collections — women, men, accessories and fragrance.",
+    "collectionFallbackTitle": "Collection",
+    "productFallbackTitle": "Product",
+    "cartTitle": "Shopping Bag",
+    "cartDescription": "Review the pieces in your bag.",
+    "checkoutTitle": "Checkout",
+    "checkoutDescription": "Complete your order.",
+    "checkoutConfirmationTitle": "Order Confirmed",
+    "checkoutConfirmationDescription": "Thank you — your order has been received."
+  },
+
+  "nav": {
+    "shop": "Shop",
+    "collections": "Collections"
+  },
+
+  "announcement": "Complimentary shipping on orders over {threshold}",
+
+  "languageSwitcher": {
+    "label": "Language",
+    "ariaLabel": "Choose language"
+  },
+
+  "header": {
+    "skipToContent": "Skip to content",
+    "mainNavigation": "Main navigation",
+    "openMenu": "Open menu",
+    "mobileNavigation": "Mobile navigation",
+    "dismissAnnouncement": "Dismiss announcement",
+    "homeAria": "{name} — home"
+  },
+
+  "search": {
+    "button": "Search",
+    "modalTitle": "Search",
+    "placeholder": "Search for products, collections…",
+    "queryAria": "Search query",
+    "popularSearches": "Popular searches",
+    "popularSearchTerms": ["Silk scarf", "Cashmere", "Leather tote", "Loafers", "Fragrance"]
+  },
+
+  "cartButton": {
+    "shoppingBag": "Shopping bag",
+    "shoppingBagCount": "Shopping bag, {count, plural, one {# item} other {# items}}"
+  },
+
+  "footer": {
+    "tagline": "Considered pieces in warm neutral tones — designed slowly, made to keep.",
+    "shopColumnTitle": "Shop",
+    "shopAll": "Shop all",
+    "collections": "Collections",
+    "copyright": "© {year} {name}. All rights reserved."
+  },
+
+  "newsletter": {
+    "kicker": "Newsletter",
+    "title": "Join the maison",
+    "description": "New collections, private previews and considered stories — a few times a season, never more.",
+    "emailLabel": "Email address",
+    "placeholder": "Your email address",
+    "subscribe": "Subscribe",
+    "toastTitle": "Welcome to the maison",
+    "toastDescription": "You're on the list — expect only the essentials."
+  },
+
+  "home": {
+    "hero": {
+      "sectionAriaLabel": "Featured campaign",
+      "badge": "Autumn — Winter 2026",
+      "title": "The art of quiet luxury",
+      "description": "Considered silhouettes in warm neutral tones — cut from certified silk, cashmere and leather, finished by hand in our ateliers.",
+      "shopNewArrivals": "Shop New Arrivals",
+      "exploreCollections": "Explore Collections",
+      "imageAlt": "Autumn–Winter 2026 campaign — warm neutral silhouettes",
+      "justLanded": "Just landed",
+      "autumnCapsule": "The Autumn Capsule"
+    },
+    "benefits": {
+      "ariaLabel": "Why shop with us",
+      "shipping": {
+        "title": "Complimentary Shipping",
+        "description": "Free carbon-neutral delivery on all orders over {threshold}, worldwide."
+      },
+      "returns": {
+        "title": "Effortless Returns",
+        "description": "30 days to reconsider — collection arranged from your door."
+      },
+      "craft": {
+        "title": "Atelier Craftsmanship",
+        "description": "Every piece hand-finished in our ateliers with certified materials."
+      },
+      "care": {
+        "title": "Lifetime Care",
+        "description": "Repairs and refresh services for the life of your piece."
+      }
+    },
+    "featuredCategories": {
+      "eyebrow": "Curated for you",
+      "title": "Shop by category",
+      "description": "Four worlds, one language — warm neutrals, honest materials, timeless cuts."
+    },
+    "featuredProducts": {
+      "eyebrow": "The edit",
+      "title": "Featured pieces",
+      "description": "A tight selection from the new season — chosen by our ateliers.",
+      "viewAll": "View all new arrivals"
+    },
+    "brandStory": {
+      "imageAlt": "Inside the Yasso atelier",
+      "eyebrow": "The maison",
+      "title": "Made slowly, kept forever",
+      "description": "Since 1998 we have worked with a small circle of family ateliers, choosing certified silk, cashmere and vegetable-tanned leather over volume. Each piece passes through hands, not lines — and is designed to be repaired, not replaced.",
+      "discoverStory": "Discover our story"
+    },
+    "cta": {
+      "eyebrow": "The maison service",
+      "title": "Private styling, at your pace",
+      "description": "One hour with our stylists — in boutique or over video — to build a wardrobe around what you already own. Unhurried, personal, complimentary.",
+      "bookAppointment": "Book an appointment",
+      "quote": "Style is the answer to everything — especially when it whispers."
+    },
+    "bestSellers": {
+      "eyebrow": "Most loved",
+      "title": "Best sellers",
+      "description": "The pieces our clients return for, season after season.",
+      "shopAll": "Shop all best sellers"
+    },
+    "finalCta": {
+      "kicker": "Yasso — Est. 1998",
+      "title": "Elevate the everyday",
+      "description": "Pieces that outlast seasons and trends — made slowly, worn often, kept forever.",
+      "shopNewSeason": "Shop the new season",
+      "browseCollections": "Browse all collections"
+    },
+    "testimonials": {
+      "eyebrow": "Words from our clients",
+      "title": "Quiet luxury, loudly loved",
+      "ratedAria": "Rated {rating} out of 5"
+    },
+    "instagram": {
+      "eyebrow": "Follow the maison",
+      "description": "Ateliers, campaigns and quiet moments — from our studio to yours.",
+      "openInstagram": "{alt} — opens Instagram"
+    }
+  },
+
+  "collectionsPage": {
+    "eyebrow": "The maison",
+    "title": "Collections",
+    "description": "Six worlds, one language — warm neutrals, honest materials and cuts that outlast seasons.",
+    "singleEyebrow": "Collection"
+  },
+
+  "shop": {
+    "hero": {
+      "title": "Shop all",
+      "description": "The full catalog — every piece, every world, in one considered edit."
+    },
+    "filters": {
+      "refine": "Refine",
+      "clearAll": "Clear all ({count})",
+      "category": "Category",
+      "color": "Color",
+      "size": "Size",
+      "availability": "Availability",
+      "price": "Price",
+      "min": "Min",
+      "max": "Max",
+      "priceAria": "{label} price"
+    },
+    "toolbar": {
+      "piece": "piece",
+      "pieces": "pieces",
+      "filters": "Filters",
+      "filtersWithCount": "Filters ({count})",
+      "filterAndSort": "Filter & Sort",
+      "viewResults": "View results"
+    },
+    "sort": {
+      "ariaLabel": "Sort by",
+      "featured": "Featured",
+      "newest": "Newest",
+      "priceAsc": "Price: Low to High",
+      "priceDesc": "Price: High to Low",
+      "name": "Name: A–Z"
+    },
+    "activeFilters": {
+      "removeFilter": "Remove filter: {label}",
+      "clearAll": "Clear all"
+    },
+    "browser": {
+      "emptyTitle": "This collection is arriving soon",
+      "emptyDescription": "Our ateliers are putting the final touches on these pieces. Leave your email in the newsletter below to be first to know.",
+      "exploreOtherCollections": "Explore other collections",
+      "productFilters": "Product filters"
+    },
+    "quickView": "Quick view",
+    "collectionGrid": {
+      "comingSoon": "Coming soon",
+      "arrivingSoon": "Arriving soon"
+    },
+    "piece": "{count, plural, one {# piece} other {# pieces}}"
+  },
+
+  "product": {
+    "gallery": {
+      "openFullView": "Open image in full view",
+      "productImages": "Product images",
+      "viewImageOf": "View image {index} of {total}"
+    },
+    "info": {
+      "selectSizeFirst": "Select a size first",
+      "addedToBag": "Added to bag",
+      "addedToBagDescription": "{quantity} × {name} · Size {size}",
+      "removedFromWishlist": "Removed from wishlist",
+      "savedToWishlist": "Saved to wishlist",
+      "linkCopied": "Link copied",
+      "inStock": "In stock — ships within 2–3 days",
+      "madeToOrder": "Made to order — 2–3 weeks",
+      "quantity": "Quantity",
+      "addToBag": "Add to bag",
+      "saveToWishlist": "Save to wishlist",
+      "removeFromWishlist": "Remove from wishlist",
+      "sharePiece": "Share this piece",
+      "buyNow": "Buy now"
+    },
+    "rail": {
+      "completeTheLook": "Complete the look",
+      "relatedPieces": "Related pieces",
+      "forYou": "For you",
+      "youMayAlsoLike": "You may also like",
+      "yourHistory": "Your history",
+      "recentlyViewed": "Recently viewed"
+    },
+    "accordions": {
+      "specifications": "Specifications",
+      "shippingReturns": "Shipping & Returns",
+      "careInstructions": "Care Instructions"
+    },
+    "rating": {
+      "ratedAria": "Rated {rating} out of 5",
+      "review": "review",
+      "reviews": "reviews"
+    },
+    "size": "Size",
+    "color": "Color",
+    "quantitySelector": {
+      "ariaLabel": "Quantity",
+      "decrease": "Decrease quantity",
+      "increase": "Increase quantity"
+    },
+    "quickView": {
+      "addToBag": "Add to bag",
+      "addedToBag": "Added to bag",
+      "addedToBagDescription": "{name} · Size {size}",
+      "viewFullDetails": "View full details"
+    },
+    "stickyAddToCart": {
+      "addToBag": "Add to bag",
+      "addedToBag": "Added to bag",
+      "addedToBagDescription": "{name} · Size {size}"
+    }
+  },
+
+  "cart": {
+    "curatedForYou": "Curated for you",
+    "lineMeta": "{color} · Size {size}",
+    "item": {
+      "saveForLater": "Save for later",
+      "remove": "Remove",
+      "each": "{price} each"
+    },
+    "summary": {
+      "title": "Order summary",
+      "proceedToCheckout": "Proceed to checkout",
+      "footnote": "Taxes calculated at checkout · Secure payment · 30-day returns"
+    },
+    "view": {
+      "removedFromBag": "Removed from bag",
+      "savedForLater": "Saved for later",
+      "movedToBag": "Moved to bag",
+      "cartUpdated": "Cart updated",
+      "updateCart": "Update cart"
+    },
+    "continueShopping": "Continue shopping",
+    "coupon": {
+      "couponApplied": "Coupon applied",
+      "couponAppliedDescription": "{code} — 10% off, demo only for now.",
+      "addCoupon": "Add a coupon code",
+      "appliedCode": "{code} — 10% off",
+      "remove": "Remove",
+      "placeholder": "e.g. YASSO10",
+      "ariaLabel": "Coupon code",
+      "apply": "Apply"
+    },
+    "empty": {
+      "title": "Your bag is empty",
+      "description": "Discover our collections and add your favorite pieces — they'll wait for you here.",
+      "continueShopping": "Continue shopping"
+    },
+    "miniCart": {
+      "shoppingBag": "Shopping Bag",
+      "shoppingBagCount": "Shopping Bag ({count})",
+      "subtotal": "Subtotal",
+      "viewBag": "View bag",
+      "checkout": "Checkout",
+      "footnote": "Shipping & taxes calculated at checkout",
+      "quantityTimes": "{quantity} ×",
+      "emptyTitle": "Your bag is empty",
+      "emptyDescription": "Discover our collections and add your favorite pieces.",
+      "continueShopping": "Continue shopping"
+    },
+    "orderSummary": {
+      "subtotal": "Subtotal",
+      "discount": "Discount",
+      "shipping": "Shipping",
+      "complimentary": "Complimentary",
+      "addMoreForFreeShipping": "Add <b>{amount}</b> more for complimentary shipping.",
+      "unlockedFreeShipping": "You've unlocked complimentary shipping.",
+      "total": "Total",
+      "progressAria": "Progress toward complimentary shipping"
+    },
+    "savedForLater": {
+      "title": "Saved for later",
+      "titleWithCount": "Saved for later ({count})",
+      "moveToBag": "Move to bag",
+      "remove": "Remove"
+    },
+    "shippingEstimate": {
+      "estimate": "Estimate shipping",
+      "countryAria": "Country",
+      "postalCode": "Postal code",
+      "estimateButton": "Estimate",
+      "result": "{country} · {postalCode} — 2 to 4 working days, complimentary over {threshold}.",
+      "resultNoPostal": "{country} — 2 to 4 working days, complimentary over {threshold}."
+    }
+  },
+
+  "checkout": {
+    "sections": {
+      "contactInformation": "Contact information",
+      "shippingAddress": "Shipping address",
+      "shippingMethod": "Shipping method",
+      "paymentMethod": "Payment method",
+      "orderNotes": "Order notes"
+    },
+    "bagEmpty": "Your bag is empty",
+    "orderFailedTitle": "We couldn't place your order",
+    "connectionError": "Please check your connection and try again.",
+    "orderPlaced": "Order placed",
+    "orderPlacedDescription": "{orderNumber} — thank you, it's on its way.",
+    "placingOrder": "Placing your order…",
+    "placeOrder": "Place order · {total}",
+    "terms": "By placing your order you agree to our terms · Nothing is charged today — pay on delivery.",
+    "header": {
+      "progressAria": "Checkout progress",
+      "bag": "Bag",
+      "details": "Details",
+      "confirmation": "Confirmation"
+    },
+    "orderSummary": {
+      "title": "Your order",
+      "lineMeta": "Size {size} · Qty {quantity}"
+    },
+    "contactInfo": {
+      "fullName": "Full name",
+      "fullNamePlaceholder": "e.g. Yassine El Amrani",
+      "phone": "Phone number",
+      "phonePlaceholder": "+212 6 12 34 56 78",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "emailHint": "Optional — for your order updates."
+    },
+    "shippingAddress": {
+      "country": "Country",
+      "city": "City",
+      "cityPlaceholder": "e.g. Casablanca",
+      "street": "Street address",
+      "streetPlaceholder": "Street, building, apartment",
+      "postalCode": "Postal code",
+      "postalCodePlaceholder": "e.g. 20000",
+      "optional": "Optional."
+    },
+    "orderNotes": {
+      "label": "Order notes",
+      "placeholder": "Delivery instructions, gift message, preferred time…",
+      "hint": "Optional."
+    },
+    "paymentMethod": {
+      "ariaLabel": "Payment method",
+      "comingSoon": "Coming soon"
+    },
+    "shippingMethodSection": {
+      "ariaLabel": "Shipping method",
+      "complimentary": "Complimentary"
+    },
+    "confirmation": {
+      "kicker": "Order confirmed",
+      "title": "Thank you — it's on its way",
+      "description": "Your order has been received and our atelier is preparing it with care. You'll pay in cash when it arrives at your door.",
+      "orderNumber": "Order number",
+      "estimatedDelivery": "Estimated delivery",
+      "continueShopping": "Continue shopping",
+      "backToHome": "Back to home"
+    },
+    "actions": {
+      "orderingNotSetUp": "Ordering isn't fully set up yet — the latest database migration hasn't been applied.",
+      "connectionError": "We couldn't reach the boutique. Please check your connection and try again.",
+      "genericError": "Something went wrong. Please try again.",
+      "itemUnavailable": "One of the pieces in your bag is no longer available.",
+      "orderCreateFailed": "The order could not be created. Please try again."
+    }
+  },
+
+  "validation": {
+    "fullName": "Please enter your full name.",
+    "phone": "Please enter a valid phone number.",
+    "email": "Please enter a valid email address.",
+    "country": "Please choose a country.",
+    "city": "Please enter your city.",
+    "street": "Please enter your street address.",
+    "paymentMethod": "Only cash on delivery is available for now.",
+    "emptyBag": "Your bag is empty."
+  },
+
+  "badges": {
+    "new": "New",
+    "bestSeller": "Best Seller",
+    "sale": "Sale",
+    "comingSoon": "Coming soon"
+  },
+
+  "colors": {
+    "noir": "Noir",
+    "chocolate": "Chocolate",
+    "camel": "Camel",
+    "sand": "Sand",
+    "ivory": "Ivory"
+  },
+
+  "sizes": {
+    "oneSize": "One size"
+  },
+
+  "availability": {
+    "inStock": "In stock",
+    "madeToOrder": "Made to order"
+  },
+
+  "shippingMethods": {
+    "standard": {
+      "label": "Standard Delivery",
+      "description": "2–4 working days, carbon-neutral"
+    },
+    "express": {
+      "label": "Express Delivery",
+      "description": "1–2 working days, signature on arrival"
+    }
+  },
+
+  "paymentMethods": {
+    "cod": {
+      "label": "Cash on Delivery",
+      "description": "Pay in cash when your order arrives at your door."
+    },
+    "card": {
+      "label": "Credit Card",
+      "description": "Coming soon"
+    },
+    "paypal": {
+      "label": "PayPal",
+      "description": "Coming soon"
+    }
+  },
+
+  "countries": {
+    "morocco": "Morocco",
+    "unitedStates": "United States",
+    "unitedKingdom": "United Kingdom",
+    "france": "France",
+    "unitedArabEmirates": "United Arab Emirates"
+  },
+
+  "specifications": {
+    "material": "Material",
+    "origin": "Origin",
+    "availability": "Availability",
+    "reference": "Reference",
+    "madeInPortugal": "Made in Portugal",
+    "inStock": "In stock",
+    "madeToOrder": "Made to order",
+    "materialWomen": "Certified mulberry silk & cashmere",
+    "materialMen": "Italian wool & organic cotton",
+    "materialAccessories": "Vegetable-tanned leather & twill silk",
+    "materialFragrance": "Natural essences, 20% concentration",
+    "materialDefault": "Certified natural fibers"
+  },
+
+  "shippingReturns": [
+    "Complimentary carbon-neutral shipping on orders over {threshold}.",
+    "Express delivery available at checkout — 2 to 3 working days.",
+    "30-day returns, collected from your door at no cost.",
+    "Every piece arrives in our signature recycled packaging."
+  ],
+
+  "careInstructions": [
+    "Dry clean only, with a specialist you trust.",
+    "Store folded in the provided cotton pouch, away from direct light.",
+    "Steam gently — never iron directly on the surface.",
+    "Repairs and refresh services are complimentary for life."
+  ],
+
+  "home_brandStats": [
+    { "label": "Maison founded" },
+    { "label": "Ateliers worldwide" },
+    { "label": "Responsibly sourced" }
+  ],
+
+  "home_testimonials": [
+    "The attention to detail is extraordinary. My coat arrived wrapped like a gift and fits like it was made for me.",
+    "Quiet luxury done right — no logos, just impeccable fabric and cut. I keep coming back every season.",
+    "Their lifetime care service restored my five-year-old tote to new. This is what buying well means."
+  ],
+
+  "home_instagramAlts": [
+    "Model wearing the silk wrap dress in sand",
+    "Close-up of hand-stitched leather tote detail",
+    "Atelier workspace with fabric swatches",
+    "Model in cashmere crewneck, studio portrait",
+    "Flat lay of the summer capsule pieces",
+    "Behind the scenes at the autumn campaign shoot"
+  ],
+
+  "common": {
+    "loading": "Loading",
+    "close": "Close",
+    "dismiss": "Dismiss",
+    "page": "Page {number}",
+    "previousPage": "Previous page",
+    "nextPage": "Next page",
+    "pagination": "Pagination",
+    "breadcrumb": "Breadcrumb",
+    "home": "Home"
+  }
+}

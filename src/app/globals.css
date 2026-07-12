@@ -60,7 +60,7 @@
   --color-danger: var(--danger);
   --color-info: var(--info);
 
-  /* Typography */
+  /* Typography — Arabic (dir="rtl") swaps to Cairo via the override below */
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
@@ -247,4 +247,18 @@
     transform: translateY(-4px);
     box-shadow: var(--shadow-lift);
   }
+}
+
+/* ---------------------------------------------------------------------------
+ * Arabic (dir="rtl") typography — swap the UI font to Cairo. Kept UNLAYERED
+ * so it overrides Tailwind's inlined `font-sans` utility (which, under
+ * `@theme inline`, resolves straight to the Geist variable). Layout mirroring
+ * is handled natively by the dir attribute; this only changes the typeface.
+ * ------------------------------------------------------------------------- */
+html[dir="rtl"] body,
+html[dir="rtl"] input,
+html[dir="rtl"] textarea,
+html[dir="rtl"] select,
+html[dir="rtl"] button {
+  font-family: var(--font-cairo), var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
 }

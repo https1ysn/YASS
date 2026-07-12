@@ -109,66 +109,28 @@ export const bestSellers: PlaceholderProduct[] = [
   },
 ];
 
-export const brandStats = [
-  { value: "1998", label: "Maison founded" },
-  { value: "3", label: "Ateliers worldwide" },
-  { value: "100%", label: "Responsibly sourced" },
-] as const;
+// brandStats/benefits/testimonials/instagramPosts text lives in
+// messages/*.json (home_brandStats, home_benefits, home_testimonials,
+// home_instagramAlts) — these arrays keep only the stable/numeric fields;
+// components pair them up by index with the translated text via t.raw().
 
-export const benefits = [
-  {
-    icon: "shipping",
-    title: "Complimentary Shipping",
-    description: "Free carbon-neutral delivery on all orders over $150, worldwide.",
-  },
-  {
-    icon: "returns",
-    title: "Effortless Returns",
-    description: "30 days to reconsider — collection arranged from your door.",
-  },
-  {
-    icon: "craft",
-    title: "Atelier Craftsmanship",
-    description: "Every piece hand-finished in our ateliers with certified materials.",
-  },
-  {
-    icon: "care",
-    title: "Lifetime Care",
-    description: "Repairs and refresh services for the life of your piece.",
-  },
-] as const;
+export const brandStats = [{ value: "1998" }, { value: "3" }, { value: "100%" }] as const;
+
+export const benefits = [{ icon: "shipping" }, { icon: "returns" }, { icon: "craft" }, { icon: "care" }] as const;
 
 export const testimonials = [
-  {
-    quote:
-      "The attention to detail is extraordinary. My coat arrived wrapped like a gift and fits like it was made for me.",
-    name: "Amelia R.",
-    location: "Paris",
-    rating: 5,
-  },
-  {
-    quote:
-      "Quiet luxury done right — no logos, just impeccable fabric and cut. I keep coming back every season.",
-    name: "Karim B.",
-    location: "Dubai",
-    rating: 5,
-  },
-  {
-    quote:
-      "Their lifetime care service restored my five-year-old tote to new. This is what buying well means.",
-    name: "Sofia M.",
-    location: "Milan",
-    rating: 5,
-  },
+  { name: "Amelia R.", location: "Paris", rating: 5 },
+  { name: "Karim B.", location: "Dubai", rating: 5 },
+  { name: "Sofia M.", location: "Milan", rating: 5 },
 ] as const;
 
 export const instagramPosts = [
-  { imageSrc: "/images/instagram/i1.jpg", alt: "Atelier detail — silk in dune tones" },
-  { imageSrc: "/images/instagram/i2.jpg", alt: "Campaign — warm neutral wardrobe" },
-  { imageSrc: "/images/instagram/i3.jpg", alt: "Studio still life — leather goods" },
-  { imageSrc: "/images/instagram/i4.jpg", alt: "Behind the seams — hand stitching" },
-  { imageSrc: "/images/instagram/i5.jpg", alt: "The summer capsule, on location" },
-  { imageSrc: "/images/instagram/i6.jpg", alt: "Fragrance — santal and amber" },
+  { imageSrc: "/images/instagram/i1.jpg" },
+  { imageSrc: "/images/instagram/i2.jpg" },
+  { imageSrc: "/images/instagram/i3.jpg" },
+  { imageSrc: "/images/instagram/i4.jpg" },
+  { imageSrc: "/images/instagram/i5.jpg" },
+  { imageSrc: "/images/instagram/i6.jpg" },
 ] as const;
 
 export const instagramHandle = "@yasso.maison";

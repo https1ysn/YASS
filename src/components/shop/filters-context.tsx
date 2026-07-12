@@ -1,11 +1,12 @@
 "use client";
 
 import * as React from "react";
+import type { Collection } from "@/types/product";
 
 /**
- * UI-only filter state shared by the toolbar, filter panels and active-filter
- * chips. It does NOT filter products — wiring to real catalog logic comes in a
- * later phase.
+ * Filter state shared by the toolbar, filter panels and active-filter chips.
+ * Category selections actually filter the product grid (see ProductBrowser);
+ * color/size/availability/price remain UI-only refinements.
  */
 
 export type FilterGroupKey = "categories" | "colors" | "sizes" | "availability";
@@ -39,11 +40,19 @@ interface FiltersContextValue {
   clearAll: () => void;
   /** Number of active refinements (price counts as one). */
   activeCount: number;
+  /** Live categories from Supabase, for the category filter and its chip labels. */
+  categories: Collection[];
 }
 
 const FiltersContext = React.createContext<FiltersContextValue | null>(null);
 
-export function FiltersProvider({ children }: { children: React.ReactNode }) {
+export function FiltersProvider({
+  categories,
+  children,
+}: {
+  categories: Collection[];
+  children: React.ReactNode;
+}) {
   const [state, setState] = React.useState<FiltersState>(initialState);
 
   const toggle = React.useCallback((group: FilterGroupKey, value: string) => {
@@ -79,8 +88,8 @@ export function FiltersProvider({ children }: { children: React.ReactNode }) {
     (state.priceMin || state.priceMax ? 1 : 0);
 
   const value = React.useMemo(
-    () => ({ state, toggle, setPrice, clearPrice, setSort, clearAll, activeCount }),
-    [state, toggle, setPrice, clearPrice, setSort, clearAll, activeCount]
+    () => ({ state, toggle, setPrice, clearPrice, setSort, clearAll, activeCount, categories }),
+    [state, toggle, setPrice, clearPrice, setSort, clearAll, activeCount, categories]
   );
 
   return <FiltersContext.Provider value={value}>{children}</FiltersContext.Provider>;

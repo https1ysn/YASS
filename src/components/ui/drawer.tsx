@@ -20,6 +20,8 @@ export interface DrawerProps {
   footer?: React.ReactNode;
   children?: React.ReactNode;
   className?: string;
+  /** aria-label for the close button — override with a translated string outside admin. */
+  closeLabel?: string;
 }
 
 export function Drawer({
@@ -30,6 +32,7 @@ export function Drawer({
   footer,
   children,
   className,
+  closeLabel = "Close",
 }: DrawerProps) {
   const { panelRef, mounted } = useOverlay(open, onClose);
   const titleId = React.useId();
@@ -66,7 +69,7 @@ export function Drawer({
           <button
             type="button"
             onClick={onClose}
-            aria-label="Close"
+            aria-label={closeLabel}
             className="text-muted hover:bg-foreground/5 hover:text-foreground -m-2 rounded-full p-2 transition-colors"
           >
             <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" className="size-5">

@@ -1,12 +1,16 @@
 "use client";
 
 import * as React from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/types/product";
 import { ProductCard } from "@/components/ui/product-card";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/shared/reveal";
 import { ProductQuickView } from "@/components/product/quick-view";
+import { intlTagByLocale, type AppLocale } from "@/i18n/routing";
+import { localeHref } from "@/i18n/alternates";
+import { translateBadge } from "@/lib/product-badge";
 
 export interface ProductGridProps {
   products: Product[];
@@ -15,6 +19,9 @@ export interface ProductGridProps {
 
 export function ProductGrid({ products, className }: ProductGridProps) {
   const [quickView, setQuickView] = React.useState<Product | null>(null);
+  const t = useTranslations("shop");
+  const tBadges = useTranslations("badges");
+  const locale = useLocale() as AppLocale;
 
   return (
     <>
@@ -23,13 +30,15 @@ export function ProductGrid({ products, className }: ProductGridProps) {
           <Reveal key={product.slug} delay={Math.min(index, 5) * 60}>
             <ProductCard
               name={product.name}
-              href={product.href}
+              href={localeHref(locale, product.href)}
               imageSrc={product.imageSrc}
               imageAlt={product.imageAlt}
               price={product.price}
               compareAtPrice={product.compareAtPrice}
               category={product.category}
-              badge={product.badge}
+              badge={translateBadge(product.badge, tBadges)}
+              saleLabel={tBadges("sale")}
+              locale={intlTagByLocale[locale]}
               className="h-full"
               footer={
                 <Button
@@ -39,7 +48,7 @@ export function ProductGrid({ products, className }: ProductGridProps) {
                   onClick={() => setQuickView(product)}
                   className="border-border rounded-xl border"
                 >
-                  Quick view
+                  {t("quickView")}
                 </Button>
               }
             />

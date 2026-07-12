@@ -1,24 +1,21 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { useLocale, useTranslations } from "next-intl";
+import { Link, useRouter } from "@/i18n/navigation";
+import { cn, formatPrice } from "@/lib/utils";
 import type { Product, ProductSpecification } from "@/types/product";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/toast";
 import { useCartStore } from "@/store/cart-store";
 import { filterColors } from "@/constants/shop";
+import { intlTagByLocale, type AppLocale } from "@/i18n/routing";
 import { HeartIcon } from "@/components/layout/icons";
 import { RatingStars } from "./rating-stars";
 import { ColorSelector } from "./color-selector";
 import { SizeSelector } from "./size-selector";
 import { QuantitySelector } from "./quantity-selector";
 import { ProductAccordions } from "./product-accordions";
-
-function formatPrice(value: number) {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(value);
-}
 
 export interface ProductInfoProps {
   product: Product;
@@ -29,6 +26,9 @@ export interface ProductInfoProps {
 
 export function ProductInfo({ product, specifications, shipping, care }: ProductInfoProps) {
   const router = useRouter();
+  const locale = useLocale() as AppLocale;
+  const t = useTranslations("product.info");
+  const tColors = useTranslations("colors");
   const addLine = useCartStore((state) => state.addLine);
   const [color, setColor] = React.useState<string | null>(product.colors[0] ?? null);
   const [size, setSize] = React.useState<string | null>(
@@ -39,11 +39,14 @@ export function ProductInfo({ product, specifications, shipping, care }: Product
 
   const onSale = product.compareAtPrice != null && product.compareAtPrice > product.price;
   const inStock = product.availability === "in-stock";
-  const swatches = filterColors.filter((c) => product.colors.includes(c.value));
+  const swatches = filterColors.map((c) => ({ ...c, label: tColors(c.value) })).filter((c) =>
+    product.colors.includes(c.value)
+  );
+  const price = (value: number) => formatPrice(value, "USD", intlTagByLocale[locale]);
 
   function requireSize(): boolean {
     if (size) return true;
-    toast({ title: "Select a size first", variant: "warning" });
+    toast({ title: t("selectSizeFirst"), variant: "warning" });
     return false;
   }
 
@@ -51,8 +54,8 @@ export function ProductInfo({ product, specifications, shipping, care }: Product
     if (!requireSize()) return;
     addLine(product, { size: size!, color: color ?? product.colors[0] ?? "", quantity });
     toast({
-      title: "Added to bag",
-      description: `${quantity} × ${product.name} · Size ${size}`,
+      title: t("addedToBag"),
+      description: t("addedToBagDescription", { quantity, name: product.name, size: size! }),
       variant: "success",
     });
   }
@@ -66,7 +69,7 @@ export function ProductInfo({ product, specifications, shipping, care }: Product
   function toggleWishlist() {
     setSaved((prev) => !prev);
     toast({
-      title: saved ? "Removed from wishlist" : "Saved to wishlist",
+      title: saved ? t("removedFromWishlist") : t("savedToWishlist"),
       variant: saved ? "info" : "success",
     });
   }
@@ -79,7 +82,7 @@ export function ProductInfo({ product, specifications, shipping, care }: Product
         return;
       }
       await navigator.clipboard.writeText(url);
-      toast({ title: "Link copied", description: url, variant: "success" });
+      toast({ title: t("linkCopied"), description: url, variant: "success" });
     } catch {
       /* user dismissed the share sheet */
     }
@@ -102,10 +105,8 @@ export function ProductInfo({ product, specifications, shipping, care }: Product
       {/* Price + stock */}
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
         <div className="flex items-baseline gap-2.5">
-          <span className="text-2xl font-semibold tracking-tight">
-            {formatPrice(product.price)}
-          </span>
-          {onSale && <s className="text-muted text-base">{formatPrice(product.compareAtPrice!)}</s>}
+          <span className="text-2xl font-semibold tracking-tight">{price(product.price)}</span>
+          {onSale && <s className="text-muted text-base">{price(product.compareAtPrice!)}</s>}
         </div>
         <p
           className={cn(
@@ -117,7 +118,7 @@ export function ProductInfo({ product, specifications, shipping, care }: Product
             aria-hidden="true"
             className={cn("size-2 rounded-full", inStock ? "bg-success" : "bg-warning")}
           />
-          {inStock ? "In stock — ships within 2–3 days" : "Made to order — 2–3 weeks"}
+          {inStock ? t("inStock") : t("madeToOrder")}
         </p>
       </div>
 
@@ -130,7 +131,9 @@ export function ProductInfo({ product, specifications, shipping, care }: Product
         )}
         <SizeSelector sizes={product.sizes} value={size} onChange={setSize} />
         <div className="flex flex-col gap-3">
-          <p className="text-muted text-xs font-medium tracking-[0.15em] uppercase">Quantity</p>
+          <p className="text-muted text-xs font-medium tracking-[0.15em] uppercase">
+            {t("quantity")}
+          </p>
           <QuantitySelector value={quantity} onChange={setQuantity} className="self-start" />
         </div>
       </div>
@@ -139,14 +142,14 @@ export function ProductInfo({ product, specifications, shipping, care }: Product
       <div className="flex flex-col gap-3">
         <div className="flex gap-3">
           <Button size="lg" fullWidth onClick={addToBag}>
-            Add to bag
+            {t("addToBag")}
           </Button>
           <Button
             variant="ghost"
             size="icon"
             onClick={toggleWishlist}
             aria-pressed={saved}
-            aria-label={saved ? "Remove from wishlist" : "Save to wishlist"}
+            aria-label={saved ? t("removeFromWishlist") : t("saveToWishlist")}
             className={cn(
               "border-border h-13 w-13 shrink-0 rounded-2xl border",
               saved && "border-secondary text-secondary"
@@ -158,7 +161,7 @@ export function ProductInfo({ product, specifications, shipping, care }: Product
             variant="ghost"
             size="icon"
             onClick={share}
-            aria-label="Share this piece"
+            aria-label={t("sharePiece")}
             className="border-border h-13 w-13 shrink-0 rounded-2xl border"
           >
             <svg
@@ -179,7 +182,7 @@ export function ProductInfo({ product, specifications, shipping, care }: Product
           </Button>
         </div>
         <Button variant="secondary" size="lg" fullWidth onClick={buyNow}>
-          Buy now
+          {t("buyNow")}
         </Button>
       </div>
 

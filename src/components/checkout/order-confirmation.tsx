@@ -1,6 +1,10 @@
 import * as React from "react";
+import { getTranslations, getLocale } from "next-intl/server";
 import { ButtonLink } from "@/components/ui/button-link";
-import { ESTIMATED_DELIVERY, FAKE_ORDER_NUMBER } from "@/constants/checkout";
+import { FAKE_ORDER_NUMBER } from "@/constants/checkout";
+import { localeHref } from "@/i18n/alternates";
+import { estimateDeliveryRange } from "@/lib/delivery";
+import type { AppLocale } from "@/i18n/routing";
 
 function SuccessIllustration() {
   return (
@@ -31,46 +35,49 @@ export interface OrderConfirmationProps {
 }
 
 /** Post-checkout confirmation. */
-export function OrderConfirmation({
+export async function OrderConfirmation({
   orderNumber = FAKE_ORDER_NUMBER,
-  estimatedDelivery = ESTIMATED_DELIVERY,
+  estimatedDelivery,
 }: OrderConfirmationProps) {
+  const [t, locale] = await Promise.all([
+    getTranslations("checkout.confirmation"),
+    getLocale(),
+  ]);
+  const delivery = estimatedDelivery ?? estimateDeliveryRange("standard", locale as AppLocale);
+
   return (
     <div className="mx-auto flex max-w-xl flex-col items-center gap-8 py-20 text-center sm:py-28">
       <SuccessIllustration />
 
       <div className="animate-slide-up flex flex-col gap-3 pt-6 [animation-delay:150ms]">
         <p className="text-secondary text-xs font-medium tracking-[0.25em] uppercase">
-          Order confirmed
+          {t("kicker")}
         </p>
-        <h1 className="text-3xl sm:text-4xl">Thank you — it&apos;s on its way</h1>
-        <p className="text-muted text-base leading-relaxed">
-          Your order has been received and our atelier is preparing it with care. You&apos;ll pay in
-          cash when it arrives at your door.
-        </p>
+        <h1 className="text-3xl sm:text-4xl">{t("title")}</h1>
+        <p className="text-muted text-base leading-relaxed">{t("description")}</p>
       </div>
 
       <dl className="animate-slide-up grid w-full grid-cols-1 gap-4 [animation-delay:250ms] sm:grid-cols-2">
         <div className="border-border bg-surface shadow-soft flex flex-col gap-1 rounded-2xl border p-5">
           <dt className="text-muted text-xs font-medium tracking-[0.15em] uppercase">
-            Order number
+            {t("orderNumber")}
           </dt>
           <dd className="text-lg font-semibold tracking-tight">{orderNumber}</dd>
         </div>
         <div className="border-border bg-surface shadow-soft flex flex-col gap-1 rounded-2xl border p-5">
           <dt className="text-muted text-xs font-medium tracking-[0.15em] uppercase">
-            Estimated delivery
+            {t("estimatedDelivery")}
           </dt>
-          <dd className="text-lg font-semibold tracking-tight">{estimatedDelivery}</dd>
+          <dd className="text-lg font-semibold tracking-tight">{delivery}</dd>
         </div>
       </dl>
 
       <div className="animate-slide-up flex w-full flex-col gap-3 [animation-delay:350ms] sm:w-auto sm:flex-row">
-        <ButtonLink href="/shop" size="lg">
-          Continue shopping
+        <ButtonLink href={localeHref(locale, "/shop")} size="lg">
+          {t("continueShopping")}
         </ButtonLink>
-        <ButtonLink href="/" variant="outline" size="lg">
-          Back to home
+        <ButtonLink href={localeHref(locale, "/")} variant="outline" size="lg">
+          {t("backToHome")}
         </ButtonLink>
       </div>
     </div>

@@ -110,6 +110,10 @@ supabase db push
     adds `is_admin()` (JWT email against the allow-list), guards every `admin_*` function with
     it, moves their grants from `anon` to `authenticated`, and makes the products-bucket write
     policies admin-only. Catalog reads and `place_order()` stay public.
+11. `20260711120000_products_is_featured_column.sql` — repairs a database that never received
+    migration 5's `is_featured` column (while later migrations were applied on top of it),
+    which broke every product create/update with "column is_featured does not exist". Adds
+    only the missing column and its index — no function is touched.
 
 ## Admin authentication
 

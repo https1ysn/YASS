@@ -15,6 +15,8 @@ export interface ProductCardProps {
   locale?: string;
   category?: string;
   badge?: string;
+  /** "Sale" badge text — override with a translated string outside admin. */
+  saleLabel?: string;
   /** Slot rendered below the details — e.g. an add-to-cart button. */
   footer?: React.ReactNode;
   className?: string;
@@ -35,6 +37,7 @@ export function ProductCard({
   locale = "en-US",
   category,
   badge,
+  saleLabel = "Sale",
   footer,
   className,
 }: ProductCardProps) {
@@ -59,7 +62,7 @@ export function ProductCard({
           {(badge || onSale) && (
             <div className="absolute top-4 left-4 flex gap-2">
               {badge && <Badge variant="primary">{badge}</Badge>}
-              {onSale && <Badge variant="secondary">Sale</Badge>}
+              {onSale && <Badge variant="secondary">{saleLabel}</Badge>}
             </div>
           )}
         </div>

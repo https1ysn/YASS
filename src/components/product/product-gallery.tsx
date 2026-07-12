@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Modal } from "@/components/ui/modal";
@@ -18,6 +19,8 @@ export interface ProductGalleryProps {
  * UI only — images are static placeholders.
  */
 export function ProductGallery({ images, alt, badge, className }: ProductGalleryProps) {
+  const t = useTranslations("product.gallery");
+  const tCommon = useTranslations("common");
   const [active, setActive] = React.useState(0);
   const [zoomed, setZoomed] = React.useState(false);
   const [origin, setOrigin] = React.useState("50% 50%");
@@ -52,18 +55,18 @@ export function ProductGallery({ images, alt, badge, className }: ProductGallery
           )}
         />
         {badge && (
-          <Badge variant="primary" className="absolute top-4 left-4 z-10">
+          <Badge variant="primary" className="absolute top-4 start-4 z-10">
             {badge}
           </Badge>
         )}
         <button
           type="button"
-          aria-label="Open image in full view"
+          aria-label={t("openFullView")}
           onClick={(event) => {
             event.stopPropagation();
             setLightboxOpen(true);
           }}
-          className="glass text-foreground focus-visible:ring-ring absolute right-4 bottom-4 z-10 grid size-11 place-items-center rounded-2xl transition-all hover:scale-105 focus-visible:ring-2 focus-visible:outline-none"
+          className="glass text-foreground focus-visible:ring-ring absolute end-4 bottom-4 z-10 grid size-11 place-items-center rounded-2xl transition-all hover:scale-105 focus-visible:ring-2 focus-visible:outline-none"
         >
           <svg
             aria-hidden="true"
@@ -80,12 +83,12 @@ export function ProductGallery({ images, alt, badge, className }: ProductGallery
         </button>
       </div>
 
-      <div role="group" aria-label="Product images" className="flex gap-2.5 sm:gap-3">
+      <div role="group" aria-label={t("productImages")} className="flex gap-2.5 sm:gap-3">
         {images.map((image, index) => (
           <button
             key={`${image}-${index}`}
             type="button"
-            aria-label={`View image ${index + 1} of ${images.length}`}
+            aria-label={t("viewImageOf", { index: index + 1, total: images.length })}
             aria-current={active === index}
             onClick={() => setActive(index)}
             className={cn(
@@ -106,6 +109,7 @@ export function ProductGallery({ images, alt, badge, className }: ProductGallery
         onClose={() => setLightboxOpen(false)}
         size="lg"
         title={alt}
+        closeLabel={tCommon("close")}
         className="max-w-3xl"
       >
         <div className="relative aspect-[4/5] max-h-[70dvh] w-full overflow-hidden rounded-2xl">

@@ -1,44 +1,42 @@
+/** Structural site config — hrefs and stable keys only. Every display label
+ * lives in messages/*.json (nav.*, footer.*, announcement, search.*) so the
+ * storefront never hardcodes translations here. Used by both the storefront
+ * and the admin (wordmark/name are brand constants, never translated). */
+
 export interface NavLink {
-  label: string;
+  key: string;
   href: string;
 }
 
 export interface FooterColumn {
-  title: string;
+  titleKey: string;
   links: NavLink[];
 }
 
 export const siteConfig = {
   name: "Yasso Store",
   wordmark: "YASSO",
-  description: "Premium e-commerce experience.",
-
-  announcement: "Complimentary shipping on orders over $150",
 
   nav: [
-    { label: "Shop", href: "/shop" },
-    { label: "Collections", href: "/collections" },
+    { key: "shop", href: "/shop" },
+    { key: "collections", href: "/collections" },
   ] satisfies NavLink[],
 
-  popularSearches: ["Silk scarf", "Cashmere", "Leather tote", "Loafers", "Fragrance"],
-
   footer: {
-    tagline: "Considered pieces in warm neutral tones — designed slowly, made to keep.",
     columns: [
       {
-        title: "Shop",
+        titleKey: "shopColumnTitle",
         links: [
-          { label: "Shop all", href: "/shop" },
-          { label: "Collections", href: "/collections" },
-          { label: "Women", href: "/collections/women" },
-          { label: "Men", href: "/collections/men" },
+          { key: "shopAll", href: "/shop" },
+          { key: "collections", href: "/collections" },
         ],
       },
     ] satisfies FooterColumn[],
+    // Platform names are universal — kept as literal labels, not translated.
     socials: [
       { label: "Instagram", href: "https://instagram.com" },
       { label: "Pinterest", href: "https://pinterest.com" },
       { label: "X", href: "https://x.com" },
-    ] satisfies NavLink[],
+    ],
   },
 } as const;

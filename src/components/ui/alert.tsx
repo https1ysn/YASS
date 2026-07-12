@@ -40,12 +40,15 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: StatusVariant;
   title?: string;
   dismissible?: boolean;
+  /** aria-label for the dismiss button — override with a translated string outside admin. */
+  dismissLabel?: string;
 }
 
 export function Alert({
   variant = "info",
   title,
   dismissible = false,
+  dismissLabel = "Dismiss",
   className,
   children,
   ...props
@@ -72,7 +75,7 @@ export function Alert({
         <button
           type="button"
           onClick={() => setDismissed(true)}
-          aria-label="Dismiss"
+          aria-label={dismissLabel}
           className="hover:bg-foreground/5 -m-1 rounded-full p-1 transition-colors"
         >
           <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" className="size-4">

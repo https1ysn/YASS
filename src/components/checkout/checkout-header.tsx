@@ -1,12 +1,9 @@
-import * as React from "react";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
+"use client";
 
-const steps = [
-  { label: "Bag", href: "/cart" },
-  { label: "Details" },
-  { label: "Confirmation" },
-] as const;
+import * as React from "react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import { cn } from "@/lib/utils";
 
 export interface CheckoutHeaderProps {
   title: string;
@@ -17,16 +14,23 @@ export interface CheckoutHeaderProps {
 
 /** Page title with the Bag → Details → Confirmation step indicator. */
 export function CheckoutHeader({ title, currentStep, className }: CheckoutHeaderProps) {
+  const t = useTranslations("checkout.header");
+  const steps = [
+    { key: "bag", label: t("bag"), href: "/cart" },
+    { key: "details", label: t("details") },
+    { key: "confirmation", label: t("confirmation") },
+  ] as const;
+
   return (
     <div className={cn("animate-slide-up flex flex-col gap-4", className)}>
-      <nav aria-label="Checkout progress">
+      <nav aria-label={t("progressAria")}>
         <ol className="flex flex-wrap items-center gap-2 text-xs font-medium tracking-[0.15em] uppercase">
           {steps.map((step, index) => {
             const stepNumber = index + 1;
             const isCurrent = stepNumber === currentStep;
             const isDone = stepNumber < currentStep;
             return (
-              <li key={step.label} className="flex items-center gap-2">
+              <li key={step.key} className="flex items-center gap-2">
                 {"href" in step && step.href && !isCurrent ? (
                   <Link
                     href={step.href}
@@ -49,7 +53,7 @@ export function CheckoutHeader({ title, currentStep, className }: CheckoutHeader
                     aria-hidden="true"
                     viewBox="0 0 20 20"
                     fill="none"
-                    className="text-muted/60 size-3"
+                    className="text-muted/60 size-3 rtl:-scale-x-100"
                   >
                     <path
                       d="m7.5 5 5 5-5 5"

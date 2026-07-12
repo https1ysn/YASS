@@ -2,11 +2,13 @@
 
 import * as React from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { cn, formatPrice } from "@/lib/utils";
 import type { CartLine } from "@/types/cart";
 import { QuantitySelector } from "@/components/product";
 import { filterColors } from "@/constants/shop";
+import { intlTagByLocale, type AppLocale } from "@/i18n/routing";
 
 export interface CartItemProps {
   line: CartLine;
@@ -27,7 +29,13 @@ export function CartItem({
   onSaveForLater,
   className,
 }: CartItemProps) {
-  const colorLabel = filterColors.find((color) => color.value === line.color)?.label ?? line.color;
+  const locale = useLocale() as AppLocale;
+  const t = useTranslations("cart");
+  const tColors = useTranslations("colors");
+  const colorLabel = filterColors.some((c) => c.value === line.color)
+    ? tColors(line.color)
+    : line.color;
+  const price = (value: number) => formatPrice(value, "USD", intlTagByLocale[locale]);
 
   return (
     <li className={cn("animate-fade-in flex gap-4 py-6 sm:gap-6", className)}>
@@ -58,14 +66,14 @@ export function CartItem({
               {line.product.name}
             </Link>
             <p className="text-muted text-sm">
-              {colorLabel} · Size {line.size}
+              {t("lineMeta", { color: colorLabel, size: line.size })}
             </p>
             {line.quantity > 1 && (
-              <p className="text-muted text-xs">{formatPrice(line.product.price)} each</p>
+              <p className="text-muted text-xs">{t("item.each", { price: price(line.product.price) })}</p>
             )}
           </div>
           <p className="text-sm font-semibold whitespace-nowrap sm:text-base">
-            {formatPrice(line.product.price * line.quantity)}
+            {price(line.product.price * line.quantity)}
           </p>
         </div>
 
@@ -81,7 +89,7 @@ export function CartItem({
                 onClick={() => onSaveForLater(line.id)}
                 className={cn(actionClasses, "hover:text-foreground")}
               >
-                Save for later
+                {t("item.saveForLater")}
               </button>
             )}
             <button
@@ -89,7 +97,7 @@ export function CartItem({
               onClick={() => onRemove(line.id)}
               className={cn(actionClasses, "hover:text-danger")}
             >
-              Remove
+              {t("item.remove")}
             </button>
           </div>
         </div>

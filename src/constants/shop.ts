@@ -256,52 +256,45 @@ export function getProductGallery(product: Product): string[] {
   return [0, 1, 2, 3].map((offset) => galleryPool[(start + offset) % galleryPool.length]);
 }
 
-const materialByCategory: Record<string, string> = {
-  Women: "Certified mulberry silk & cashmere",
-  Men: "Italian wool & organic cotton",
-  Accessories: "Vegetable-tanned leather & twill silk",
-  Fragrance: "Natural essences, 20% concentration",
+/**
+ * Category key used to look up a translated material spec — see
+ * specifications.material{Category} in messages/*.json. `t` is a
+ * next-intl translator scoped to the "specifications" namespace.
+ */
+const materialKeyByCategory: Record<string, string> = {
+  Women: "materialWomen",
+  Men: "materialMen",
+  Accessories: "materialAccessories",
+  Fragrance: "materialFragrance",
 };
 
-export function getProductSpecifications(product: Product): ProductSpecification[] {
+export function getProductSpecifications(
+  product: Product,
+  t: (key: string) => string
+): ProductSpecification[] {
+  const materialKey = materialKeyByCategory[product.category] ?? "materialDefault";
   return [
+    { label: t("material"), value: t(materialKey) },
+    { label: t("origin"), value: t("madeInPortugal") },
     {
-      label: "Material",
-      value: materialByCategory[product.category] ?? "Certified natural fibers",
+      label: t("availability"),
+      value: product.availability === "in-stock" ? t("inStock") : t("madeToOrder"),
     },
-    { label: "Origin", value: "Made in Portugal" },
-    {
-      label: "Availability",
-      value: product.availability === "in-stock" ? "In stock" : "Made to order",
-    },
-    { label: "Reference", value: `YS-${product.slug.slice(0, 12).toUpperCase()}` },
+    { label: t("reference"), value: `YS-${product.slug.slice(0, 12).toUpperCase()}` },
   ];
 }
 
-export const shippingReturns = [
-  "Complimentary carbon-neutral shipping on orders over $150.",
-  "Express delivery available at checkout — 2 to 3 working days.",
-  "30-day returns, collected from your door at no cost.",
-  "Every piece arrives in our signature recycled packaging.",
-];
-
-export const careInstructions = [
-  "Dry clean only, with a specialist you trust.",
-  "Store folded in the provided cotton pouch, away from direct light.",
-  "Steam gently — never iron directly on the surface.",
-  "Repairs and refresh services are complimentary for life.",
-];
-
 /* ------------------------------ Filter options --------------------------- */
 
-export const filterCategories = [
-  { value: "women", label: "Women", count: 5 },
-  { value: "men", label: "Men", count: 4 },
-  { value: "accessories", label: "Accessories", count: 3 },
-  { value: "fragrance", label: "Fragrance", count: 1 },
-] as const;
+// Category options are loaded live from Supabase — see getShopCategories()
+// in lib/supabase/queries.ts. Never hardcode them here.
+// Display labels for the values below live in messages/*.json
+// (colors.*, availability.*, shop.sort.*) — components look them up by value.
 
 export const filterColors = [
+  // `label` is English-only and used by the (untranslated) admin dashboard;
+  // storefront components translate labels themselves via colors.* in
+  // messages/*.json and ignore this field.
   { value: "noir", label: "Noir", hex: "#111111" },
   { value: "chocolate", label: "Chocolate", hex: "#6F5137" },
   { value: "camel", label: "Camel", hex: "#AD7D56" },
@@ -312,14 +305,14 @@ export const filterColors = [
 export const filterSizes = ["XS", "S", "M", "L", "XL", "One size"] as const;
 
 export const filterAvailability = [
-  { value: "in-stock", label: "In stock", count: 9 },
-  { value: "made-to-order", label: "Made to order", count: 4 },
+  { value: "in-stock", count: 9 },
+  { value: "made-to-order", count: 4 },
 ] as const;
 
 export const sortOptions = [
-  { value: "featured", label: "Featured" },
-  { value: "newest", label: "Newest" },
-  { value: "price-asc", label: "Price: Low to High" },
-  { value: "price-desc", label: "Price: High to Low" },
-  { value: "name", label: "Name: A–Z" },
+  { value: "featured" },
+  { value: "newest" },
+  { value: "price-asc" },
+  { value: "price-desc" },
+  { value: "name" },
 ] as const;

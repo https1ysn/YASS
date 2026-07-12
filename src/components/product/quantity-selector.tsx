@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 export interface QuantitySelectorProps {
@@ -18,6 +19,7 @@ export function QuantitySelector({
   max = 9,
   className,
 }: QuantitySelectorProps) {
+  const t = useTranslations("product.quantitySelector");
   const buttonClasses = cn(
     "grid size-11 place-items-center text-foreground transition-colors hover:bg-foreground/5",
     "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset focus-visible:outline-none",
@@ -27,7 +29,7 @@ export function QuantitySelector({
   return (
     <div
       role="group"
-      aria-label="Quantity"
+      aria-label={t("ariaLabel")}
       className={cn(
         "border-border bg-surface-elevated inline-flex items-center overflow-hidden rounded-xl border",
         className
@@ -35,7 +37,7 @@ export function QuantitySelector({
     >
       <button
         type="button"
-        aria-label="Decrease quantity"
+        aria-label={t("decrease")}
         disabled={value <= min}
         onClick={() => onChange(Math.max(min, value - 1))}
         className={buttonClasses}
@@ -49,7 +51,7 @@ export function QuantitySelector({
       </span>
       <button
         type="button"
-        aria-label="Increase quantity"
+        aria-label={t("increase")}
         disabled={value >= max}
         onClick={() => onChange(Math.min(max, value + 1))}
         className={buttonClasses}

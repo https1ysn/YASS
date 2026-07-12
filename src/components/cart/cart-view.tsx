@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/toast";
 import { useCartHydration, useCartStore } from "@/store/cart-store";
@@ -16,6 +17,7 @@ import { ContinueShopping } from "./continue-shopping";
  * visual only — checkout recomputes real totals on the server.
  */
 export function CartView() {
+  const t = useTranslations("cart");
   useCartHydration();
   const lines = useCartStore((state) => state.lines);
   const saved = useCartStore((state) => state.saved);
@@ -35,21 +37,21 @@ export function CartView() {
   function remove(id: string) {
     const line = lines.find((l) => l.id === id);
     removeLine(id);
-    if (line) toast({ title: "Removed from bag", description: line.product.name });
+    if (line) toast({ title: t("view.removedFromBag"), description: line.product.name });
   }
 
   function save(id: string) {
     const line = lines.find((l) => l.id === id);
     if (!line) return;
     saveForLater(id);
-    toast({ title: "Saved for later", description: line.product.name, variant: "success" });
+    toast({ title: t("view.savedForLater"), description: line.product.name, variant: "success" });
   }
 
   function backToBag(id: string) {
     const line = saved.find((l) => l.id === id);
     if (!line) return;
     moveToBag(id);
-    toast({ title: "Moved to bag", description: line.product.name, variant: "success" });
+    toast({ title: t("view.movedToBag"), description: line.product.name, variant: "success" });
   }
 
   return (
@@ -74,9 +76,9 @@ export function CartView() {
                 variant="outline"
                 size="sm"
                 className="rounded-xl"
-                onClick={() => toast({ title: "Cart updated" })}
+                onClick={() => toast({ title: t("view.cartUpdated") })}
               >
-                Update cart
+                {t("view.updateCart")}
               </Button>
             </div>
           </div>

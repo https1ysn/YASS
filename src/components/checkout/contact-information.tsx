@@ -1,14 +1,19 @@
+"use client";
+
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { Input } from "@/components/ui/input";
 
 /** Contact fields — uncontrolled, validated natively via required/type. */
 export function ContactInformation() {
+  const t = useTranslations("checkout.contactInfo");
+
   return (
     <div className="flex flex-col gap-5">
       <Input
         name="fullName"
-        label="Full name"
-        placeholder="e.g. Yassine El Amrani"
+        label={t("fullName")}
+        placeholder={t("fullNamePlaceholder")}
         autoComplete="name"
         required
       />
@@ -16,18 +21,18 @@ export function ContactInformation() {
         <Input
           name="phone"
           type="tel"
-          label="Phone number"
-          placeholder="+212 6 12 34 56 78"
+          label={t("phone")}
+          placeholder={t("phonePlaceholder")}
           autoComplete="tel"
           required
         />
         <Input
           name="email"
           type="email"
-          label="Email"
-          placeholder="you@example.com"
+          label={t("email")}
+          placeholder={t("emailPlaceholder")}
           autoComplete="email"
-          hint="Optional — for your order updates."
+          hint={t("emailHint")}
         />
       </div>
     </div>

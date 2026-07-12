@@ -1,13 +1,18 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 import { Drawer } from "@/components/ui/drawer";
+import { Link } from "@/i18n/navigation";
 import { MenuIcon, iconActionClasses } from "./icons";
+import { LanguageSwitcher } from "./language-switcher";
 
 export function MobileNav() {
+  const t = useTranslations("header");
+  const tNav = useTranslations("nav");
+  const tCommon = useTranslations("common");
   const [open, setOpen] = React.useState(false);
 
   const close = () => setOpen(false);
@@ -17,27 +22,37 @@ export function MobileNav() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        aria-label="Open menu"
+        aria-label={t("openMenu")}
         className={cn(iconActionClasses, "-ml-2")}
       >
         <MenuIcon />
       </button>
 
-      <Drawer open={open} onClose={close} side="left" title={siteConfig.wordmark}>
-        <nav aria-label="Mobile navigation" className="flex h-full flex-col">
+      <Drawer
+        open={open}
+        onClose={close}
+        side="left"
+        title={siteConfig.wordmark}
+        closeLabel={tCommon("close")}
+      >
+        <nav aria-label={t("mobileNavigation")} className="flex h-full flex-col">
           <ul className="flex flex-col">
             {siteConfig.nav.map((item) => (
-              <li key={item.label} className="border-border border-b">
+              <li key={item.key} className="border-border border-b">
                 <Link
                   href={item.href}
                   onClick={close}
                   className="block py-4 text-base font-medium tracking-wide"
                 >
-                  {item.label}
+                  {tNav(item.key)}
                 </Link>
               </li>
             ))}
           </ul>
+
+          <div className="mt-6">
+            <LanguageSwitcher />
+          </div>
 
           <div className="mt-auto flex gap-5 pt-10">
             {siteConfig.footer.socials.map((social) => (

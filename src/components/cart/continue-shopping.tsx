@@ -1,5 +1,8 @@
+"use client";
+
 import * as React from "react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { ArrowRightIcon } from "@/components/layout/icons";
 
@@ -10,11 +13,9 @@ export interface ContinueShoppingProps {
 }
 
 /** Quiet "keep browsing" link used under the cart line items. */
-export function ContinueShopping({
-  href = "/shop",
-  label = "Continue shopping",
-  className,
-}: ContinueShoppingProps) {
+export function ContinueShopping({ href = "/shop", label, className }: ContinueShoppingProps) {
+  const t = useTranslations("cart");
+
   return (
     <Link
       href={href}
@@ -23,8 +24,8 @@ export function ContinueShopping({
         className
       )}
     >
-      <ArrowRightIcon className="size-4 rotate-180 transition-transform group-hover:-translate-x-1" />
-      {label}
+      <ArrowRightIcon className="size-4 rotate-180 rtl:rotate-0 transition-transform group-hover:-translate-x-1 rtl:group-hover:translate-x-1" />
+      {label ?? t("continueShopping")}
     </Link>
   );
 }

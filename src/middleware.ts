@@ -1,15 +1,18 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
+import createIntlMiddleware from "next-intl/middleware";
 import { isSupabaseConfigured, supabaseKey, supabaseUrl } from "@/lib/supabase/config";
 import { isAdminEmail } from "@/lib/auth/admins";
+import { routing } from "@/i18n/routing";
 
 /**
  * Guards every /admin route. Sessions are validated server-side with
  * `auth.getUser()` (never trusting client state) and refreshed cookies are
  * carried on every response — including redirects — so there is no flicker
- * and no logged-out flash after token rotation.
+ * and no logged-out flash after token rotation. The admin dashboard stays
+ * English-only and outside the locale routing below.
  */
-export async function middleware(request: NextRequest) {
+async function adminAuthMiddleware(request: NextRequest) {
   let response = NextResponse.next({ request });
 
   // Without Supabase there is no auth to enforce; the admin pages themselves
@@ -62,6 +65,21 @@ export async function middleware(request: NextRequest) {
   return response;
 }
 
+/** Locale detection/redirect/rewrite for the storefront — French default. */
+const intlMiddleware = createIntlMiddleware(routing);
+
+export default async function middleware(request: NextRequest) {
+  if (request.nextUrl.pathname.startsWith("/admin")) {
+    return adminAuthMiddleware(request);
+  }
+  return intlMiddleware(request);
+}
+
 export const config = {
-  matcher: ["/admin/:path*", "/admin"],
+  matcher: [
+    "/admin/:path*",
+    "/admin",
+    // Storefront: every path except Next internals, API routes, and files with an extension.
+    "/((?!api|_next|_vercel|admin|.*\\..*).*)",
+  ],
 };

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { filterColors } from "@/constants/shop";
 import { useFilters } from "./filters-context";
@@ -8,18 +9,21 @@ import { FilterGroup } from "./product-filters";
 
 export function ColorFilter() {
   const { state, toggle } = useFilters();
+  const t = useTranslations("shop.filters");
+  const tColors = useTranslations("colors");
 
   return (
-    <FilterGroup title="Color">
+    <FilterGroup title={t("color")}>
       <div className="flex flex-wrap gap-3">
         {filterColors.map((color) => {
           const selected = state.colors.includes(color.value);
+          const label = tColors(color.value);
           return (
             <button
               key={color.value}
               type="button"
               aria-pressed={selected}
-              title={color.label}
+              title={label}
               onClick={() => toggle("colors", color.value)}
               style={{ backgroundColor: color.hex }}
               className={cn(
@@ -28,7 +32,7 @@ export function ColorFilter() {
                 selected && "ring-ring ring-offset-background ring-2 ring-offset-2"
               )}
             >
-              <span className="sr-only">{color.label}</span>
+              <span className="sr-only">{label}</span>
             </button>
           );
         })}

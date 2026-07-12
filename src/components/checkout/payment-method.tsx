@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { paymentMethods } from "@/constants/checkout";
 import { OptionCard } from "./option-card";
 
@@ -10,8 +11,11 @@ export interface PaymentMethodProps {
 }
 
 export function PaymentMethod({ value, onChange }: PaymentMethodProps) {
+  const t = useTranslations("checkout.paymentMethod");
+  const tMethods = useTranslations("paymentMethods");
+
   return (
-    <div role="radiogroup" aria-label="Payment method" className="flex flex-col gap-3">
+    <div role="radiogroup" aria-label={t("ariaLabel")} className="flex flex-col gap-3">
       {paymentMethods.map((method) => (
         <OptionCard
           key={method.id}
@@ -19,10 +23,10 @@ export function PaymentMethod({ value, onChange }: PaymentMethodProps) {
           value={method.id}
           checked={value === method.id}
           onChange={onChange}
-          label={method.label}
-          description={method.description}
+          label={tMethods(`${method.id}.label`)}
+          description={tMethods(`${method.id}.description`)}
           disabled={!method.available}
-          disabledBadge="Coming soon"
+          disabledBadge={t("comingSoon")}
         />
       ))}
     </div>

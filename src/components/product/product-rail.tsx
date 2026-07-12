@@ -1,8 +1,14 @@
+"use client";
+
 import * as React from "react";
+import { useLocale, useTranslations } from "next-intl";
 import type { Product } from "@/types/product";
 import { Section } from "@/components/ui/section";
 import { ProductCard } from "@/components/ui/product-card";
 import { Reveal } from "@/components/shared/reveal";
+import { intlTagByLocale, type AppLocale } from "@/i18n/routing";
+import { localeHref } from "@/i18n/alternates";
+import { translateBadge } from "@/lib/product-badge";
 
 export interface ProductRailProps {
   eyebrow?: string;
@@ -16,6 +22,9 @@ export interface ProductRailProps {
  * Reused for Related, Recently Viewed and You May Also Like.
  */
 export function ProductRail({ eyebrow, title, products, className }: ProductRailProps) {
+  const locale = useLocale() as AppLocale;
+  const tBadges = useTranslations("badges");
+
   if (products.length === 0) return null;
 
   return (
@@ -29,13 +38,15 @@ export function ProductRail({ eyebrow, title, products, className }: ProductRail
           >
             <ProductCard
               name={product.name}
-              href={product.href}
+              href={localeHref(locale, product.href)}
               imageSrc={product.imageSrc}
               imageAlt={product.imageAlt}
               price={product.price}
               compareAtPrice={product.compareAtPrice}
               category={product.category}
-              badge={product.badge}
+              badge={translateBadge(product.badge, tBadges)}
+              saleLabel={tBadges("sale")}
+              locale={intlTagByLocale[locale]}
               className="h-full"
             />
           </Reveal>

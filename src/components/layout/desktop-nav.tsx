@@ -1,7 +1,9 @@
-import * as React from "react";
-import Link from "next/link";
+"use client";
+
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
+import { Link } from "@/i18n/navigation";
 
 const navLinkClasses = cn(
   "inline-flex h-full items-center px-4 text-sm font-medium tracking-wide text-foreground/75 transition-colors",
@@ -9,12 +11,14 @@ const navLinkClasses = cn(
 );
 
 export function DesktopNav({ className }: { className?: string }) {
+  const t = useTranslations("nav");
+
   return (
     <ul className={cn("items-stretch", className)}>
       {siteConfig.nav.map((item) => (
-        <li key={item.label} className="flex items-stretch">
+        <li key={item.key} className="flex items-stretch">
           <Link href={item.href} className={navLinkClasses}>
-            {item.label}
+            {t(item.key)}
           </Link>
         </li>
       ))}

@@ -12,6 +12,11 @@ export interface PaginationProps {
   /** Render items as buttons for client-side paging. */
   onPageChange?: (page: number) => void;
   className?: string;
+  /** aria-labels — override with translated strings outside admin. */
+  navAriaLabel?: string;
+  previousLabel?: string;
+  nextLabel?: string;
+  pageLabel?: (page: number) => string;
 }
 
 const ELLIPSIS = "…" as const;
@@ -41,6 +46,10 @@ export function Pagination({
   createHref,
   onPageChange,
   className,
+  navAriaLabel = "Pagination",
+  previousLabel = "Previous page",
+  nextLabel = "Next page",
+  pageLabel = (p) => `Page ${p}`,
 }: PaginationProps) {
   if (totalPages <= 1) return null;
 
@@ -78,10 +87,10 @@ export function Pagination({
 
   return (
     <nav
-      aria-label="Pagination"
+      aria-label={navAriaLabel}
       className={cn("flex items-center justify-center gap-1", className)}
     >
-      {page > 1 && renderItem(page - 1, <Chevron direction="left" />, "Previous page")}
+      {page > 1 && renderItem(page - 1, <Chevron direction="left" />, previousLabel)}
       {getRange(page, totalPages).map((item, index) =>
         item === ELLIPSIS ? (
           <span key={`e-${index}`} aria-hidden="true" className="text-muted px-2">
@@ -89,11 +98,11 @@ export function Pagination({
           </span>
         ) : (
           <React.Fragment key={item}>
-            {renderItem(item, item, `Page ${item}`, item === page)}
+            {renderItem(item, item, pageLabel(item), item === page)}
           </React.Fragment>
         )
       )}
-      {page < totalPages && renderItem(page + 1, <Chevron direction="right" />, "Next page")}
+      {page < totalPages && renderItem(page + 1, <Chevron direction="right" />, nextLabel)}
     </nav>
   );
 }
@@ -104,7 +113,10 @@ function Chevron({ direction }: { direction: "left" | "right" }) {
       aria-hidden="true"
       viewBox="0 0 20 20"
       fill="none"
-      className={cn("size-4", direction === "left" && "rotate-180")}
+      className={cn(
+        "size-4",
+        direction === "left" ? "rotate-180 rtl:rotate-0" : "rtl:rotate-180"
+      )}
     >
       <path
         d="m7.5 5 5 5-5 5"

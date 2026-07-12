@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { filterSizes } from "@/constants/shop";
 import { useFilters } from "./filters-context";
@@ -8,12 +9,15 @@ import { FilterGroup } from "./product-filters";
 
 export function SizeFilter() {
   const { state, toggle } = useFilters();
+  const t = useTranslations("shop.filters");
+  const tSizes = useTranslations("sizes");
 
   return (
-    <FilterGroup title="Size">
+    <FilterGroup title={t("size")}>
       <div className="flex flex-wrap gap-2">
         {filterSizes.map((size) => {
           const selected = state.sizes.includes(size);
+          const label = size === "One size" ? tSizes("oneSize") : size;
           return (
             <button
               key={size}
@@ -28,7 +32,7 @@ export function SizeFilter() {
                   : "border-border bg-surface-elevated text-foreground/80 hover:border-primary/40 hover:text-foreground"
               )}
             >
-              {size}
+              {label}
             </button>
           );
         })}

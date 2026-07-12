@@ -41,7 +41,7 @@ export function toast(options: ToastOptions) {
   useToastStore.getState().add(options);
 }
 
-function ToastCard({ item }: { item: ToastItem }) {
+function ToastCard({ item, dismissLabel }: { item: ToastItem; dismissLabel: string }) {
   const dismiss = useToastStore((s) => s.dismiss);
 
   React.useEffect(() => {
@@ -76,7 +76,7 @@ function ToastCard({ item }: { item: ToastItem }) {
       <button
         type="button"
         onClick={() => dismiss(item.id)}
-        aria-label="Dismiss"
+        aria-label={dismissLabel}
         className="text-muted hover:bg-foreground/5 hover:text-foreground -m-1 rounded-full p-1 transition-colors"
       >
         <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" className="size-4">
@@ -92,8 +92,13 @@ function ToastCard({ item }: { item: ToastItem }) {
   );
 }
 
-/** Mount once (already wired in the root layout). */
-export function Toaster() {
+export interface ToasterProps {
+  /** aria-label for each toast's dismiss button — override with a translated string outside admin. */
+  dismissLabel?: string;
+}
+
+/** Mount once per root layout (storefront and admin each mount their own). */
+export function Toaster({ dismissLabel = "Dismiss" }: ToasterProps = {}) {
   const toasts = useToastStore((s) => s.toasts);
   const [mounted, setMounted] = React.useState(false);
 
@@ -103,10 +108,10 @@ export function Toaster() {
   return createPortal(
     <div
       aria-live="polite"
-      className="pointer-events-none fixed inset-x-4 bottom-4 z-[60] flex flex-col items-end gap-3 sm:inset-x-auto sm:right-6 sm:bottom-6 sm:w-96"
+      className="pointer-events-none fixed inset-x-4 bottom-4 z-[60] flex flex-col items-end gap-3 rtl:items-start sm:inset-x-auto sm:right-6 sm:bottom-6 sm:w-96 rtl:sm:right-auto rtl:sm:left-6"
     >
       {toasts.map((item) => (
-        <ToastCard key={item.id} item={item} />
+        <ToastCard key={item.id} item={item} dismissLabel={dismissLabel} />
       ))}
     </div>,
     document.body

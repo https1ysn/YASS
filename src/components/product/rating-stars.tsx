@@ -1,4 +1,7 @@
+"use client";
+
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 export interface RatingStarsProps {
@@ -9,11 +12,13 @@ export interface RatingStarsProps {
 
 /** Five-star rating with optional review count — static placeholder data. */
 export function RatingStars({ rating, reviewCount, className }: RatingStarsProps) {
+  const t = useTranslations("product.rating");
+
   return (
     <div className={cn("flex items-center gap-2", className)}>
       <div
         role="img"
-        aria-label={`Rated ${rating} out of 5`}
+        aria-label={t("ratedAria", { rating })}
         className="text-secondary flex gap-0.5"
       >
         {[1, 2, 3, 4, 5].map((star) => (
@@ -35,7 +40,7 @@ export function RatingStars({ rating, reviewCount, className }: RatingStarsProps
         {reviewCount != null && (
           <span>
             {" "}
-            · {reviewCount} {reviewCount === 1 ? "review" : "reviews"}
+            · {reviewCount} {reviewCount === 1 ? t("review") : t("reviews")}
           </span>
         )}
       </p>

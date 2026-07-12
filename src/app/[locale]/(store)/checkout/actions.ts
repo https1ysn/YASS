@@ -1,21 +1,28 @@
 "use server";
 
+import { getTranslations } from "next-intl/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { getProducts } from "@/lib/supabase/queries";
-import { checkoutSchema, type CheckoutInput } from "@/schemas/checkout";
+import { createCheckoutSchema, type CheckoutInput } from "@/schemas/checkout";
 import { FLAT_SHIPPING_RATE, FREE_SHIPPING_THRESHOLD } from "@/constants/cart";
 import { shippingMethods } from "@/constants/checkout";
+import type { AppLocale } from "@/i18n/routing";
 
 export type PlaceOrderResult = { ok: true; orderNumber: string } | { ok: false; error: string };
 
-function friendlyError(message: string, code?: string): string {
+async function friendlyError(
+  message: string,
+  locale: AppLocale,
+  code?: string
+): Promise<string> {
+  const t = await getTranslations({ locale, namespace: "checkout.actions" });
   if (code === "PGRST202" || /place_order/i.test(message)) {
-    return "Ordering isn't fully set up yet — the latest database migration hasn't been applied.";
+    return t("orderingNotSetUp");
   }
   if (/fetch failed|network|ENOTFOUND|ECONN|timeout/i.test(message)) {
-    return "We couldn't reach the boutique. Please check your connection and try again.";
+    return t("connectionError");
   }
-  return message || "Something went wrong. Please try again.";
+  return message || t("genericError");
 }
 
 /**
@@ -23,12 +30,17 @@ function friendlyError(message: string, code?: string): string {
  * catalog (never trusting client prices), then calls the atomic `place_order`
  * database function which stores the customer, order and order items.
  */
-export async function placeOrder(input: CheckoutInput): Promise<PlaceOrderResult> {
-  const parsed = checkoutSchema.safeParse(input);
+export async function placeOrder(
+  input: CheckoutInput,
+  locale: AppLocale
+): Promise<PlaceOrderResult> {
+  const tValidation = await getTranslations({ locale, namespace: "validation" });
+  const schema = createCheckoutSchema((key) => tValidation(key));
+  const parsed = schema.safeParse(input);
   if (!parsed.success) {
     return {
       ok: false,
-      error: parsed.error.issues[0]?.message ?? "Please check your details and try again.",
+      error: parsed.error.issues[0]?.message ?? tValidation("fullName"),
     };
   }
   const data = parsed.data;
@@ -47,7 +59,8 @@ export async function placeOrder(input: CheckoutInput): Promise<PlaceOrderResult
   for (const item of data.items) {
     const product = products.find((p) => p.slug === item.slug);
     if (!product) {
-      return { ok: false, error: "One of the pieces in your bag is no longer available." };
+      const t = await getTranslations({ locale, namespace: "checkout.actions" });
+      return { ok: false, error: t("itemUnavailable") };
     }
     items.push({
       slug: product.slug,
@@ -91,16 +104,17 @@ export async function placeOrder(input: CheckoutInput): Promise<PlaceOrderResult
     });
 
     if (error) {
-      return { ok: false, error: friendlyError(error.message, error.code) };
+      return { ok: false, error: await friendlyError(error.message, locale, error.code) };
     }
 
     const orderNumber = (result as { order_number?: string } | null)?.order_number;
     if (!orderNumber) {
-      return { ok: false, error: "The order could not be created. Please try again." };
+      const t = await getTranslations({ locale, namespace: "checkout.actions" });
+      return { ok: false, error: t("orderCreateFailed") };
     }
     return { ok: true, orderNumber };
   } catch (error) {
     const message = error instanceof Error ? error.message : "";
-    return { ok: false, error: friendlyError(message) };
+    return { ok: false, error: await friendlyError(message, locale) };
   }
 }

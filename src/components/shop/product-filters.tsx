@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { useFilters } from "./filters-context";
 import { CategoryFilter } from "./category-filter";
@@ -24,18 +25,19 @@ export function FilterGroup({ title, children }: { title: string; children: Reac
 /** Full refinement panel — rendered in the desktop sidebar and mobile drawer. */
 export function ProductFilters({ className }: { className?: string }) {
   const { clearAll, activeCount } = useFilters();
+  const t = useTranslations("shop.filters");
 
   return (
     <div className={cn("flex flex-col gap-8", className)}>
       <div className="flex items-center justify-between">
-        <p className="text-sm font-semibold tracking-tight">Refine</p>
+        <p className="text-sm font-semibold tracking-tight">{t("refine")}</p>
         {activeCount > 0 && (
           <button
             type="button"
             onClick={clearAll}
             className="text-secondary text-xs font-medium underline-offset-4 transition-colors hover:underline"
           >
-            Clear all ({activeCount})
+            {t("clearAll", { count: activeCount })}
           </button>
         )}
       </div>

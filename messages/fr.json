@@ -1,0 +1,553 @@
+{
+  "metadata": {
+    "siteName": "Yasso Store",
+    "defaultTitle": "Yasso Store",
+    "defaultDescription": "Une expérience e-commerce haut de gamme.",
+    "shopTitle": "Boutique",
+    "shopDescription": "Découvrez tout le catalogue Yasso — des pièces réfléchies dans des tons neutres et chaleureux.",
+    "collectionsTitle": "Collections",
+    "collectionsDescription": "Explorez les collections de la maison — femme, homme, accessoires et parfums.",
+    "collectionFallbackTitle": "Collection",
+    "productFallbackTitle": "Produit",
+    "cartTitle": "Panier",
+    "cartDescription": "Vérifiez les pièces dans votre panier.",
+    "checkoutTitle": "Commande",
+    "checkoutDescription": "Finalisez votre commande.",
+    "checkoutConfirmationTitle": "Commande confirmée",
+    "checkoutConfirmationDescription": "Merci — votre commande a bien été reçue."
+  },
+
+  "nav": {
+    "shop": "Boutique",
+    "collections": "Collections"
+  },
+
+  "announcement": "Livraison offerte dès {threshold} d'achat",
+
+  "languageSwitcher": {
+    "label": "Langue",
+    "ariaLabel": "Choisir la langue"
+  },
+
+  "header": {
+    "skipToContent": "Aller au contenu",
+    "mainNavigation": "Navigation principale",
+    "openMenu": "Ouvrir le menu",
+    "mobileNavigation": "Navigation mobile",
+    "dismissAnnouncement": "Fermer l'annonce",
+    "homeAria": "{name} — accueil"
+  },
+
+  "search": {
+    "button": "Recherche",
+    "modalTitle": "Recherche",
+    "placeholder": "Rechercher un produit, une collection…",
+    "queryAria": "Recherche",
+    "popularSearches": "Recherches populaires",
+    "popularSearchTerms": ["Foulard en soie", "Cachemire", "Sac cabas en cuir", "Mocassins", "Parfum"]
+  },
+
+  "cartButton": {
+    "shoppingBag": "Panier",
+    "shoppingBagCount": "Panier, {count, plural, one {# article} other {# articles}}"
+  },
+
+  "footer": {
+    "tagline": "Des pièces réfléchies dans des tons neutres et chaleureux — pensées lentement, faites pour durer.",
+    "shopColumnTitle": "Boutique",
+    "shopAll": "Toute la boutique",
+    "collections": "Collections",
+    "copyright": "© {year} {name}. Tous droits réservés."
+  },
+
+  "newsletter": {
+    "kicker": "Newsletter",
+    "title": "Rejoignez la maison",
+    "description": "Nouvelles collections, avant-premières privées et récits choisis — quelques fois par saison, jamais plus.",
+    "emailLabel": "Adresse e-mail",
+    "placeholder": "Votre adresse e-mail",
+    "subscribe": "S'abonner",
+    "toastTitle": "Bienvenue dans la maison",
+    "toastDescription": "Vous êtes inscrit — uniquement l'essentiel, promis."
+  },
+
+  "home": {
+    "hero": {
+      "sectionAriaLabel": "Campagne à la une",
+      "badge": "Automne — Hiver 2026",
+      "title": "L'art du luxe discret",
+      "description": "Des silhouettes réfléchies dans des tons neutres et chaleureux — taillées dans la soie certifiée, le cachemire et le cuir, finies à la main dans nos ateliers.",
+      "shopNewArrivals": "Découvrir les nouveautés",
+      "exploreCollections": "Explorer les collections",
+      "imageAlt": "Campagne Automne–Hiver 2026 — silhouettes en tons neutres et chaleureux",
+      "justLanded": "Vient d'arriver",
+      "autumnCapsule": "La capsule automne"
+    },
+    "benefits": {
+      "ariaLabel": "Pourquoi nous choisir",
+      "shipping": {
+        "title": "Livraison offerte",
+        "description": "Livraison gratuite et neutre en carbone sur toutes les commandes dès {threshold}, dans le monde entier."
+      },
+      "returns": {
+        "title": "Retours simplifiés",
+        "description": "30 jours pour changer d'avis — collecte organisée depuis votre domicile."
+      },
+      "craft": {
+        "title": "Savoir-faire artisanal",
+        "description": "Chaque pièce finie à la main dans nos ateliers avec des matières certifiées."
+      },
+      "care": {
+        "title": "Entretien à vie",
+        "description": "Réparations et remises à neuf pour toute la vie de votre pièce."
+      }
+    },
+    "featuredCategories": {
+      "eyebrow": "Sélectionné pour vous",
+      "title": "Acheter par catégorie",
+      "description": "Quatre univers, un seul langage — tons neutres, matières honnêtes, coupes intemporelles."
+    },
+    "featuredProducts": {
+      "eyebrow": "La sélection",
+      "title": "Pièces phares",
+      "description": "Une sélection resserrée de la nouvelle saison — choisie par nos ateliers.",
+      "viewAll": "Voir toutes les nouveautés"
+    },
+    "brandStory": {
+      "imageAlt": "Dans l'atelier Yasso",
+      "eyebrow": "La maison",
+      "title": "Fait lentement, gardé pour toujours",
+      "description": "Depuis 1998, nous travaillons avec un cercle restreint d'ateliers familiaux, privilégiant la soie certifiée, le cachemire et le cuir tanné végétal plutôt que le volume. Chaque pièce passe entre des mains, non entre des lignes de production — et est conçue pour être réparée, non remplacée.",
+      "discoverStory": "Découvrir notre histoire"
+    },
+    "cta": {
+      "eyebrow": "Le service de la maison",
+      "title": "Un style privé, à votre rythme",
+      "description": "Une heure avec nos stylistes — en boutique ou en visioconférence — pour composer une garde-robe autour de ce que vous possédez déjà. Sans hâte, personnel, offert.",
+      "bookAppointment": "Prendre rendez-vous",
+      "quote": "Le style est la réponse à tout — surtout quand il murmure."
+    },
+    "bestSellers": {
+      "eyebrow": "Les plus aimées",
+      "title": "Meilleures ventes",
+      "description": "Les pièces que nos clients retrouvent, saison après saison.",
+      "shopAll": "Voir toutes les meilleures ventes"
+    },
+    "finalCta": {
+      "kicker": "Yasso — Depuis 1998",
+      "title": "Sublimez le quotidien",
+      "description": "Des pièces qui traversent les saisons et les tendances — faites lentement, portées souvent, gardées pour toujours.",
+      "shopNewSeason": "Découvrir la nouvelle saison",
+      "browseCollections": "Parcourir toutes les collections"
+    },
+    "testimonials": {
+      "eyebrow": "La parole de nos clients",
+      "title": "Un luxe discret, hautement apprécié",
+      "ratedAria": "Noté {rating} sur 5"
+    },
+    "instagram": {
+      "eyebrow": "Suivez la maison",
+      "description": "Ateliers, campagnes et instants discrets — de notre studio jusqu'à vous.",
+      "openInstagram": "{alt} — ouvre Instagram"
+    }
+  },
+
+  "collectionsPage": {
+    "eyebrow": "La maison",
+    "title": "Collections",
+    "description": "Six univers, un seul langage — tons neutres, matières honnêtes et coupes intemporelles.",
+    "singleEyebrow": "Collection"
+  },
+
+  "shop": {
+    "hero": {
+      "title": "Toute la boutique",
+      "description": "Le catalogue complet — chaque pièce, chaque univers, en une seule sélection réfléchie."
+    },
+    "filters": {
+      "refine": "Affiner",
+      "clearAll": "Tout effacer ({count})",
+      "category": "Catégorie",
+      "color": "Couleur",
+      "size": "Taille",
+      "availability": "Disponibilité",
+      "price": "Prix",
+      "min": "Min",
+      "max": "Max",
+      "priceAria": "Prix {label}"
+    },
+    "toolbar": {
+      "piece": "pièce",
+      "pieces": "pièces",
+      "filters": "Filtres",
+      "filtersWithCount": "Filtres ({count})",
+      "filterAndSort": "Filtrer et trier",
+      "viewResults": "Voir les résultats"
+    },
+    "sort": {
+      "ariaLabel": "Trier par",
+      "featured": "En vedette",
+      "newest": "Plus récent",
+      "priceAsc": "Prix croissant",
+      "priceDesc": "Prix décroissant",
+      "name": "Nom : A–Z"
+    },
+    "activeFilters": {
+      "removeFilter": "Retirer le filtre : {label}",
+      "clearAll": "Tout effacer"
+    },
+    "browser": {
+      "emptyTitle": "Cette collection arrive bientôt",
+      "emptyDescription": "Nos ateliers apportent les dernières touches à ces pièces. Laissez votre e-mail dans la newsletter ci-dessous pour être informé en premier.",
+      "exploreOtherCollections": "Explorer d'autres collections",
+      "productFilters": "Filtres produits"
+    },
+    "quickView": "Aperçu rapide",
+    "collectionGrid": {
+      "comingSoon": "Bientôt disponible",
+      "arrivingSoon": "Arrive bientôt"
+    },
+    "piece": "{count, plural, one {# pièce} other {# pièces}}"
+  },
+
+  "product": {
+    "gallery": {
+      "openFullView": "Ouvrir l'image en plein écran",
+      "productImages": "Images du produit",
+      "viewImageOf": "Voir l'image {index} sur {total}"
+    },
+    "info": {
+      "selectSizeFirst": "Sélectionnez d'abord une taille",
+      "addedToBag": "Ajouté au panier",
+      "addedToBagDescription": "{quantity} × {name} · Taille {size}",
+      "removedFromWishlist": "Retiré des favoris",
+      "savedToWishlist": "Ajouté aux favoris",
+      "linkCopied": "Lien copié",
+      "inStock": "En stock — expédié sous 2 à 3 jours",
+      "madeToOrder": "Fabriqué sur commande — 2 à 3 semaines",
+      "quantity": "Quantité",
+      "addToBag": "Ajouter au panier",
+      "saveToWishlist": "Ajouter aux favoris",
+      "removeFromWishlist": "Retirer des favoris",
+      "sharePiece": "Partager cette pièce",
+      "buyNow": "Acheter maintenant"
+    },
+    "rail": {
+      "completeTheLook": "Complétez le look",
+      "relatedPieces": "Pièces associées",
+      "forYou": "Pour vous",
+      "youMayAlsoLike": "Vous aimerez aussi",
+      "yourHistory": "Votre historique",
+      "recentlyViewed": "Récemment consultés"
+    },
+    "accordions": {
+      "specifications": "Caractéristiques",
+      "shippingReturns": "Livraison et retours",
+      "careInstructions": "Entretien"
+    },
+    "rating": {
+      "ratedAria": "Noté {rating} sur 5",
+      "review": "avis",
+      "reviews": "avis"
+    },
+    "size": "Taille",
+    "color": "Couleur",
+    "quantitySelector": {
+      "ariaLabel": "Quantité",
+      "decrease": "Diminuer la quantité",
+      "increase": "Augmenter la quantité"
+    },
+    "quickView": {
+      "addToBag": "Ajouter au panier",
+      "addedToBag": "Ajouté au panier",
+      "addedToBagDescription": "{name} · Taille {size}",
+      "viewFullDetails": "Voir tous les détails"
+    },
+    "stickyAddToCart": {
+      "addToBag": "Ajouter au panier",
+      "addedToBag": "Ajouté au panier",
+      "addedToBagDescription": "{name} · Taille {size}"
+    }
+  },
+
+  "cart": {
+    "curatedForYou": "Sélectionné pour vous",
+    "lineMeta": "{color} · Taille {size}",
+    "item": {
+      "saveForLater": "Enregistrer pour plus tard",
+      "remove": "Retirer",
+      "each": "{price} l'unité"
+    },
+    "summary": {
+      "title": "Récapitulatif de commande",
+      "proceedToCheckout": "Passer la commande",
+      "footnote": "Taxes calculées à la commande · Paiement sécurisé · Retours sous 30 jours"
+    },
+    "view": {
+      "removedFromBag": "Retiré du panier",
+      "savedForLater": "Enregistré pour plus tard",
+      "movedToBag": "Déplacé vers le panier",
+      "cartUpdated": "Panier mis à jour",
+      "updateCart": "Mettre à jour le panier"
+    },
+    "continueShopping": "Continuer mes achats",
+    "coupon": {
+      "couponApplied": "Code promo appliqué",
+      "couponAppliedDescription": "{code} — 10 % de réduction, démo uniquement pour le moment.",
+      "addCoupon": "Ajouter un code promo",
+      "appliedCode": "{code} — 10 % de réduction",
+      "remove": "Retirer",
+      "placeholder": "ex. YASSO10",
+      "ariaLabel": "Code promo",
+      "apply": "Appliquer"
+    },
+    "empty": {
+      "title": "Votre panier est vide",
+      "description": "Découvrez nos collections et ajoutez vos pièces préférées — elles vous attendront ici.",
+      "continueShopping": "Continuer mes achats"
+    },
+    "miniCart": {
+      "shoppingBag": "Panier",
+      "shoppingBagCount": "Panier ({count})",
+      "subtotal": "Sous-total",
+      "viewBag": "Voir le panier",
+      "checkout": "Commander",
+      "footnote": "Livraison et taxes calculées à la commande",
+      "quantityTimes": "{quantity} ×",
+      "emptyTitle": "Votre panier est vide",
+      "emptyDescription": "Découvrez nos collections et ajoutez vos pièces préférées.",
+      "continueShopping": "Continuer mes achats"
+    },
+    "orderSummary": {
+      "subtotal": "Sous-total",
+      "discount": "Réduction",
+      "shipping": "Livraison",
+      "complimentary": "Offerte",
+      "addMoreForFreeShipping": "Ajoutez <b>{amount}</b> de plus pour la livraison offerte.",
+      "unlockedFreeShipping": "Vous avez débloqué la livraison offerte.",
+      "total": "Total",
+      "progressAria": "Progression vers la livraison offerte"
+    },
+    "savedForLater": {
+      "title": "Enregistré pour plus tard",
+      "titleWithCount": "Enregistré pour plus tard ({count})",
+      "moveToBag": "Déplacer vers le panier",
+      "remove": "Retirer"
+    },
+    "shippingEstimate": {
+      "estimate": "Estimer la livraison",
+      "countryAria": "Pays",
+      "postalCode": "Code postal",
+      "estimateButton": "Estimer",
+      "result": "{country} · {postalCode} — 2 à 4 jours ouvrés, offerte dès {threshold}.",
+      "resultNoPostal": "{country} — 2 à 4 jours ouvrés, offerte dès {threshold}."
+    }
+  },
+
+  "checkout": {
+    "sections": {
+      "contactInformation": "Coordonnées",
+      "shippingAddress": "Adresse de livraison",
+      "shippingMethod": "Mode de livraison",
+      "paymentMethod": "Mode de paiement",
+      "orderNotes": "Notes de commande"
+    },
+    "bagEmpty": "Votre panier est vide",
+    "orderFailedTitle": "Impossible de passer votre commande",
+    "connectionError": "Vérifiez votre connexion et réessayez.",
+    "orderPlaced": "Commande passée",
+    "orderPlacedDescription": "{orderNumber} — merci, elle est en route.",
+    "placingOrder": "Envoi de votre commande…",
+    "placeOrder": "Passer la commande · {total}",
+    "terms": "En passant votre commande, vous acceptez nos conditions · Rien n'est débité aujourd'hui — paiement à la livraison.",
+    "header": {
+      "progressAria": "Progression de la commande",
+      "bag": "Panier",
+      "details": "Détails",
+      "confirmation": "Confirmation"
+    },
+    "orderSummary": {
+      "title": "Votre commande",
+      "lineMeta": "Taille {size} · Qté {quantity}"
+    },
+    "contactInfo": {
+      "fullName": "Nom complet",
+      "fullNamePlaceholder": "ex. Yassine El Amrani",
+      "phone": "Numéro de téléphone",
+      "phonePlaceholder": "+212 6 12 34 56 78",
+      "email": "E-mail",
+      "emailPlaceholder": "vous@exemple.com",
+      "emailHint": "Facultatif — pour le suivi de votre commande."
+    },
+    "shippingAddress": {
+      "country": "Pays",
+      "city": "Ville",
+      "cityPlaceholder": "ex. Casablanca",
+      "street": "Adresse",
+      "streetPlaceholder": "Rue, bâtiment, appartement",
+      "postalCode": "Code postal",
+      "postalCodePlaceholder": "ex. 20000",
+      "optional": "Facultatif."
+    },
+    "orderNotes": {
+      "label": "Notes de commande",
+      "placeholder": "Instructions de livraison, message cadeau, horaire préféré…",
+      "hint": "Facultatif."
+    },
+    "paymentMethod": {
+      "ariaLabel": "Mode de paiement",
+      "comingSoon": "Bientôt disponible"
+    },
+    "shippingMethodSection": {
+      "ariaLabel": "Mode de livraison",
+      "complimentary": "Offerte"
+    },
+    "confirmation": {
+      "kicker": "Commande confirmée",
+      "title": "Merci — elle est en route",
+      "description": "Votre commande a bien été reçue et notre atelier la prépare avec soin. Vous paierez en espèces à la livraison.",
+      "orderNumber": "Numéro de commande",
+      "estimatedDelivery": "Livraison estimée",
+      "continueShopping": "Continuer mes achats",
+      "backToHome": "Retour à l'accueil"
+    },
+    "actions": {
+      "orderingNotSetUp": "La commande n'est pas encore totalement configurée — la dernière migration de base de données n'a pas été appliquée.",
+      "connectionError": "Impossible de joindre la boutique. Vérifiez votre connexion et réessayez.",
+      "genericError": "Une erreur est survenue. Veuillez réessayer.",
+      "itemUnavailable": "L'une des pièces de votre panier n'est plus disponible.",
+      "orderCreateFailed": "La commande n'a pas pu être créée. Veuillez réessayer."
+    }
+  },
+
+  "validation": {
+    "fullName": "Veuillez saisir votre nom complet.",
+    "phone": "Veuillez saisir un numéro de téléphone valide.",
+    "email": "Veuillez saisir une adresse e-mail valide.",
+    "country": "Veuillez choisir un pays.",
+    "city": "Veuillez saisir votre ville.",
+    "street": "Veuillez saisir votre adresse.",
+    "paymentMethod": "Seul le paiement à la livraison est disponible pour le moment.",
+    "emptyBag": "Votre panier est vide."
+  },
+
+  "badges": {
+    "new": "Nouveau",
+    "bestSeller": "Meilleure vente",
+    "sale": "Promo",
+    "comingSoon": "Bientôt disponible"
+  },
+
+  "colors": {
+    "noir": "Noir",
+    "chocolate": "Chocolat",
+    "camel": "Camel",
+    "sand": "Sable",
+    "ivory": "Ivoire"
+  },
+
+  "sizes": {
+    "oneSize": "Taille unique"
+  },
+
+  "availability": {
+    "inStock": "En stock",
+    "madeToOrder": "Sur commande"
+  },
+
+  "shippingMethods": {
+    "standard": {
+      "label": "Livraison standard",
+      "description": "2 à 4 jours ouvrés, neutre en carbone"
+    },
+    "express": {
+      "label": "Livraison express",
+      "description": "1 à 2 jours ouvrés, signature à réception"
+    }
+  },
+
+  "paymentMethods": {
+    "cod": {
+      "label": "Paiement à la livraison",
+      "description": "Payez en espèces à la réception de votre commande."
+    },
+    "card": {
+      "label": "Carte bancaire",
+      "description": "Bientôt disponible"
+    },
+    "paypal": {
+      "label": "PayPal",
+      "description": "Bientôt disponible"
+    }
+  },
+
+  "countries": {
+    "morocco": "Maroc",
+    "unitedStates": "États-Unis",
+    "unitedKingdom": "Royaume-Uni",
+    "france": "France",
+    "unitedArabEmirates": "Émirats arabes unis"
+  },
+
+  "specifications": {
+    "material": "Matière",
+    "origin": "Origine",
+    "availability": "Disponibilité",
+    "reference": "Référence",
+    "madeInPortugal": "Fabriqué au Portugal",
+    "inStock": "En stock",
+    "madeToOrder": "Sur commande",
+    "materialWomen": "Soie certifiée et cachemire",
+    "materialMen": "Laine italienne et coton biologique",
+    "materialAccessories": "Cuir tanné végétal et twill de soie",
+    "materialFragrance": "Essences naturelles, 20 % de concentration",
+    "materialDefault": "Fibres naturelles certifiées"
+  },
+
+  "shippingReturns": [
+    "Livraison offerte et neutre en carbone dès {threshold} d'achat.",
+    "Livraison express disponible à la commande — 2 à 3 jours ouvrés.",
+    "Retours sous 30 jours, collectés gratuitement chez vous.",
+    "Chaque pièce arrive dans notre emballage recyclé signature."
+  ],
+
+  "careInstructions": [
+    "Nettoyage à sec uniquement, chez un spécialiste de confiance.",
+    "À ranger plié dans la housse en coton fournie, à l'abri de la lumière directe.",
+    "Défroisser à la vapeur en douceur — ne jamais repasser directement sur la surface.",
+    "Réparations et remises à neuf offertes à vie."
+  ],
+
+  "home_brandStats": [
+    { "label": "Maison fondée en" },
+    { "label": "Ateliers dans le monde" },
+    { "label": "Sourcing responsable" }
+  ],
+
+  "home_testimonials": [
+    "L'attention portée aux détails est extraordinaire. Mon manteau est arrivé emballé comme un cadeau et il me va comme s'il avait été fait pour moi.",
+    "Le luxe discret comme il se doit — aucun logo, juste une matière et une coupe impeccables. Je reviens à chaque saison.",
+    "Leur service d'entretien à vie a redonné à mon sac vieux de cinq ans un aspect neuf. C'est ça, bien acheter."
+  ],
+
+  "home_instagramAlts": [
+    "Mannequin portant la robe portefeuille en soie sable",
+    "Gros plan sur le détail cousu main du sac cabas en cuir",
+    "Espace de travail de l'atelier avec échantillons de tissus",
+    "Mannequin en pull col rond en cachemire, portrait studio",
+    "Mise à plat des pièces de la capsule été",
+    "Coulisses du tournage de la campagne automne"
+  ],
+
+  "common": {
+    "loading": "Chargement",
+    "close": "Fermer",
+    "dismiss": "Fermer",
+    "page": "Page {number}",
+    "previousPage": "Page précédente",
+    "nextPage": "Page suivante",
+    "pagination": "Pagination",
+    "breadcrumb": "Fil d'Ariane",
+    "home": "Accueil"
+  }
+}

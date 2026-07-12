@@ -9,11 +9,13 @@ export interface BreadcrumbItem {
 
 export interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
   items: BreadcrumbItem[];
+  /** nav aria-label — override with a translated string outside admin. */
+  ariaLabel?: string;
 }
 
-export function Breadcrumb({ items, className, ...props }: BreadcrumbProps) {
+export function Breadcrumb({ items, ariaLabel = "Breadcrumb", className, ...props }: BreadcrumbProps) {
   return (
-    <nav aria-label="Breadcrumb" className={className} {...props}>
+    <nav aria-label={ariaLabel} className={className} {...props}>
       <ol className="flex flex-wrap items-center gap-2 text-sm">
         {items.map((item, index) => {
           const isLast = index === items.length - 1;

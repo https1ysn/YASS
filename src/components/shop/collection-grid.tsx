@@ -1,11 +1,14 @@
+"use client";
+
 import * as React from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import type { Collection } from "@/types/product";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/shared/reveal";
 import { ArrowRightIcon } from "@/components/layout/icons";
+import { Link } from "@/i18n/navigation";
 
 export interface CollectionGridProps {
   collections: Collection[];
@@ -13,6 +16,8 @@ export interface CollectionGridProps {
 }
 
 export function CollectionGrid({ collections, className }: CollectionGridProps) {
+  const t = useTranslations("shop");
+
   return (
     <div className={cn("grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3", className)}>
       {collections.map((collection, index) => (
@@ -36,8 +41,8 @@ export function CollectionGrid({ collections, className }: CollectionGridProps) 
             </div>
 
             {collection.comingSoon && (
-              <Badge variant="secondary" className="absolute top-4 left-4">
-                Coming soon
+              <Badge variant="secondary" className="absolute top-4 start-4">
+                {t("collectionGrid.comingSoon")}
               </Badge>
             )}
 
@@ -45,15 +50,15 @@ export function CollectionGrid({ collections, className }: CollectionGridProps) 
               <div className="flex flex-col gap-1">
                 <p className="text-[11px] font-medium tracking-[0.18em] uppercase opacity-75">
                   {collection.pieceCount > 0
-                    ? `${collection.pieceCount} ${collection.pieceCount === 1 ? "piece" : "pieces"}`
-                    : "Arriving soon"}
+                    ? t("piece", { count: collection.pieceCount })
+                    : t("collectionGrid.arrivingSoon")}
                 </p>
                 <p className="text-xl font-semibold tracking-tight sm:text-2xl">
                   {collection.name}
                 </p>
                 <p className="hidden text-sm text-white/80 sm:block">{collection.description}</p>
               </div>
-              <ArrowRightIcon className="mb-1 size-5 shrink-0 opacity-80 transition-transform group-hover:translate-x-1" />
+              <ArrowRightIcon className="mb-1 size-5 shrink-0 rtl:-scale-x-100 opacity-80 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
             </div>
           </Link>
         </Reveal>

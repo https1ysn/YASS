@@ -1,0 +1,553 @@
+{
+  "metadata": {
+    "siteName": "Yasso Store",
+    "defaultTitle": "Yasso Store",
+    "defaultDescription": "تجربة تسوق إلكتروني راقية.",
+    "shopTitle": "المتجر",
+    "shopDescription": "تسوقي كامل مجموعة ياسو — قطع مدروسة بألوان محايدة دافئة.",
+    "collectionsTitle": "المجموعات",
+    "collectionsDescription": "اكتشفي مجموعات الدار — نسائية، رجالية، إكسسوارات وعطور.",
+    "collectionFallbackTitle": "مجموعة",
+    "productFallbackTitle": "منتج",
+    "cartTitle": "حقيبة التسوق",
+    "cartDescription": "راجعي القطع الموجودة في حقيبتك.",
+    "checkoutTitle": "إتمام الطلب",
+    "checkoutDescription": "أكملي طلبك.",
+    "checkoutConfirmationTitle": "تم تأكيد الطلب",
+    "checkoutConfirmationDescription": "شكرًا لكِ — لقد استلمنا طلبك."
+  },
+
+  "nav": {
+    "shop": "المتجر",
+    "collections": "المجموعات"
+  },
+
+  "announcement": "شحن مجاني للطلبات التي تتجاوز {threshold}",
+
+  "languageSwitcher": {
+    "label": "اللغة",
+    "ariaLabel": "اختيار اللغة"
+  },
+
+  "header": {
+    "skipToContent": "الانتقال إلى المحتوى",
+    "mainNavigation": "التنقل الرئيسي",
+    "openMenu": "فتح القائمة",
+    "mobileNavigation": "قائمة الجوال",
+    "dismissAnnouncement": "إغلاق الإعلان",
+    "homeAria": "{name} — الصفحة الرئيسية"
+  },
+
+  "search": {
+    "button": "بحث",
+    "modalTitle": "بحث",
+    "placeholder": "ابحثي عن منتج أو مجموعة…",
+    "queryAria": "كلمة البحث",
+    "popularSearches": "عمليات بحث شائعة",
+    "popularSearchTerms": ["وشاح حريري", "كشمير", "حقيبة جلدية", "موكاسان", "عطر"]
+  },
+
+  "cartButton": {
+    "shoppingBag": "حقيبة التسوق",
+    "shoppingBagCount": "حقيبة التسوق، {count, plural, zero {# قطعة} one {قطعة واحدة} two {قطعتان} few {# قطع} many {# قطعة} other {# قطعة}}"
+  },
+
+  "footer": {
+    "tagline": "قطع مدروسة بألوان محايدة دافئة — صُممت بتأنٍّ، لتدوم.",
+    "shopColumnTitle": "المتجر",
+    "shopAll": "كل المنتجات",
+    "collections": "المجموعات",
+    "copyright": "© {year} {name}. جميع الحقوق محفوظة."
+  },
+
+  "newsletter": {
+    "kicker": "النشرة البريدية",
+    "title": "انضمي إلى الدار",
+    "description": "مجموعات جديدة، عروض حصرية مسبقة، وقصص مختارة بعناية — بضع مرات في الموسم، لا أكثر.",
+    "emailLabel": "البريد الإلكتروني",
+    "placeholder": "بريدك الإلكتروني",
+    "subscribe": "اشتراك",
+    "toastTitle": "مرحبًا بكِ في الدار",
+    "toastDescription": "أصبحتِ ضمن القائمة — سنرسل لكِ الأهم فقط."
+  },
+
+  "home": {
+    "hero": {
+      "sectionAriaLabel": "الحملة المميزة",
+      "badge": "خريف — شتاء 2026",
+      "title": "فن الفخامة الهادئة",
+      "description": "قصّات مدروسة بألوان محايدة دافئة — من الحرير المعتمد والكشمير والجلد، مُنجزة يدويًا في أتيليهاتنا.",
+      "shopNewArrivals": "تسوقي أحدث الوصول",
+      "exploreCollections": "استكشاف المجموعات",
+      "imageAlt": "حملة خريف–شتاء 2026 — قصّات بألوان محايدة دافئة",
+      "justLanded": "وصل حديثًا",
+      "autumnCapsule": "كبسولة الخريف"
+    },
+    "benefits": {
+      "ariaLabel": "لماذا تتسوقين معنا",
+      "shipping": {
+        "title": "شحن مجاني",
+        "description": "توصيل مجاني ومحايد كربونيًا لكل الطلبات التي تتجاوز {threshold}، حول العالم."
+      },
+      "returns": {
+        "title": "إرجاع سهل",
+        "description": "30 يومًا لإعادة التفكير — استلام مُنظّم من باب منزلك."
+      },
+      "craft": {
+        "title": "حرفية الأتيليه",
+        "description": "كل قطعة تُنجز يدويًا في أتيليهاتنا بخامات معتمدة."
+      },
+      "care": {
+        "title": "عناية مدى الحياة",
+        "description": "خدمات الإصلاح والتجديد طوال عمر قطعتك."
+      }
+    },
+    "featuredCategories": {
+      "eyebrow": "مختارة لكِ",
+      "title": "تسوقي حسب الفئة",
+      "description": "أربعة عوالم، لغة واحدة — ألوان محايدة، خامات صادقة، قصّات خالدة."
+    },
+    "featuredProducts": {
+      "eyebrow": "التشكيلة المختارة",
+      "title": "قطع مميزة",
+      "description": "تشكيلة مختارة بعناية من الموسم الجديد — اختارتها أتيليهاتنا.",
+      "viewAll": "عرض كل الوصول الجديد"
+    },
+    "brandStory": {
+      "imageAlt": "داخل أتيليه ياسو",
+      "eyebrow": "الدار",
+      "title": "صُنعت بتأنٍّ، تدوم للأبد",
+      "description": "منذ عام 1998، نعمل مع دائرة صغيرة من الأتيليهات العائلية، مفضّلين الحرير المعتمد والكشمير والجلد المدبوغ نباتيًا على الكم. كل قطعة تمر بين أياد، لا عبر خطوط إنتاج — وصُممت لتُصلح لا لتُستبدل.",
+      "discoverStory": "اكتشفي قصتنا"
+    },
+    "cta": {
+      "eyebrow": "خدمة الدار",
+      "title": "استشارة أسلوب خاصة، بوتيرتك",
+      "description": "ساعة مع مصممي الأزياء لدينا — في المتجر أو عبر الفيديو — لتكوين خزانة ملابس حول ما تملكينه بالفعل. دون استعجال، شخصية، ومجانية.",
+      "bookAppointment": "احجزي موعدًا",
+      "quote": "الأسلوب هو الجواب على كل شيء — خصوصًا حين يهمس."
+    },
+    "bestSellers": {
+      "eyebrow": "الأكثر حبًا",
+      "title": "الأكثر مبيعًا",
+      "description": "القطع التي يعود إليها عملاؤنا، موسمًا بعد موسم.",
+      "shopAll": "تسوقي كل الأكثر مبيعًا"
+    },
+    "finalCta": {
+      "kicker": "ياسو — تأسست 1998",
+      "title": "ارتقي بيومك",
+      "description": "قطع تتجاوز الفصول والصيحات — صُنعت بتأنٍّ، تُلبس كثيرًا، وتدوم للأبد.",
+      "shopNewSeason": "تسوقي الموسم الجديد",
+      "browseCollections": "تصفحي كل المجموعات"
+    },
+    "testimonials": {
+      "eyebrow": "آراء عميلاتنا",
+      "title": "فخامة هادئة، محبوبة بصوت عالٍ",
+      "ratedAria": "التقييم {rating} من 5"
+    },
+    "instagram": {
+      "eyebrow": "تابعي الدار",
+      "description": "أتيليهات، حملات، ولحظات هادئة — من استوديونا إليكِ.",
+      "openInstagram": "{alt} — فتح إنستغرام"
+    }
+  },
+
+  "collectionsPage": {
+    "eyebrow": "الدار",
+    "title": "المجموعات",
+    "description": "ستة عوالم، لغة واحدة — ألوان محايدة، خامات صادقة، وقصّات خالدة.",
+    "singleEyebrow": "مجموعة"
+  },
+
+  "shop": {
+    "hero": {
+      "title": "كل المنتجات",
+      "description": "الكتالوج الكامل — كل قطعة، كل عالم، في تشكيلة واحدة مدروسة."
+    },
+    "filters": {
+      "refine": "تصفية",
+      "clearAll": "مسح الكل ({count})",
+      "category": "الفئة",
+      "color": "اللون",
+      "size": "المقاس",
+      "availability": "التوفر",
+      "price": "السعر",
+      "min": "الأدنى",
+      "max": "الأقصى",
+      "priceAria": "السعر {label}"
+    },
+    "toolbar": {
+      "piece": "قطعة",
+      "pieces": "قطع",
+      "filters": "الفلاتر",
+      "filtersWithCount": "الفلاتر ({count})",
+      "filterAndSort": "تصفية وترتيب",
+      "viewResults": "عرض النتائج"
+    },
+    "sort": {
+      "ariaLabel": "الترتيب حسب",
+      "featured": "مميز",
+      "newest": "الأحدث",
+      "priceAsc": "السعر: من الأقل للأعلى",
+      "priceDesc": "السعر: من الأعلى للأقل",
+      "name": "الاسم: أ–ي"
+    },
+    "activeFilters": {
+      "removeFilter": "إزالة الفلتر: {label}",
+      "clearAll": "مسح الكل"
+    },
+    "browser": {
+      "emptyTitle": "هذه المجموعة قادمة قريبًا",
+      "emptyDescription": "أتيليهاتنا تضع اللمسات الأخيرة على هذه القطع. اتركي بريدك الإلكتروني في النشرة أدناه لتكوني أول من يعلم.",
+      "exploreOtherCollections": "استكشاف مجموعات أخرى",
+      "productFilters": "فلاتر المنتجات"
+    },
+    "quickView": "عرض سريع",
+    "collectionGrid": {
+      "comingSoon": "قريبًا",
+      "arrivingSoon": "قادمة قريبًا"
+    },
+    "piece": "{count, plural, one {# قطعة} other {# قطع}}"
+  },
+
+  "product": {
+    "gallery": {
+      "openFullView": "فتح الصورة بالحجم الكامل",
+      "productImages": "صور المنتج",
+      "viewImageOf": "عرض الصورة {index} من {total}"
+    },
+    "info": {
+      "selectSizeFirst": "يرجى اختيار المقاس أولًا",
+      "addedToBag": "أُضيف إلى الحقيبة",
+      "addedToBagDescription": "{quantity} × {name} · المقاس {size}",
+      "removedFromWishlist": "أُزيل من المفضلة",
+      "savedToWishlist": "أُضيف إلى المفضلة",
+      "linkCopied": "تم نسخ الرابط",
+      "inStock": "متوفر — يُشحن خلال 2–3 أيام",
+      "madeToOrder": "يُصنع عند الطلب — 2–3 أسابيع",
+      "quantity": "الكمية",
+      "addToBag": "أضيفي إلى الحقيبة",
+      "saveToWishlist": "أضيفي إلى المفضلة",
+      "removeFromWishlist": "إزالة من المفضلة",
+      "sharePiece": "مشاركة هذه القطعة",
+      "buyNow": "اشتري الآن"
+    },
+    "rail": {
+      "completeTheLook": "أكملي الإطلالة",
+      "relatedPieces": "قطع ذات صلة",
+      "forYou": "لكِ خصيصًا",
+      "youMayAlsoLike": "قد يعجبكِ أيضًا",
+      "yourHistory": "سجل تصفحكِ",
+      "recentlyViewed": "شوهدت مؤخرًا"
+    },
+    "accordions": {
+      "specifications": "المواصفات",
+      "shippingReturns": "الشحن والإرجاع",
+      "careInstructions": "تعليمات العناية"
+    },
+    "rating": {
+      "ratedAria": "التقييم {rating} من 5",
+      "review": "تقييم",
+      "reviews": "تقييمات"
+    },
+    "size": "المقاس",
+    "color": "اللون",
+    "quantitySelector": {
+      "ariaLabel": "الكمية",
+      "decrease": "إنقاص الكمية",
+      "increase": "زيادة الكمية"
+    },
+    "quickView": {
+      "addToBag": "أضيفي إلى الحقيبة",
+      "addedToBag": "أُضيف إلى الحقيبة",
+      "addedToBagDescription": "{name} · المقاس {size}",
+      "viewFullDetails": "عرض كل التفاصيل"
+    },
+    "stickyAddToCart": {
+      "addToBag": "أضيفي إلى الحقيبة",
+      "addedToBag": "أُضيف إلى الحقيبة",
+      "addedToBagDescription": "{name} · المقاس {size}"
+    }
+  },
+
+  "cart": {
+    "curatedForYou": "مختارة لكِ",
+    "lineMeta": "{color} · المقاس {size}",
+    "item": {
+      "saveForLater": "حفظ لوقت لاحق",
+      "remove": "إزالة",
+      "each": "{price} للقطعة"
+    },
+    "summary": {
+      "title": "ملخص الطلب",
+      "proceedToCheckout": "المتابعة إلى الدفع",
+      "footnote": "الضرائب تُحسب عند الدفع · دفع آمن · إرجاع خلال 30 يومًا"
+    },
+    "view": {
+      "removedFromBag": "أُزيل من الحقيبة",
+      "savedForLater": "حُفظ لوقت لاحق",
+      "movedToBag": "نُقل إلى الحقيبة",
+      "cartUpdated": "تم تحديث الحقيبة",
+      "updateCart": "تحديث الحقيبة"
+    },
+    "continueShopping": "متابعة التسوق",
+    "coupon": {
+      "couponApplied": "تم تطبيق كود الخصم",
+      "couponAppliedDescription": "{code} — خصم 10٪، تجريبي فقط في الوقت الحالي.",
+      "addCoupon": "أضيفي كود خصم",
+      "appliedCode": "{code} — خصم 10٪",
+      "remove": "إزالة",
+      "placeholder": "مثال: YASSO10",
+      "ariaLabel": "كود الخصم",
+      "apply": "تطبيق"
+    },
+    "empty": {
+      "title": "حقيبتك فارغة",
+      "description": "اكتشفي مجموعاتنا وأضيفي قطعك المفضلة — ستنتظرك هنا.",
+      "continueShopping": "متابعة التسوق"
+    },
+    "miniCart": {
+      "shoppingBag": "حقيبة التسوق",
+      "shoppingBagCount": "حقيبة التسوق ({count})",
+      "subtotal": "المجموع الفرعي",
+      "viewBag": "عرض الحقيبة",
+      "checkout": "إتمام الطلب",
+      "footnote": "الشحن والضرائب تُحسب عند الدفع",
+      "quantityTimes": "{quantity} ×",
+      "emptyTitle": "حقيبتك فارغة",
+      "emptyDescription": "اكتشفي مجموعاتنا وأضيفي قطعك المفضلة.",
+      "continueShopping": "متابعة التسوق"
+    },
+    "orderSummary": {
+      "subtotal": "المجموع الفرعي",
+      "discount": "الخصم",
+      "shipping": "الشحن",
+      "complimentary": "مجاني",
+      "addMoreForFreeShipping": "أضيفي <b>{amount}</b> أخرى للحصول على شحن مجاني.",
+      "unlockedFreeShipping": "لقد حصلتِ على شحن مجاني.",
+      "total": "الإجمالي",
+      "progressAria": "التقدم نحو الشحن المجاني"
+    },
+    "savedForLater": {
+      "title": "محفوظ لوقت لاحق",
+      "titleWithCount": "محفوظ لوقت لاحق ({count})",
+      "moveToBag": "نقل إلى الحقيبة",
+      "remove": "إزالة"
+    },
+    "shippingEstimate": {
+      "estimate": "تقدير الشحن",
+      "countryAria": "الدولة",
+      "postalCode": "الرمز البريدي",
+      "estimateButton": "تقدير",
+      "result": "{country} · {postalCode} — من 2 إلى 4 أيام عمل، مجاني ابتداءً من {threshold}.",
+      "resultNoPostal": "{country} — من 2 إلى 4 أيام عمل، مجاني ابتداءً من {threshold}."
+    }
+  },
+
+  "checkout": {
+    "sections": {
+      "contactInformation": "معلومات التواصل",
+      "shippingAddress": "عنوان الشحن",
+      "shippingMethod": "طريقة الشحن",
+      "paymentMethod": "طريقة الدفع",
+      "orderNotes": "ملاحظات الطلب"
+    },
+    "bagEmpty": "حقيبتك فارغة",
+    "orderFailedTitle": "تعذّر إتمام طلبك",
+    "connectionError": "يرجى التحقق من اتصالك والمحاولة مرة أخرى.",
+    "orderPlaced": "تم إرسال الطلب",
+    "orderPlacedDescription": "{orderNumber} — شكرًا لكِ، الطلب في الطريق.",
+    "placingOrder": "جارٍ إرسال طلبك…",
+    "placeOrder": "إتمام الطلب · {total}",
+    "terms": "بإتمامكِ الطلب، فإنكِ توافقين على شروطنا · لا يُخصم أي مبلغ اليوم — الدفع عند الاستلام.",
+    "header": {
+      "progressAria": "مراحل إتمام الطلب",
+      "bag": "الحقيبة",
+      "details": "التفاصيل",
+      "confirmation": "التأكيد"
+    },
+    "orderSummary": {
+      "title": "طلبك",
+      "lineMeta": "المقاس {size} · الكمية {quantity}"
+    },
+    "contactInfo": {
+      "fullName": "الاسم الكامل",
+      "fullNamePlaceholder": "مثال: ياسمين العمراني",
+      "phone": "رقم الهاتف",
+      "phonePlaceholder": "+212 6 12 34 56 78",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "you@example.com",
+      "emailHint": "اختياري — لمتابعة طلبك."
+    },
+    "shippingAddress": {
+      "country": "الدولة",
+      "city": "المدينة",
+      "cityPlaceholder": "مثال: الدار البيضاء",
+      "street": "العنوان",
+      "streetPlaceholder": "الشارع، المبنى، الشقة",
+      "postalCode": "الرمز البريدي",
+      "postalCodePlaceholder": "مثال: 20000",
+      "optional": "اختياري."
+    },
+    "orderNotes": {
+      "label": "ملاحظات الطلب",
+      "placeholder": "تعليمات التوصيل، رسالة هدية، الوقت المفضل…",
+      "hint": "اختياري."
+    },
+    "paymentMethod": {
+      "ariaLabel": "طريقة الدفع",
+      "comingSoon": "قريبًا"
+    },
+    "shippingMethodSection": {
+      "ariaLabel": "طريقة الشحن",
+      "complimentary": "مجاني"
+    },
+    "confirmation": {
+      "kicker": "تم تأكيد الطلب",
+      "title": "شكرًا لكِ — طلبك في الطريق",
+      "description": "لقد استلمنا طلبك وأتيليهنا يُجهّزه بعناية. ستدفعين نقدًا عند وصوله إلى باب منزلك.",
+      "orderNumber": "رقم الطلب",
+      "estimatedDelivery": "موعد التسليم المتوقع",
+      "continueShopping": "متابعة التسوق",
+      "backToHome": "العودة إلى الرئيسية"
+    },
+    "actions": {
+      "orderingNotSetUp": "لم يتم إعداد نظام الطلبات بالكامل بعد — لم يتم تطبيق آخر تحديث لقاعدة البيانات.",
+      "connectionError": "تعذّر الوصول إلى المتجر. يرجى التحقق من اتصالك والمحاولة مرة أخرى.",
+      "genericError": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+      "itemUnavailable": "إحدى القطع في حقيبتك لم تعد متوفرة.",
+      "orderCreateFailed": "تعذّر إنشاء الطلب. يرجى المحاولة مرة أخرى."
+    }
+  },
+
+  "validation": {
+    "fullName": "يرجى إدخال اسمك الكامل.",
+    "phone": "يرجى إدخال رقم هاتف صحيح.",
+    "email": "يرجى إدخال بريد إلكتروني صحيح.",
+    "country": "يرجى اختيار دولة.",
+    "city": "يرجى إدخال مدينتك.",
+    "street": "يرجى إدخال عنوانك.",
+    "paymentMethod": "الدفع عند الاستلام هو الخيار الوحيد المتاح حاليًا.",
+    "emptyBag": "حقيبتك فارغة."
+  },
+
+  "badges": {
+    "new": "جديد",
+    "bestSeller": "الأكثر مبيعًا",
+    "sale": "تخفيض",
+    "comingSoon": "قريبًا"
+  },
+
+  "colors": {
+    "noir": "أسود",
+    "chocolate": "بني شوكولاتة",
+    "camel": "جملي",
+    "sand": "رملي",
+    "ivory": "عاجي"
+  },
+
+  "sizes": {
+    "oneSize": "مقاس واحد"
+  },
+
+  "availability": {
+    "inStock": "متوفر",
+    "madeToOrder": "عند الطلب"
+  },
+
+  "shippingMethods": {
+    "standard": {
+      "label": "شحن عادي",
+      "description": "2 إلى 4 أيام عمل، محايد كربونيًا"
+    },
+    "express": {
+      "label": "شحن سريع",
+      "description": "1 إلى 2 أيام عمل، بتوقيع عند الاستلام"
+    }
+  },
+
+  "paymentMethods": {
+    "cod": {
+      "label": "الدفع عند الاستلام",
+      "description": "ادفعي نقدًا عند وصول طلبك إلى باب منزلك."
+    },
+    "card": {
+      "label": "بطاقة ائتمان",
+      "description": "قريبًا"
+    },
+    "paypal": {
+      "label": "باي بال",
+      "description": "قريبًا"
+    }
+  },
+
+  "countries": {
+    "morocco": "المغرب",
+    "unitedStates": "الولايات المتحدة",
+    "unitedKingdom": "المملكة المتحدة",
+    "france": "فرنسا",
+    "unitedArabEmirates": "الإمارات العربية المتحدة"
+  },
+
+  "specifications": {
+    "material": "الخامة",
+    "origin": "المنشأ",
+    "availability": "التوفر",
+    "reference": "المرجع",
+    "madeInPortugal": "صُنع في البرتغال",
+    "inStock": "متوفر",
+    "madeToOrder": "عند الطلب",
+    "materialWomen": "حرير التوت المعتمد والكشمير",
+    "materialMen": "صوف إيطالي وقطن عضوي",
+    "materialAccessories": "جلد مدبوغ نباتيًا وحرير تويل",
+    "materialFragrance": "خلاصات طبيعية، بتركيز 20٪",
+    "materialDefault": "ألياف طبيعية معتمدة"
+  },
+
+  "shippingReturns": [
+    "شحن مجاني ومحايد كربونيًا للطلبات التي تتجاوز {threshold}.",
+    "الشحن السريع متاح عند إتمام الطلب — من 2 إلى 3 أيام عمل.",
+    "إرجاع خلال 30 يومًا، مع استلام مجاني من باب منزلك.",
+    "كل قطعة تصل في تغليفنا المُعاد تدويره المميز."
+  ],
+
+  "careInstructions": [
+    "التنظيف الجاف فقط، لدى مختص تثقين به.",
+    "يُحفظ مطويًا في كيس القطن المرفق، بعيدًا عن الضوء المباشر.",
+    "يُكوى بالبخار برفق — لا تكوي مباشرة على السطح أبدًا.",
+    "خدمات الإصلاح والتجديد مجانية مدى الحياة."
+  ],
+
+  "home_brandStats": [
+    { "label": "تأسست الدار عام" },
+    { "label": "أتيليهات حول العالم" },
+    { "label": "مصادر مسؤولة" }
+  ],
+
+  "home_testimonials": [
+    "الاهتمام بالتفاصيل استثنائي. وصل معطفي ملفوفًا كالهدية ويناسبني وكأنه صُنع خصيصًا لي.",
+    "فخامة هادئة بأسلوبها الصحيح — بلا شعارات، فقط قماش وقصّة لا تشوبهما شائبة. أعود إليهم كل موسم.",
+    "خدمة العناية مدى الحياة أعادت حقيبتي التي عمرها خمس سنوات إلى حالتها الجديدة. هذا هو معنى الشراء الجيد."
+  ],
+
+  "home_instagramAlts": [
+    "عارضة ترتدي الفستان الحريري الملفوف باللون الرملي",
+    "لقطة مقربة لتفاصيل الحقيبة الجلدية المخيطة يدويًا",
+    "مساحة عمل الأتيليه مع عينات الأقمشة",
+    "عارضة بسترة الكشمير، بورتريه استوديو",
+    "تصوير علوي لقطع كبسولة الصيف",
+    "خلف الكواليس في تصوير حملة الخريف"
+  ],
+
+  "common": {
+    "loading": "جارٍ التحميل",
+    "close": "إغلاق",
+    "dismiss": "إغلاق",
+    "page": "صفحة {number}",
+    "previousPage": "الصفحة السابقة",
+    "nextPage": "الصفحة التالية",
+    "pagination": "الصفحات",
+    "breadcrumb": "مسار التنقل",
+    "home": "الرئيسية"
+  }
+}

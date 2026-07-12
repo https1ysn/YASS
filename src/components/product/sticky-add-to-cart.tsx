@@ -2,18 +2,18 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
+import { useLocale, useTranslations } from "next-intl";
+import { cn, formatPrice } from "@/lib/utils";
 import type { Product } from "@/types/product";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/toast";
 import { useCartStore } from "@/store/cart-store";
-
-function formatPrice(value: number) {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(value);
-}
+import { intlTagByLocale, type AppLocale } from "@/i18n/routing";
 
 /** Mobile-only sticky bar that appears once the main actions scroll away. */
 export function StickyAddToCart({ product }: { product: Product }) {
+  const locale = useLocale() as AppLocale;
+  const t = useTranslations("product.stickyAddToCart");
   const addLine = useCartStore((state) => state.addLine);
   const [visible, setVisible] = React.useState(false);
 
@@ -38,7 +38,9 @@ export function StickyAddToCart({ product }: { product: Product }) {
         </span>
         <div className="min-w-0 flex-1">
           <p className="text-foreground truncate text-sm font-semibold">{product.name}</p>
-          <p className="text-muted text-sm">{formatPrice(product.price)}</p>
+          <p className="text-muted text-sm">
+            {formatPrice(product.price, "USD", intlTagByLocale[locale])}
+          </p>
         </div>
         <Button
           size="sm"
@@ -48,13 +50,13 @@ export function StickyAddToCart({ product }: { product: Product }) {
             const size = product.sizes[0];
             addLine(product, { size, color: product.colors[0] ?? "" });
             toast({
-              title: "Added to bag",
-              description: `${product.name} · Size ${size}`,
+              title: t("addedToBag"),
+              description: t("addedToBagDescription", { name: product.name, size }),
               variant: "success",
             });
           }}
         >
-          Add to bag
+          {t("addToBag")}
         </Button>
       </div>
     </div>

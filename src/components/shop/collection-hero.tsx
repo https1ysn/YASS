@@ -1,5 +1,6 @@
 import * as React from "react";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/container";
 import { Breadcrumb, type BreadcrumbItem } from "@/components/ui/breadcrumb";
 
@@ -14,7 +15,7 @@ export interface CollectionHeroProps {
   breadcrumb?: BreadcrumbItem[];
 }
 
-export function CollectionHero({
+export async function CollectionHero({
   eyebrow,
   title,
   description,
@@ -23,10 +24,18 @@ export function CollectionHero({
   count,
   breadcrumb,
 }: CollectionHeroProps) {
+  const t = await getTranslations();
+
   return (
     <section className="pt-6 sm:pt-8">
       <Container>
-        {breadcrumb && <Breadcrumb items={breadcrumb} className="animate-fade-in mb-5 sm:mb-7" />}
+        {breadcrumb && (
+          <Breadcrumb
+            items={breadcrumb}
+            ariaLabel={t("common.breadcrumb")}
+            className="animate-fade-in mb-5 sm:mb-7"
+          />
+        )}
 
         {imageSrc ? (
           <div className="animate-scale-in shadow-elevated relative overflow-hidden rounded-2xl">
@@ -58,7 +67,7 @@ export function CollectionHero({
               )}
               {count != null && (
                 <p className="mt-1 text-xs font-medium tracking-[0.15em] text-white/70 uppercase">
-                  {count} {count === 1 ? "piece" : "pieces"}
+                  {t("shop.piece", { count })}
                 </p>
               )}
             </div>

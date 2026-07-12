@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { formatPrice } from "@/lib/utils";
 import type { CartLine } from "@/types/cart";
 import { Drawer } from "@/components/ui/drawer";
@@ -10,6 +11,8 @@ import { Button } from "@/components/ui/button";
 import { ButtonLink } from "@/components/ui/button-link";
 import { BagIcon } from "@/components/layout/icons";
 import { filterColors } from "@/constants/shop";
+import { intlTagByLocale, type AppLocale } from "@/i18n/routing";
+import { localeHref } from "@/i18n/alternates";
 
 export interface MiniCartDrawerProps {
   open: boolean;
@@ -19,31 +22,41 @@ export interface MiniCartDrawerProps {
 
 /** Compact bag drawer opened from the header — static placeholder contents. */
 export function MiniCartDrawer({ open, onClose, lines }: MiniCartDrawerProps) {
+  const locale = useLocale() as AppLocale;
+  const t = useTranslations("cart.miniCart");
+  const tCart = useTranslations("cart");
+  const tColors = useTranslations("colors");
+  const tCommon = useTranslations("common");
   const count = lines.reduce((sum, line) => sum + line.quantity, 0);
   const subtotal = lines.reduce((sum, line) => sum + line.product.price * line.quantity, 0);
+  const price = (value: number) => formatPrice(value, "USD", intlTagByLocale[locale]);
 
   return (
     <Drawer
       open={open}
       onClose={onClose}
       side="right"
-      title={count > 0 ? `Shopping Bag (${count})` : "Shopping Bag"}
+      title={count > 0 ? t("shoppingBagCount", { count }) : t("shoppingBag")}
+      closeLabel={tCommon("close")}
       footer={
         lines.length > 0 ? (
           <div className="flex flex-col gap-3">
             <div className="flex items-baseline justify-between text-sm">
-              <span className="text-muted">Subtotal</span>
-              <span className="text-base font-semibold">{formatPrice(subtotal)}</span>
+              <span className="text-muted">{t("subtotal")}</span>
+              <span className="text-base font-semibold">{price(subtotal)}</span>
             </div>
-            <ButtonLink href="/cart" variant="outline" fullWidth onClick={onClose}>
-              View bag
+            <ButtonLink
+              href={localeHref(locale, "/cart")}
+              variant="outline"
+              fullWidth
+              onClick={onClose}
+            >
+              {t("viewBag")}
             </ButtonLink>
-            <ButtonLink href="/checkout" fullWidth onClick={onClose}>
-              Checkout
+            <ButtonLink href={localeHref(locale, "/checkout")} fullWidth onClick={onClose}>
+              {t("checkout")}
             </ButtonLink>
-            <p className="text-muted text-center text-xs">
-              Shipping & taxes calculated at checkout
-            </p>
+            <p className="text-muted text-center text-xs">{t("footnote")}</p>
           </div>
         ) : undefined
       }
@@ -51,8 +64,9 @@ export function MiniCartDrawer({ open, onClose, lines }: MiniCartDrawerProps) {
       {lines.length > 0 ? (
         <ul className="divide-border divide-y">
           {lines.map((line) => {
-            const colorLabel =
-              filterColors.find((color) => color.value === line.color)?.label ?? line.color;
+            const colorLabel = filterColors.some((c) => c.value === line.color)
+              ? tColors(line.color)
+              : line.color;
             return (
               <li key={line.id} className="animate-fade-in flex gap-4 py-4">
                 <Link
@@ -78,11 +92,11 @@ export function MiniCartDrawer({ open, onClose, lines }: MiniCartDrawerProps) {
                     {line.product.name}
                   </Link>
                   <p className="text-muted text-xs">
-                    {colorLabel} · Size {line.size}
+                    {tCart("lineMeta", { color: colorLabel, size: line.size })}
                   </p>
                   <p className="text-muted mt-auto text-sm">
-                    {line.quantity} ×{" "}
-                    <span className="text-foreground">{formatPrice(line.product.price)}</span>
+                    {t("quantityTimes", { quantity: line.quantity })}{" "}
+                    <span className="text-foreground">{price(line.product.price)}</span>
                   </p>
                 </div>
               </li>
@@ -95,12 +109,10 @@ export function MiniCartDrawer({ open, onClose, lines }: MiniCartDrawerProps) {
             <BagIcon className="size-7" />
           </span>
           <div className="flex flex-col gap-1.5">
-            <p className="text-lg font-semibold tracking-tight">Your bag is empty</p>
-            <p className="text-muted max-w-xs text-sm leading-relaxed">
-              Discover our collections and add your favorite pieces.
-            </p>
+            <p className="text-lg font-semibold tracking-tight">{t("emptyTitle")}</p>
+            <p className="text-muted max-w-xs text-sm leading-relaxed">{t("emptyDescription")}</p>
           </div>
-          <Button onClick={onClose}>Continue shopping</Button>
+          <Button onClick={onClose}>{t("continueShopping")}</Button>
         </div>
       )}
     </Drawer>

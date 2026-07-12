@@ -1,6 +1,9 @@
+import { intlTagByLocale, type AppLocale } from "@/i18n/routing";
+
 /** Estimated delivery date range, skipping weekends. */
 export function estimateDeliveryRange(
   method: "standard" | "express",
+  locale: AppLocale,
   from: Date = new Date()
 ): string {
   const [minDays, maxDays] = method === "express" ? [1, 2] : [2, 4];
@@ -19,8 +22,9 @@ export function estimateDeliveryRange(
   const start = addBusinessDays(from, minDays);
   const end = addBusinessDays(from, maxDays);
 
-  const monthDay = new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric" });
-  const dayOnly = new Intl.DateTimeFormat("en-US", { day: "numeric" });
+  const tag = intlTagByLocale[locale];
+  const monthDay = new Intl.DateTimeFormat(tag, { month: "long", day: "numeric" });
+  const dayOnly = new Intl.DateTimeFormat(tag, { day: "numeric" });
 
   const range =
     start.getMonth() === end.getMonth()

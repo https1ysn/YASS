@@ -1,8 +1,12 @@
 import * as React from "react";
+import { getTranslations, getLocale } from "next-intl/server";
 import { Section } from "@/components/ui/section";
 import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/shared/reveal";
 import { benefits } from "@/constants/home";
+import { formatPrice } from "@/lib/utils";
+import { intlTagByLocale, type AppLocale } from "@/i18n/routing";
+import { FREE_SHIPPING_THRESHOLD } from "@/constants/cart";
 
 const icons: Record<(typeof benefits)[number]["icon"], React.ReactNode> = {
   shipping: (
@@ -32,12 +36,16 @@ const icons: Record<(typeof benefits)[number]["icon"], React.ReactNode> = {
   ),
 };
 
-export function Benefits() {
+export async function Benefits() {
+  const t = await getTranslations("home.benefits");
+  const locale = (await getLocale()) as AppLocale;
+  const threshold = formatPrice(FREE_SHIPPING_THRESHOLD, "USD", intlTagByLocale[locale]);
+
   return (
-    <Section spacing="sm" aria-label="Why shop with us">
+    <Section spacing="sm" aria-label={t("ariaLabel")}>
       <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
         {benefits.map((benefit, index) => (
-          <Reveal key={benefit.title} delay={index * 80}>
+          <Reveal key={benefit.icon} delay={index * 80}>
             <Card className="flex h-full flex-col gap-4 p-6 sm:p-8">
               <span className="bg-secondary/15 text-secondary grid size-12 place-items-center rounded-2xl">
                 <svg
@@ -55,9 +63,11 @@ export function Benefits() {
               </span>
               <div className="flex flex-col gap-1.5">
                 <h3 className="text-base font-semibold tracking-normal sm:text-lg">
-                  {benefit.title}
+                  {t(`${benefit.icon}.title`)}
                 </h3>
-                <p className="text-muted text-sm leading-relaxed">{benefit.description}</p>
+                <p className="text-muted text-sm leading-relaxed">
+                  {t(`${benefit.icon}.description`, { threshold })}
+                </p>
               </div>
             </Card>
           </Reveal>

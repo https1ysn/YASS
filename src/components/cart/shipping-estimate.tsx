@@ -1,40 +1,50 @@
 "use client";
 
 import * as React from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
 import { ChevronDownIcon } from "@/components/layout/icons";
-import { shippingCountries } from "@/constants/cart";
+import { shippingCountries, FREE_SHIPPING_THRESHOLD } from "@/constants/cart";
+import { formatPrice } from "@/lib/utils";
+import { intlTagByLocale, type AppLocale } from "@/i18n/routing";
 
 /** Shipping estimate — UI only; always returns the same friendly demo answer. */
 export function ShippingEstimate() {
-  const [country, setCountry] = React.useState<string>(shippingCountries[0]);
+  const locale = useLocale() as AppLocale;
+  const t = useTranslations("cart.shippingEstimate");
+  const tCountries = useTranslations("countries");
+  const [countryKey, setCountryKey] = React.useState<string>(shippingCountries[0].key);
   const [postalCode, setPostalCode] = React.useState("");
   const [estimate, setEstimate] = React.useState<string | null>(null);
 
   function submit(event: React.FormEvent) {
     event.preventDefault();
+    const country = tCountries(countryKey);
+    const threshold = formatPrice(FREE_SHIPPING_THRESHOLD, "USD", intlTagByLocale[locale]);
     setEstimate(
-      `${country}${postalCode ? ` · ${postalCode}` : ""} — 2 to 4 working days, complimentary over $150.`
+      postalCode
+        ? t("result", { country, postalCode, threshold })
+        : t("resultNoPostal", { country, threshold })
     );
   }
 
   return (
     <details className="group border-border border-t">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-sm font-medium tracking-wide select-none [&::-webkit-details-marker]:hidden">
-        Estimate shipping
+        {t("estimate")}
         <ChevronDownIcon className="text-muted size-4 shrink-0 transition-transform group-open:rotate-180" />
       </summary>
       <form onSubmit={submit} className="animate-fade-in flex flex-col gap-3 pb-4">
         <Select
-          aria-label="Country"
-          value={country}
-          onChange={(event) => setCountry(event.target.value)}
+          aria-label={t("countryAria")}
+          value={countryKey}
+          onChange={(event) => setCountryKey(event.target.value)}
           className="h-10 rounded-xl text-sm"
         >
-          {shippingCountries.map((name) => (
-            <option key={name} value={name}>
-              {name}
+          {shippingCountries.map((country) => (
+            <option key={country.key} value={country.key}>
+              {tCountries(country.key)}
             </option>
           ))}
         </Select>
@@ -42,12 +52,12 @@ export function ShippingEstimate() {
           <input
             value={postalCode}
             onChange={(event) => setPostalCode(event.target.value)}
-            placeholder="Postal code"
-            aria-label="Postal code"
+            placeholder={t("postalCode")}
+            aria-label={t("postalCode")}
             className="border-border bg-surface-elevated placeholder:text-muted focus:border-secondary focus:ring-secondary/25 h-10 w-full flex-1 rounded-xl border px-3.5 text-sm transition-all focus:ring-2 focus:outline-none"
           />
           <Button type="submit" variant="outline" size="sm" className="h-10 rounded-xl">
-            Estimate
+            {t("estimateButton")}
           </Button>
         </div>
         {estimate && (

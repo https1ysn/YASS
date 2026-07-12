@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 export interface ColorOption {
@@ -17,12 +18,14 @@ export interface ColorSelectorProps {
 }
 
 export function ColorSelector({ colors, value, onChange, className }: ColorSelectorProps) {
+  const t = useTranslations("product");
   const selected = colors.find((color) => color.value === value);
 
   return (
-    <div className={cn("flex flex-col gap-3", className)} role="group" aria-label="Color">
+    <div className={cn("flex flex-col gap-3", className)} role="group" aria-label={t("color")}>
       <p className="text-muted text-xs font-medium tracking-[0.15em] uppercase">
-        Color{selected && <span className="normal-case"> — {selected.label}</span>}
+        {t("color")}
+        {selected && <span className="normal-case"> — {selected.label}</span>}
       </p>
       <div className="flex flex-wrap gap-3">
         {colors.map((color) => (

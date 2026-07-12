@@ -1,11 +1,13 @@
-import * as React from "react";
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { siteConfig } from "@/config/site";
 import { Container } from "@/components/ui/container";
+import { Link } from "@/i18n/navigation";
 import { NewsletterSection } from "./newsletter-section";
 import { Copyright } from "./copyright";
 
-export function Footer() {
+export async function Footer() {
+  const t = await getTranslations();
+
   return (
     <footer className="border-border bg-surface mt-auto border-t">
       <Container>
@@ -17,12 +19,12 @@ export function Footer() {
           <div className="col-span-2 flex max-w-sm flex-col gap-4 sm:col-span-1">
             <Link
               href="/"
-              aria-label={`${siteConfig.name} — home`}
+              aria-label={t("header.homeAria", { name: siteConfig.name })}
               className="text-foreground w-fit rounded-lg text-lg font-bold tracking-[0.35em]"
             >
               {siteConfig.wordmark}
             </Link>
-            <p className="text-muted text-sm leading-relaxed">{siteConfig.footer.tagline}</p>
+            <p className="text-muted text-sm leading-relaxed">{t("footer.tagline")}</p>
             <ul className="mt-2 flex gap-5">
               {siteConfig.footer.socials.map((social) => (
                 <li key={social.label}>
@@ -40,9 +42,9 @@ export function Footer() {
           </div>
 
           {siteConfig.footer.columns.map((column) => (
-            <nav key={column.title} aria-label={column.title}>
+            <nav key={column.titleKey} aria-label={t(`footer.${column.titleKey}`)}>
               <p className="text-muted mb-4 text-xs font-medium tracking-[0.18em] uppercase">
-                {column.title}
+                {t(`footer.${column.titleKey}`)}
               </p>
               <ul className="flex flex-col gap-3">
                 {column.links.map((link) => (
@@ -51,7 +53,7 @@ export function Footer() {
                       href={link.href}
                       className="text-foreground/75 hover:text-foreground text-sm transition-colors"
                     >
-                      {link.label}
+                      {t(`footer.${link.key}`)}
                     </Link>
                   </li>
                 ))}

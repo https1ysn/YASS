@@ -1,8 +1,9 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
-import { filterAvailability, filterCategories, filterColors } from "@/constants/shop";
+import type { Collection } from "@/types/product";
 import { useFilters, type FilterGroupKey } from "./filters-context";
 
 interface Chip {
@@ -11,23 +12,26 @@ interface Chip {
   label: string;
 }
 
-function labelFor(group: FilterGroupKey, value: string): string {
-  if (group === "categories")
-    return filterCategories.find((c) => c.value === value)?.label ?? value;
-  if (group === "colors") return filterColors.find((c) => c.value === value)?.label ?? value;
-  if (group === "availability")
-    return filterAvailability.find((a) => a.value === value)?.label ?? value;
-  return value;
-}
-
 export function ActiveFilters({ className }: { className?: string }) {
-  const { state, toggle, clearPrice, clearAll, activeCount } = useFilters();
+  const { state, toggle, clearPrice, clearAll, activeCount, categories } = useFilters();
+  const t = useTranslations("shop.activeFilters");
+  const tColors = useTranslations("colors");
+  const tAvailability = useTranslations("availability");
+
   if (activeCount === 0) return null;
+
+  function labelFor(group: FilterGroupKey, value: string, cats: Collection[]): string {
+    if (group === "categories") return cats.find((c) => c.slug === value)?.name ?? value;
+    if (group === "colors") return tColors(value);
+    if (group === "availability")
+      return tAvailability(value === "in-stock" ? "inStock" : "madeToOrder");
+    return value;
+  }
 
   const chips: Chip[] = (
     ["categories", "colors", "sizes", "availability"] as FilterGroupKey[]
   ).flatMap((group) =>
-    state[group].map((value) => ({ group, value, label: labelFor(group, value) }))
+    state[group].map((value) => ({ group, value, label: labelFor(group, value, categories) }))
   );
 
   if (state.priceMin || state.priceMax) {
@@ -45,7 +49,7 @@ export function ActiveFilters({ className }: { className?: string }) {
           key={`${chip.group}-${chip.value}`}
           type="button"
           onClick={() => (chip.group === "price" ? clearPrice() : toggle(chip.group, chip.value))}
-          aria-label={`Remove filter: ${chip.label}`}
+          aria-label={t("removeFilter", { label: chip.label })}
           className="border-border bg-surface-elevated text-foreground/80 hover:border-danger/40 hover:text-danger inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-xs font-medium transition-all"
         >
           {chip.label}
@@ -62,9 +66,9 @@ export function ActiveFilters({ className }: { className?: string }) {
       <button
         type="button"
         onClick={clearAll}
-        className="text-muted hover:text-foreground ml-1 text-xs font-medium underline-offset-4 transition-colors hover:underline"
+        className="text-muted hover:text-foreground ms-1 text-xs font-medium underline-offset-4 transition-colors hover:underline"
       >
-        Clear all
+        {t("clearAll")}
       </button>
     </div>
   );

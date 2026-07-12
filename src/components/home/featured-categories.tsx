@@ -1,8 +1,9 @@
 import * as React from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/shared/reveal";
+import { Link } from "@/i18n/navigation";
 import { featuredCategories as defaultCategories } from "@/constants/home";
 
 export interface FeaturedCategoryItem {
@@ -12,17 +13,15 @@ export interface FeaturedCategoryItem {
   description: string;
 }
 
-export function FeaturedCategories({
+export async function FeaturedCategories({
   categories = defaultCategories,
 }: {
   categories?: readonly FeaturedCategoryItem[];
 }) {
+  const t = await getTranslations("home.featuredCategories");
+
   return (
-    <Section
-      eyebrow="Curated for you"
-      title="Shop by category"
-      description="Four worlds, one language — warm neutrals, honest materials, timeless cuts."
-    >
+    <Section eyebrow={t("eyebrow")} title={t("title")} description={t("description")}>
       <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
         {categories.map((category, index) => (
           <Reveal key={category.name} delay={index * 80}>

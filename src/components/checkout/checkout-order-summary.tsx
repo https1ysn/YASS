@@ -2,11 +2,13 @@
 
 import * as React from "react";
 import Image from "next/image";
+import { useLocale, useTranslations } from "next-intl";
 import { cn, formatPrice } from "@/lib/utils";
 import type { CartLine } from "@/types/cart";
 import { Card } from "@/components/ui/card";
 import { OrderSummary } from "@/components/cart/order-summary";
 import { CouponCode } from "@/components/cart/coupon-code";
+import { intlTagByLocale, type AppLocale } from "@/i18n/routing";
 
 export interface CheckoutOrderSummaryProps {
   lines: CartLine[];
@@ -30,9 +32,13 @@ export function CheckoutOrderSummary({
   onClearCoupon,
   className,
 }: CheckoutOrderSummaryProps) {
+  const locale = useLocale() as AppLocale;
+  const t = useTranslations("checkout.orderSummary");
+  const price = (value: number) => formatPrice(value, "USD", intlTagByLocale[locale]);
+
   return (
     <Card className={cn("flex flex-col gap-5 p-6 sm:p-8", className)}>
-      <h2 className="text-lg font-semibold tracking-tight sm:text-xl">Your order</h2>
+      <h2 className="text-lg font-semibold tracking-tight sm:text-xl">{t("title")}</h2>
 
       <ul className="divide-border border-border divide-y border-y">
         {lines.map((line) => (
@@ -47,7 +53,7 @@ export function CheckoutOrderSummary({
               />
               <span
                 aria-hidden="true"
-                className="bg-primary text-primary-foreground absolute -top-0 -right-0 grid size-5 place-items-center rounded-bl-lg text-[10px] font-semibold"
+                className="bg-primary text-primary-foreground absolute -top-0 -end-0 grid size-5 place-items-center rounded-bl-lg text-[10px] font-semibold"
               >
                 {line.quantity}
               </span>
@@ -55,11 +61,11 @@ export function CheckoutOrderSummary({
             <span className="flex min-w-0 flex-1 flex-col gap-0.5">
               <span className="truncate text-sm font-medium">{line.product.name}</span>
               <span className="text-muted text-xs">
-                Size {line.size} · Qty {line.quantity}
+                {t("lineMeta", { size: line.size, quantity: line.quantity })}
               </span>
             </span>
             <span className="text-sm font-semibold whitespace-nowrap">
-              {formatPrice(line.product.price * line.quantity)}
+              {price(line.product.price * line.quantity)}
             </span>
           </li>
         ))}

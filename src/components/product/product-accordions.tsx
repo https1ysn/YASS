@@ -1,4 +1,7 @@
+"use client";
+
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import type { ProductSpecification } from "@/types/product";
 import { ChevronDownIcon } from "@/components/layout/icons";
 
@@ -30,9 +33,11 @@ export interface ProductAccordionsProps {
 
 /** Specifications, Shipping & Returns and Care — native, accessible accordions. */
 export function ProductAccordions({ specifications, shipping, care }: ProductAccordionsProps) {
+  const t = useTranslations("product.accordions");
+
   return (
     <div className="divide-border border-border divide-y border-y">
-      <AccordionItem title="Specifications" defaultOpen>
+      <AccordionItem title={t("specifications")} defaultOpen>
         <dl className="flex flex-col gap-2.5">
           {specifications.map((spec) => (
             <div key={spec.label} className="flex items-baseline justify-between gap-4 text-sm">
@@ -43,7 +48,7 @@ export function ProductAccordions({ specifications, shipping, care }: ProductAcc
         </dl>
       </AccordionItem>
 
-      <AccordionItem title="Shipping & Returns">
+      <AccordionItem title={t("shippingReturns")}>
         <ul className="flex flex-col gap-2.5">
           {shipping.map((line) => (
             <li key={line} className="text-muted flex gap-2.5 text-sm leading-relaxed">
@@ -54,7 +59,7 @@ export function ProductAccordions({ specifications, shipping, care }: ProductAcc
         </ul>
       </AccordionItem>
 
-      <AccordionItem title="Care Instructions">
+      <AccordionItem title={t("careInstructions")}>
         <ul className="flex flex-col gap-2.5">
           {care.map((line) => (
             <li key={line} className="text-muted flex gap-2.5 text-sm leading-relaxed">

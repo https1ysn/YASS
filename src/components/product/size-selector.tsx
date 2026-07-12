@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 export interface SizeSelectorProps {
@@ -11,11 +12,16 @@ export interface SizeSelectorProps {
 }
 
 export function SizeSelector({ sizes, value, onChange, className }: SizeSelectorProps) {
+  const t = useTranslations("product");
+  const tSizes = useTranslations("sizes");
+  const label = (size: string) => (size === "One size" ? tSizes("oneSize") : size);
+
   return (
-    <div className={cn("flex flex-col gap-3", className)} role="group" aria-label="Size">
+    <div className={cn("flex flex-col gap-3", className)} role="group" aria-label={t("size")}>
       <div className="flex items-center justify-between">
         <p className="text-muted text-xs font-medium tracking-[0.15em] uppercase">
-          Size{value && <span className="normal-case"> — {value}</span>}
+          {t("size")}
+          {value && <span className="normal-case"> — {label(value)}</span>}
         </p>
       </div>
       <div className="flex flex-wrap gap-2">
@@ -33,7 +39,7 @@ export function SizeSelector({ sizes, value, onChange, className }: SizeSelector
                 : "border-border bg-surface-elevated text-foreground/80 hover:border-primary/40 hover:text-foreground"
             )}
           >
-            {size}
+            {label(size)}
           </button>
         ))}
       </div>
