@@ -35,7 +35,14 @@
     "openMenu": "Ouvrir le menu",
     "mobileNavigation": "Navigation mobile",
     "dismissAnnouncement": "Fermer l'annonce",
-    "homeAria": "{name} — accueil"
+    "homeAria": "{name} — accueil",
+    "toggleTheme": "Basculer entre thème clair et sombre"
+  },
+
+  "notFound": {
+    "title": "Page introuvable",
+    "description": "La page que vous recherchez n'existe pas ou a été déplacée.",
+    "backHome": "Retour à l'accueil"
   },
 
   "search": {

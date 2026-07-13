@@ -35,7 +35,14 @@
     "openMenu": "فتح القائمة",
     "mobileNavigation": "قائمة الجوال",
     "dismissAnnouncement": "إغلاق الإعلان",
-    "homeAria": "{name} — الصفحة الرئيسية"
+    "homeAria": "{name} — الصفحة الرئيسية",
+    "toggleTheme": "التبديل بين الوضع الفاتح والداكن"
+  },
+
+  "notFound": {
+    "title": "الصفحة غير موجودة",
+    "description": "الصفحة التي تبحث عنها غير موجودة أو تم نقلها.",
+    "backHome": "العودة إلى الصفحة الرئيسية"
   },
 
   "search": {

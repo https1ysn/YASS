@@ -10,6 +10,7 @@ import { MobileNav } from "./mobile-nav";
 import { SearchBar } from "./search-bar";
 import { CartButton } from "./cart-button";
 import { LanguageSwitcher } from "./language-switcher";
+import { ThemeToggle } from "./theme-toggle";
 
 export function Navbar() {
   const t = useTranslations("header");
@@ -35,6 +36,7 @@ export function Navbar() {
 
         <div className="flex items-center gap-0.5 sm:gap-1">
           <LanguageSwitcher className="hidden sm:block" />
+          <ThemeToggle className="hidden lg:inline-flex" />
           <SearchBar />
           <CartButton />
         </div>

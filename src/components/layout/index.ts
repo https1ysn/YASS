@@ -8,3 +8,4 @@ export { MobileNav } from "./mobile-nav";
 export { Navbar } from "./navbar";
 export { NewsletterSection } from "./newsletter-section";
 export { SearchBar } from "./search-bar";
+export { ThemeToggle } from "./theme-toggle";

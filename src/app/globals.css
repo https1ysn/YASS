@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* `dark:` utilities follow the .dark class on <html> (set by the storefront's
+ * theme script/toggle) instead of the OS preference alone. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ---------------------------------------------------------------------------
  * Yasso Store — Luxury Design Tokens
  * Light/dark values are expressed with light-dark(); the active scheme follows
@@ -228,6 +232,28 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+  }
+}
+
+/* --------------------------- Theme switching ----------------------------- */
+
+/* While <html> carries .theme-transition (added by the theme toggle for the
+ * duration of a switch), every color-derived property cross-fades instead of
+ * snapping. Scoped to a class so normal interactions keep their own timing,
+ * and skipped entirely under prefers-reduced-motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html.theme-transition,
+  html.theme-transition *,
+  html.theme-transition ::before,
+  html.theme-transition ::after {
+    transition:
+      background-color 300ms var(--ease-luxury),
+      color 300ms var(--ease-luxury),
+      border-color 300ms var(--ease-luxury),
+      outline-color 300ms var(--ease-luxury),
+      fill 300ms var(--ease-luxury),
+      stroke 300ms var(--ease-luxury),
+      box-shadow 300ms var(--ease-luxury) !important;
   }
 }
 

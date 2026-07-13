@@ -8,6 +8,7 @@ import { Drawer } from "@/components/ui/drawer";
 import { Link } from "@/i18n/navigation";
 import { MenuIcon, iconActionClasses } from "./icons";
 import { LanguageSwitcher } from "./language-switcher";
+import { ThemeToggle } from "./theme-toggle";
 
 export function MobileNav() {
   const t = useTranslations("header");
@@ -50,8 +51,9 @@ export function MobileNav() {
             ))}
           </ul>
 
-          <div className="mt-6">
+          <div className="mt-6 flex items-center justify-between gap-3">
             <LanguageSwitcher />
+            <ThemeToggle />
           </div>
 
           <div className="mt-auto flex gap-5 pt-10">

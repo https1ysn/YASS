@@ -89,6 +89,15 @@ export default async function LocaleLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${cairo.variable} bg-background text-foreground flex min-h-dvh flex-col font-sans antialiased`}
       >
+        {/* Applies the theme before first paint — saved choice, then OS
+            preference, then light — so there is no flash of the wrong theme.
+            Keep the storage key in sync with THEME_STORAGE_KEY. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              '(function(){try{var t=localStorage.getItem("yasso-theme");var d=t?t==="dark":window.matchMedia("(prefers-color-scheme: dark)").matches;var c=document.documentElement.classList;c.remove("light","dark");c.add(d?"dark":"light");}catch(e){document.documentElement.classList.add("light");}})();',
+          }}
+        />
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
           <Toaster dismissLabel={t("dismiss")} />
