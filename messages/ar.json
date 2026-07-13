@@ -372,26 +372,27 @@
     },
     "contactInfo": {
       "fullName": "الاسم الكامل",
-      "fullNamePlaceholder": "مثال: ياسمين العمراني",
+      "fullNamePlaceholder": "أدخل اسمك الكامل",
       "phone": "رقم الهاتف",
-      "phonePlaceholder": "+212 6 12 34 56 78",
+      "phonePlaceholder": "+212 6XXXXXXXX",
       "email": "البريد الإلكتروني",
-      "emailPlaceholder": "you@example.com",
+      "emailPlaceholder": "example@email.com",
       "emailHint": "اختياري — لمتابعة طلبك."
     },
     "shippingAddress": {
       "country": "الدولة",
+      "countryPlaceholder": "اختر بلدك",
       "city": "المدينة",
-      "cityPlaceholder": "مثال: الدار البيضاء",
+      "cityPlaceholder": "أدخل مدينتك",
       "street": "العنوان",
       "streetPlaceholder": "الشارع، المبنى، الشقة",
       "postalCode": "الرمز البريدي",
-      "postalCodePlaceholder": "مثال: 20000",
+      "postalCodePlaceholder": "الرمز البريدي",
       "optional": "اختياري."
     },
     "orderNotes": {
       "label": "ملاحظات الطلب",
-      "placeholder": "تعليمات التوصيل، رسالة هدية، الوقت المفضل…",
+      "placeholder": "اختياري",
       "hint": "اختياري."
     },
     "paymentMethod": {

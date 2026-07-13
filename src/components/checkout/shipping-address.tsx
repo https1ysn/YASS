@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { shippingCountries } from "@/constants/cart";
 
-/** Shipping address fields — uncontrolled, Morocco preselected. Values
+/** Shipping address fields — uncontrolled, every field starts empty. Values
  * submitted stay canonical English names (matching the admin/orders side);
  * only the visible labels are translated. */
 export function ShippingAddress() {
@@ -19,10 +19,13 @@ export function ShippingAddress() {
         <Select
           name="country"
           label={t("country")}
-          defaultValue="Morocco"
+          defaultValue=""
           autoComplete="country-name"
           required
         >
+          <option value="" disabled>
+            {t("countryPlaceholder")}
+          </option>
           {shippingCountries.map((country) => (
             <option key={country.key} value={country.name}>
               {tCountries(country.key)}

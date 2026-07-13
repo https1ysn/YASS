@@ -372,26 +372,27 @@
     },
     "contactInfo": {
       "fullName": "Nom complet",
-      "fullNamePlaceholder": "ex. Yassine El Amrani",
+      "fullNamePlaceholder": "Entrez votre nom complet",
       "phone": "Numéro de téléphone",
-      "phonePlaceholder": "+212 6 12 34 56 78",
+      "phonePlaceholder": "+212 6XXXXXXXX",
       "email": "E-mail",
-      "emailPlaceholder": "vous@exemple.com",
+      "emailPlaceholder": "exemple@email.com",
       "emailHint": "Facultatif — pour le suivi de votre commande."
     },
     "shippingAddress": {
       "country": "Pays",
+      "countryPlaceholder": "Sélectionnez votre pays",
       "city": "Ville",
-      "cityPlaceholder": "ex. Casablanca",
+      "cityPlaceholder": "Entrez votre ville",
       "street": "Adresse",
       "streetPlaceholder": "Rue, bâtiment, appartement",
       "postalCode": "Code postal",
-      "postalCodePlaceholder": "ex. 20000",
+      "postalCodePlaceholder": "Code postal",
       "optional": "Facultatif."
     },
     "orderNotes": {
       "label": "Notes de commande",
-      "placeholder": "Instructions de livraison, message cadeau, horaire préféré…",
+      "placeholder": "Facultatif",
       "hint": "Facultatif."
     },
     "paymentMethod": {
