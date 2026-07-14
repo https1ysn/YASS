@@ -25,7 +25,12 @@ export function ProductGrid({ products, className }: ProductGridProps) {
 
   return (
     <>
-      <div className={cn("grid grid-cols-2 gap-4 sm:gap-6 xl:grid-cols-3", className)}>
+      <div
+        className={cn(
+          "grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 xl:grid-cols-4",
+          className
+        )}
+      >
         {products.map((product, index) => (
           <Reveal key={product.slug} delay={Math.min(index, 5) * 60}>
             <ProductCard

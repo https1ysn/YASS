@@ -3,27 +3,7 @@
 import * as React from "react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Drawer } from "@/components/ui/drawer";
 import { SortDropdown } from "./sort-dropdown";
-import { ProductFilters } from "./product-filters";
-import { useFilters } from "./filters-context";
-
-function FilterIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 20 20"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      className="size-4"
-    >
-      <path d="M3.5 6h13M6 10h8M8.5 14h3" />
-    </svg>
-  );
-}
 
 export interface ProductToolbarProps {
   /** Number of pieces shown in the grid. */
@@ -32,10 +12,7 @@ export interface ProductToolbarProps {
 }
 
 export function ProductToolbar({ count, className }: ProductToolbarProps) {
-  const [filtersOpen, setFiltersOpen] = React.useState(false);
-  const { activeCount } = useFilters();
   const t = useTranslations("shop.toolbar");
-  const tCommon = useTranslations("common");
 
   return (
     <div
@@ -49,33 +26,7 @@ export function ProductToolbar({ count, className }: ProductToolbarProps) {
         {count === 1 ? t("piece") : t("pieces")}
       </p>
 
-      <div className="flex items-center gap-2">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => setFiltersOpen(true)}
-          leftIcon={<FilterIcon />}
-          className="h-10 rounded-xl lg:hidden"
-        >
-          {activeCount > 0 ? t("filtersWithCount", { count: activeCount }) : t("filters")}
-        </Button>
-        <SortDropdown />
-      </div>
-
-      <Drawer
-        open={filtersOpen}
-        onClose={() => setFiltersOpen(false)}
-        side="bottom"
-        title={t("filterAndSort")}
-        closeLabel={tCommon("close")}
-        footer={
-          <Button fullWidth onClick={() => setFiltersOpen(false)}>
-            {t("viewResults")}
-          </Button>
-        }
-      >
-        <ProductFilters />
-      </Drawer>
+      <SortDropdown />
     </div>
   );
 }

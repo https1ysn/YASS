@@ -6,7 +6,6 @@ import {
   getCollectionBySlug,
   getCollections,
   getProductsByCollection,
-  getShopCategories,
 } from "@/lib/supabase/queries";
 import { getLocaleAlternates, localeHref } from "@/i18n/alternates";
 
@@ -40,9 +39,8 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const collection = await getCollectionBySlug(slug);
   if (!collection) notFound();
 
-  const [products, categories, t, locale] = await Promise.all([
+  const [products, t, locale] = await Promise.all([
     getProductsByCollection(slug),
-    getShopCategories(),
     getTranslations(),
     getLocale(),
   ]);
@@ -62,7 +60,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           { label: collection.name },
         ]}
       />
-      <ProductBrowser products={products} categories={categories} />
+      <ProductBrowser products={products} />
     </>
   );
 }

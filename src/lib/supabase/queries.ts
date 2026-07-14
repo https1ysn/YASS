@@ -125,13 +125,6 @@ export async function getCollectionBySlug(slug: string): Promise<Collection | un
   return collections.find((collection) => collection.slug === slug);
 }
 
-/** Live categories only (excludes "coming soon") — powers the Shop sidebar
- * category filter, so it always mirrors what's in Supabase. */
-export async function getShopCategories(): Promise<Collection[]> {
-  const collections = await getCollections();
-  return collections.filter((collection) => !collection.comingSoon);
-}
-
 /** The four shop-by-category tiles on the homepage. */
 export async function getFeaturedCategories() {
   const collections = await getCollections();

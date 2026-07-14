@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
 import { CollectionHero, ProductBrowser } from "@/components/shop";
-import { getProducts, getShopCategories } from "@/lib/supabase/queries";
+import { getProducts } from "@/lib/supabase/queries";
 import { getLocaleAlternates, localeHref } from "@/i18n/alternates";
 
 export const revalidate = 60;
@@ -16,9 +16,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ShopPage() {
-  const [products, categories, t, locale] = await Promise.all([
+  const [products, t, locale] = await Promise.all([
     getProducts(),
-    getShopCategories(),
     getTranslations(),
     getLocale(),
   ]);
@@ -34,7 +33,7 @@ export default async function ShopPage() {
           { label: t("nav.shop") },
         ]}
       />
-      <ProductBrowser products={products} categories={categories} />
+      <ProductBrowser products={products} />
     </>
   );
 }

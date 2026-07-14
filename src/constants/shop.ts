@@ -302,13 +302,6 @@ export const filterColors = [
   { value: "ivory", label: "Ivory", hex: "#F4EFE8" },
 ] as const;
 
-export const filterSizes = ["XS", "S", "M", "L", "XL", "One size"] as const;
-
-export const filterAvailability = [
-  { value: "in-stock", count: 9 },
-  { value: "made-to-order", count: 4 },
-] as const;
-
 export const sortOptions = [
   { value: "featured" },
   { value: "newest" },

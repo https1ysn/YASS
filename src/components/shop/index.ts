@@ -1,14 +1,6 @@
-export { ActiveFilters } from "./active-filters";
-export { AvailabilityFilter } from "./availability-filter";
-export { CategoryFilter } from "./category-filter";
 export { CollectionGrid, type CollectionGridProps } from "./collection-grid";
 export { CollectionHero, type CollectionHeroProps } from "./collection-hero";
-export { ColorFilter } from "./color-filter";
-export { FiltersProvider, useFilters, type FiltersState } from "./filters-context";
-export { PriceRange } from "./price-range";
 export { ProductBrowser, type ProductBrowserProps } from "./product-browser";
-export { FilterGroup, ProductFilters } from "./product-filters";
 export { ProductGrid, type ProductGridProps } from "./product-grid";
 export { ProductToolbar, type ProductToolbarProps } from "./product-toolbar";
-export { SizeFilter } from "./size-filter";
 export { SortDropdown } from "./sort-dropdown";
