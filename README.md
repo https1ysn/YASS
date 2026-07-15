@@ -107,7 +107,7 @@ supabase db push
    functions powering /admin/customers, with per-client order aggregates and history
    (restrict once auth ships)
 10. `20260710160000_admin_auth_hardening.sql` — delivers the "restrict once auth ships" notes:
-    adds `is_admin()` (JWT email against the allow-list), guards every `admin_*` function with
+    adds `is_admin()` (true for any authenticated user), guards every `admin_*` function with
     it, moves their grants from `anon` to `authenticated`, and makes the products-bucket write
     policies admin-only. Catalog reads and `place_order()` stay public.
 11. `20260711120000_products_is_featured_column.sql` — repairs a database that never received
@@ -117,24 +117,26 @@ supabase db push
 
 ## Admin authentication
 
-The admin (`/admin/**`) is protected by Supabase Auth:
+The admin (`/admin/**`) is protected by Supabase Auth. **There is no email allow-list:** any
+authenticated Supabase Auth user is an admin. Access is governed entirely by who has a Supabase
+account, so **public sign-ups must stay disabled**.
 
-- **Login** at `/admin/login` (email + password). Only emails in the allow-list
-  (`src/lib/auth/admins.ts`, mirrored by the `is_admin()` SQL function) may enter; any other
-  account is signed straight back out with an "Unauthorized" message.
+- **Login** at `/admin/login` (email + password). Any account that authenticates successfully
+  reaches the dashboard.
 - **Middleware** (`src/middleware.ts`) validates the session server-side on every `/admin`
-  request and redirects guests to the login page (and signed-in admins away from it).
+  request and redirects guests to the login page (and signed-in users away from the login page).
 - The dashboard shell re-validates the session in its layout, every server action calls
-  `requireAdminAction()`, and — once migration 10 is applied — the database itself refuses
-  admin RPCs and storage writes from anyone but the allow-listed admin.
+  `requireAdminAction()`, and the database `is_admin()` function (which returns
+  `auth.uid() is not null`) gates every `admin_*` RPC and storage write to authenticated users.
 
 **One-time setup** (Supabase Dashboard):
 
-1. Authentication → Users → *Add user* → create `elbiadyassin25@gmail.com` with a strong
-   password (check *Auto confirm email*).
-2. Authentication → Sign In / Up → disable *Allow new users to sign up* (nobody else needs an
-   account).
-3. Apply migration 10 (see above).
+1. Authentication → Sign In / Up → disable *Allow new users to sign up* — this is now the only
+   thing standing between the public and admin access.
+2. Authentication → Users → *Add user* → create each admin account with a strong password
+   (check *Auto confirm email*). Adding a user grants admin access immediately; no code or SQL
+   change is needed.
+3. Apply the auth migrations (see above).
 
 Until the migrations run, every query silently falls back to the local placeholder catalog in
 `src/constants/`, so the site renders identically either way. Catalog pages revalidate every

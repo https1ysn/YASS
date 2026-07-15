@@ -14,6 +14,9 @@
 -- ============================================================================
 
 -- -------------------------------------------------------------- is_admin()
+-- Any authenticated Supabase user is an admin — there is no email allow-list.
+-- Access is governed entirely by who has a Supabase Auth account, so keep
+-- public sign-ups disabled. Mirrors the app-side guard in src/lib/auth/session.
 create or replace function public.is_admin()
 returns boolean
 language sql
@@ -21,13 +24,7 @@ stable
 security definer
 set search_path = public
 as $$
-  select coalesce(
-    lower(coalesce(auth.jwt() ->> 'email', '')) in (
-      'elbiadyassin25@gmail.com',
-      'elbiadyassin26@gmail.com'
-    ),
-    false
-  );
+  select auth.uid() is not null;
 $$;
 
 revoke all on function public.is_admin() from public;

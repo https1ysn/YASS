@@ -2,14 +2,14 @@ import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import createIntlMiddleware from "next-intl/middleware";
 import { isSupabaseConfigured, supabaseKey, supabaseUrl } from "@/lib/supabase/config";
-import { isAdminEmail } from "@/lib/auth/admins";
 import { routing } from "@/i18n/routing";
 
 /**
  * Guards every /admin route. Sessions are validated server-side with
  * `auth.getUser()` (never trusting client state) and refreshed cookies are
  * carried on every response — including redirects — so there is no flicker
- * and no logged-out flash after token rotation. The admin dashboard stays
+ * and no logged-out flash after token rotation. Any authenticated Supabase
+ * user may enter (no email allow-list). The admin dashboard stays
  * English-only and outside the locale routing below.
  */
 async function adminAuthMiddleware(request: NextRequest) {
@@ -38,8 +38,6 @@ async function adminAuthMiddleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const email = user?.email ?? null;
-  const isAdmin = isAdminEmail(email);
   const path = request.nextUrl.pathname;
 
   function redirectTo(pathname: string) {
@@ -49,19 +47,14 @@ async function adminAuthMiddleware(request: NextRequest) {
     return redirected;
   }
 
+  // Already-authenticated users skip the login page.
   if (path === "/admin/login") {
-    if (isAdmin) return redirectTo("/admin");
+    if (user) return redirectTo("/admin");
     return response;
   }
 
-  if (path === "/admin/unauthorized") {
-    if (!user) return redirectTo("/admin/login");
-    if (isAdmin) return redirectTo("/admin");
-    return response;
-  }
-
+  // Every other /admin route requires an authenticated Supabase user.
   if (!user) return redirectTo("/admin/login");
-  if (!isAdmin) return redirectTo("/admin/unauthorized");
   return response;
 }
 

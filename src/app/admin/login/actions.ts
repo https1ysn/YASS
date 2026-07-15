@@ -2,7 +2,6 @@
 
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
-import { isAdminEmail } from "@/lib/auth/admins";
 import { adminLoginSchema, type AdminLoginInput } from "@/schemas/admin-auth";
 
 export type AuthActionResult = { ok: true } | { ok: false; error: string };
@@ -21,8 +20,8 @@ function friendlyAuthError(message: string): string {
 }
 
 /**
- * Signs an admin in. Non-admin accounts are signed straight back out so an
- * unauthorized session never persists.
+ * Signs a user in. Any authenticated Supabase Auth user may access the admin —
+ * there is no email allow-list, so access is governed by who has an account.
  */
 export async function signInAdmin(input: AdminLoginInput): Promise<AuthActionResult> {
   const parsed = adminLoginSchema.safeParse(input);
@@ -39,17 +38,12 @@ export async function signInAdmin(input: AdminLoginInput): Promise<AuthActionRes
 
   try {
     const supabase = await createSupabaseServerClient();
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signInWithPassword({
       email: parsed.data.email,
       password: parsed.data.password,
     });
 
     if (error) return { ok: false, error: friendlyAuthError(error.message) };
-
-    if (!isAdminEmail(data.user?.email)) {
-      await supabase.auth.signOut();
-      return { ok: false, error: "Unauthorized — this account has no admin access." };
-    }
 
     return { ok: true };
   } catch (error) {

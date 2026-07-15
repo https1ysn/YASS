@@ -1,12 +1,12 @@
 import { redirect } from "next/navigation";
 import { AdminSidebar, AdminTopbar } from "@/components/admin";
-import { getAdminUser, getSessionUser } from "@/lib/auth/session";
+import { getAdminUser } from "@/lib/auth/session";
 
 /**
  * Admin shell — fixed sidebar on desktop, drawer via the topbar on mobile.
  * Server-side auth guard: the middleware redirects first for a flicker-free
  * experience, but the layout re-validates the session so pages are protected
- * even without it.
+ * even without it. Any authenticated Supabase user is an admin.
  */
 export default async function AdminPanelLayout({
   children,
@@ -14,10 +14,7 @@ export default async function AdminPanelLayout({
   children: React.ReactNode;
 }>) {
   const admin = await getAdminUser();
-  if (!admin) {
-    const user = await getSessionUser();
-    redirect(user ? "/admin/unauthorized" : "/admin/login");
-  }
+  if (!admin) redirect("/admin/login");
 
   return (
     <div className="flex min-h-dvh w-full flex-col">
