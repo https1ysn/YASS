@@ -23,7 +23,8 @@ set search_path = public
 as $$
   select coalesce(
     lower(coalesce(auth.jwt() ->> 'email', '')) in (
-      'elbiadyassin25@gmail.com'
+      'elbiadyassin25@gmail.com',
+      'elbiadyassin26@gmail.com'
     ),
     false
   );

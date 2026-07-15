@@ -18,6 +18,9 @@ export function SortDropdown({ className }: { className?: string }) {
   return (
     <div className={cn("w-44 sm:w-52", className)}>
       <Select
+        // Stable id — falling back to useId() makes the value depend on the
+        // render tree, which differs between the server and the client here.
+        id="shop-sort"
         aria-label={t("ariaLabel")}
         value={sort}
         onChange={(event) => setSort(event.target.value)}

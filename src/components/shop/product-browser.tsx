@@ -13,6 +13,9 @@ import type { AppLocale } from "@/i18n/routing";
 import { ProductToolbar } from "./product-toolbar";
 import { ProductGrid } from "./product-grid";
 
+/** Divides evenly into the 2 / 3 / 4-column grid, so rows are always full. */
+const PRODUCTS_PER_PAGE = 12;
+
 export interface ProductBrowserProps {
   products: Product[];
   emptyTitle?: string;
@@ -21,24 +24,53 @@ export interface ProductBrowserProps {
 
 /**
  * The browsing shell: product count + sort toolbar, a full-width product grid
- * and pagination.
+ * and pagination. Paging is client-side and self-contained — the grid renders
+ * one slice of `products` at a time.
  */
 export function ProductBrowser({ products, emptyTitle, emptyDescription }: ProductBrowserProps) {
   const t = useTranslations("shop.browser");
+  const tCommon = useTranslations("common");
   const locale = useLocale() as AppLocale;
+  const topRef = React.useRef<HTMLDivElement>(null);
+
+  const [page, setPage] = React.useState(1);
+  const totalPages = Math.max(1, Math.ceil(products.length / PRODUCTS_PER_PAGE));
+
+  // Moving between collections swaps the list — start again from the first page.
+  React.useEffect(() => {
+    setPage(1);
+  }, [products]);
+
+  // Never render past the end if the list is shorter than the page we're on.
+  const currentPage = Math.min(page, totalPages);
+  const start = (currentPage - 1) * PRODUCTS_PER_PAGE;
+  const visibleProducts = products.slice(start, start + PRODUCTS_PER_PAGE);
+
+  function goToPage(next: number) {
+    setPage(next);
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    topRef.current?.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "start",
+    });
+  }
 
   return (
     <Container>
-      <div className="flex flex-col gap-6 py-8 sm:py-12">
+      <div ref={topRef} className="flex scroll-mt-28 flex-col gap-6 py-8 sm:py-12">
         <ProductToolbar count={products.length} />
 
         {products.length > 0 ? (
           <>
-            <ProductGrid products={products} />
+            <ProductGrid products={visibleProducts} />
             <Pagination
-              page={1}
-              totalPages={3}
-              createHref={(page) => `?page=${page}`}
+              page={currentPage}
+              totalPages={totalPages}
+              onPageChange={goToPage}
+              navAriaLabel={tCommon("pagination")}
+              previousLabel={tCommon("previousPage")}
+              nextLabel={tCommon("nextPage")}
+              pageLabel={(p) => tCommon("page", { number: p })}
               className="mt-12 sm:mt-16"
             />
           </>
