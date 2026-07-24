@@ -37,12 +37,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "metadata" });
-  const { general, seo } = await getSiteSettings();
+  const { branding, seo } = await getSiteSettings();
 
-  const siteName = general.storeName || t("siteName");
+  // The admin-managed website name drives every title on every page: it is the
+  // template suffix, the default title when no SEO override is set, and the
+  // Open Graph site name.
+  const siteName = branding.websiteName;
   const templateName = seo.websiteTitle.trim() || siteName;
-  const defaultTitle = seo.metaTitle.trim() || t("defaultTitle");
+  const defaultTitle = seo.metaTitle.trim() || siteName;
   const description = seo.metaDescription.trim() || t("defaultDescription");
+  // The uploaded logo stands in for the Open Graph image until a purpose-made
+  // one is set in the SEO section.
+  const ogImage = seo.ogImageUrl ?? branding.logoUrl;
 
   return {
     metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"),
@@ -52,12 +58,12 @@ export async function generateMetadata({
     },
     description,
     alternates: { languages: getLocaleAlternates("") },
-    icons: general.faviconUrl ? { icon: general.faviconUrl } : undefined,
+    icons: branding.faviconUrl ? { icon: branding.faviconUrl } : undefined,
     openGraph: {
       title: defaultTitle,
       description,
       siteName,
-      images: seo.ogImageUrl ? [{ url: seo.ogImageUrl }] : undefined,
+      images: ogImage ? [{ url: ogImage }] : undefined,
     },
   };
 }

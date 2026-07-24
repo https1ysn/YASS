@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "@/components/ui/toast";
+import { getSiteSettings } from "@/lib/settings";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -13,13 +14,19 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "Admin",
-    template: "%s · Admin — Yasso Store",
-  },
-  robots: { index: false, follow: false },
-};
+/** Admin titles carry the admin-managed website name, same as the storefront. */
+export async function generateMetadata(): Promise<Metadata> {
+  const { branding } = await getSiteSettings();
+
+  return {
+    title: {
+      default: "Admin",
+      template: `%s · Admin — ${branding.websiteName}`,
+    },
+    icons: branding.faviconUrl ? { icon: branding.faviconUrl } : undefined,
+    robots: { index: false, follow: false },
+  };
+}
 
 /**
  * Independent root layout for /admin — its own <html>/<body> (Next.js

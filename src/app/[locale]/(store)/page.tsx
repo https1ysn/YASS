@@ -5,7 +5,6 @@ import {
   FeaturedCategories,
   FeaturedProducts,
   FinalCtaBanner,
-  Hero,
 } from "@/components/home";
 import { getBestSellers, getFeaturedCategories, getFeaturedProducts } from "@/lib/supabase/queries";
 
@@ -20,7 +19,6 @@ export default async function HomePage() {
 
   return (
     <>
-      <Hero />
       <FeaturedCategories categories={categories} />
       <FeaturedProducts products={featured} />
       <Benefits />

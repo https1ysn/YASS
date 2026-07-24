@@ -38,7 +38,7 @@ export async function saveSettings(input: SiteSettings): Promise<SaveSettingsRes
   const data = parsed.data;
 
   // Only accept imagery from our own bucket or the app's local assets.
-  for (const asset of [data.general.logoUrl, data.general.faviconUrl, data.seo.ogImageUrl]) {
+  for (const asset of [data.branding.logoUrl, data.branding.faviconUrl, data.seo.ogImageUrl]) {
     if (!isAllowedAsset(asset)) {
       return { ok: false, error: "Uploaded images must be sent to the storage bucket first." };
     }

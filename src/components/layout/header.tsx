@@ -4,12 +4,19 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { AnnouncementBar, type AnnouncementSettings } from "./announcement-bar";
 import { Navbar } from "./navbar";
+import type { BrandIdentity } from "./brand";
 
 /**
  * Site header: the announcement bar scrolls away, the navbar stays sticky and
  * turns glassy once the page is scrolled.
  */
-export function Header({ announcement }: { announcement?: AnnouncementSettings }) {
+export function Header({
+  announcement,
+  brand,
+}: {
+  announcement?: AnnouncementSettings;
+  brand: BrandIdentity;
+}) {
   const [scrolled, setScrolled] = React.useState(false);
 
   React.useEffect(() => {
@@ -29,7 +36,7 @@ export function Header({ announcement }: { announcement?: AnnouncementSettings }
         )}
       >
         <div className="relative">
-          <Navbar />
+          <Navbar brand={brand} />
         </div>
       </header>
     </>

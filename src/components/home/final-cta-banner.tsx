@@ -4,18 +4,20 @@ import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button-link";
 import { Reveal } from "@/components/shared/reveal";
 import { localeHref } from "@/i18n/alternates";
+import { getSiteSettings } from "@/lib/settings";
 
 /** Full-width closing statement before the footer. */
 export async function FinalCtaBanner() {
   const t = await getTranslations("home.finalCta");
   const locale = await getLocale();
+  const { branding } = await getSiteSettings();
 
   return (
     <section className="bg-primary text-primary-foreground py-20 sm:py-28">
       <Container size="md">
         <Reveal className="flex flex-col items-center gap-6 text-center">
           <p className="text-xs font-medium tracking-[0.25em] uppercase opacity-70">
-            {t("kicker")}
+            {t("kicker", { name: branding.websiteName })}
           </p>
           <h2 className="text-3xl font-bold tracking-tight text-balance sm:text-5xl">
             {t("title")}

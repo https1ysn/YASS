@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { Header, Footer } from "@/components/layout";
+import { Header, Footer, brandFromSettings } from "@/components/layout";
 import { getSiteSettings, brandingCssVars } from "@/lib/settings";
 
 /** Public storefront shell — header, footer and skip link. */
@@ -30,7 +30,7 @@ export default async function StoreLayout({
           </svg>
         </span>
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
-          {settings.general.storeName}
+          {settings.branding.websiteName}
         </h1>
         <p className="text-muted mt-3 max-w-md text-base leading-relaxed">
           {settings.advanced.maintenanceMessage}
@@ -52,7 +52,7 @@ export default async function StoreLayout({
       >
         {t("skipToContent")}
       </a>
-      <Header announcement={settings.announcement} />
+      <Header announcement={settings.announcement} brand={brandFromSettings(settings)} />
       <main id="main-content" className="flex-1">
         {children}
       </main>

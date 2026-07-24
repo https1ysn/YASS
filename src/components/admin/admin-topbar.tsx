@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { Drawer } from "@/components/ui/drawer";
-import { siteConfig } from "@/config/site";
+import type { BrandIdentity } from "@/components/layout";
 import { usePathname } from "next/navigation";
 import { MenuIcon, iconActionClasses } from "@/components/layout/icons";
 import { AdminSidebarContent } from "./admin-sidebar";
@@ -16,7 +16,7 @@ function pageTitle(pathname: string): string {
 }
 
 /** Sticky top bar — mobile menu drawer trigger, page context, store link. */
-export function AdminTopbar() {
+export function AdminTopbar({ brand }: { brand: BrandIdentity }) {
   const [open, setOpen] = React.useState(false);
   const pathname = usePathname();
 
@@ -45,8 +45,8 @@ export function AdminTopbar() {
         </Link>
       </div>
 
-      <Drawer open={open} onClose={() => setOpen(false)} side="left" title={siteConfig.wordmark}>
-        <AdminSidebarContent onNavigate={() => setOpen(false)} />
+      <Drawer open={open} onClose={() => setOpen(false)} side="left" title={brand.name}>
+        <AdminSidebarContent brand={brand} onNavigate={() => setOpen(false)} />
       </Drawer>
     </header>
   );

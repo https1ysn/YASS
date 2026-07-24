@@ -6,11 +6,12 @@ import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 import { Drawer } from "@/components/ui/drawer";
 import { Link } from "@/i18n/navigation";
+import type { BrandIdentity } from "./brand";
 import { MenuIcon, iconActionClasses } from "./icons";
 import { LanguageSwitcher } from "./language-switcher";
 import { ThemeToggle } from "./theme-toggle";
 
-export function MobileNav() {
+export function MobileNav({ brand }: { brand: BrandIdentity }) {
   const t = useTranslations("header");
   const tNav = useTranslations("nav");
   const tCommon = useTranslations("common");
@@ -33,7 +34,7 @@ export function MobileNav() {
         open={open}
         onClose={close}
         side="left"
-        title={siteConfig.wordmark}
+        title={brand.name}
         closeLabel={tCommon("close")}
       >
         <nav aria-label={t("mobileNavigation")} className="flex h-full flex-col">

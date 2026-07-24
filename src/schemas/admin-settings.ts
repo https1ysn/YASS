@@ -2,10 +2,19 @@ import { z } from "zod";
 
 /**
  * Validation for the Website Settings module — shared by the client form and
- * the server action. The shape mirrors the nine dashboard sections and every
- * field carries a default, so a partial or empty settings blob from the
- * database always resolves to a complete, render-safe object.
+ * the server action. The shape mirrors the dashboard sections and every field
+ * carries a default, so a partial or empty settings blob from the database
+ * always resolves to a complete, render-safe object.
  */
+
+/**
+ * The only place the brand name is written down in the application. It seeds a
+ * brand-new install and backs the very first render before an admin saves
+ * anything; every rendered occurrence reads `branding.websiteName` instead.
+ * Existing installs get their real name copied into the settings blob by
+ * migration 20260724120000_branding_settings.sql.
+ */
+export const DEFAULT_WEBSITE_NAME = "Yasso Store";
 
 const HEX_COLOR = /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
 
@@ -31,14 +40,22 @@ const text = (max: number, fallback = "") =>
 /** An uploaded image URL, or null when none is set. */
 const imageUrl = z.string().trim().min(1).nullable().default(null);
 
-export const generalSchema = z.object({
-  storeName: z.string().trim().min(1, "A store name is required.").max(120).default("Yasso Store"),
+export const brandingSchema = z.object({
+  // Identity. Kept strict (not `.catch()`) so the admin form surfaces a real
+  // "required" error instead of silently substituting the default; the read
+  // path in lib/settings.ts already degrades to the defaults on a bad blob,
+  // and the migration never writes a blank name.
+  websiteName: z
+    .string()
+    .trim()
+    .min(1, "A website name is required.")
+    .max(120, "Keep the website name under 120 characters.")
+    .default(DEFAULT_WEBSITE_NAME),
   tagline: text(200),
   logoUrl: imageUrl,
   faviconUrl: imageUrl,
-});
 
-export const brandingSchema = z.object({
+  // Palette.
   primaryColor: color("#000000"),
   secondaryColor: color("#ad7d56"),
   accentColor: color("#c2916a"),
@@ -87,10 +104,6 @@ export const storeSchema = z.object({
 });
 
 export const homepageSchema = z.object({
-  heroTitle: text(160),
-  heroSubtitle: text(400),
-  heroButtonText: text(60),
-  heroButtonLink: link,
   ctaBanner: text(300),
   newsletterTitle: text(160),
   newsletterDescription: text(400),
@@ -112,7 +125,6 @@ export const advancedSchema = z.object({
 export const siteSettingsSchema = z.object({
   // prefault (not default) applies `{}` on the INPUT side so each section's
   // field-level defaults fill in when the section is missing from the blob.
-  general: generalSchema.prefault({}),
   branding: brandingSchema.prefault({}),
   announcement: announcementSchema.prefault({}),
   contact: contactSchema.prefault({}),

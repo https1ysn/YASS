@@ -1,10 +1,8 @@
 {
   "metadata": {
-    "siteName": "Yasso Store",
-    "defaultTitle": "Yasso Store",
     "defaultDescription": "Une expérience e-commerce haut de gamme.",
     "shopTitle": "Boutique",
-    "shopDescription": "Découvrez tout le catalogue Yasso — des pièces réfléchies dans des tons neutres et chaleureux.",
+    "shopDescription": "Découvrez tout le catalogue {name} — des pièces réfléchies dans des tons neutres et chaleureux.",
     "collectionsTitle": "Collections",
     "collectionsDescription": "Explorez les collections de la maison — femme, homme, accessoires et parfums.",
     "collectionFallbackTitle": "Collection",
@@ -79,17 +77,6 @@
   },
 
   "home": {
-    "hero": {
-      "sectionAriaLabel": "Campagne à la une",
-      "badge": "Automne — Hiver 2026",
-      "title": "L'art du luxe discret",
-      "description": "Des silhouettes réfléchies dans des tons neutres et chaleureux — taillées dans la soie certifiée, le cachemire et le cuir, finies à la main dans nos ateliers.",
-      "shopNewArrivals": "Découvrir les nouveautés",
-      "exploreCollections": "Explorer les collections",
-      "imageAlt": "Campagne Automne–Hiver 2026 — silhouettes en tons neutres et chaleureux",
-      "justLanded": "Vient d'arriver",
-      "autumnCapsule": "La capsule automne"
-    },
     "benefits": {
       "ariaLabel": "Pourquoi nous choisir",
       "shipping": {
@@ -134,7 +121,7 @@
       "shopAll": "Voir toutes les meilleures ventes"
     },
     "finalCta": {
-      "kicker": "Yasso — Depuis 1998",
+      "kicker": "{name} — Depuis 1998",
       "title": "Sublimez le quotidien",
       "description": "Des pièces qui traversent les saisons et les tendances — faites lentement, portées souvent, gardées pour toujours.",
       "shopNewSeason": "Découvrir la nouvelle saison",
@@ -287,7 +274,7 @@
       "addCoupon": "Ajouter un code promo",
       "appliedCode": "{code} — 10 % de réduction",
       "remove": "Retirer",
-      "placeholder": "ex. YASSO10",
+      "placeholder": "ex. WELCOME10",
       "ariaLabel": "Code promo",
       "apply": "Appliquer"
     },

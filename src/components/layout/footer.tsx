@@ -1,9 +1,9 @@
-import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { siteConfig } from "@/config/site";
 import { Container } from "@/components/ui/container";
 import { Link } from "@/i18n/navigation";
 import type { SiteSettings } from "@/schemas/admin-settings";
+import { BrandMark, brandFromSettings } from "./brand";
 import { NewsletterSection } from "./newsletter-section";
 import { Copyright } from "./copyright";
 
@@ -26,11 +26,10 @@ function socialsFromSettings(social: SiteSettings["social"]) {
 export async function Footer({ settings }: { settings?: SiteSettings }) {
   const t = await getTranslations();
 
-  const storeName = settings?.general.storeName || siteConfig.name;
-  const logoUrl = settings?.general.logoUrl ?? null;
+  const brand = brandFromSettings(settings);
   const tagline =
     settings?.homepage.footerText?.trim() ||
-    settings?.general.tagline?.trim() ||
+    settings?.branding.tagline?.trim() ||
     t("footer.tagline");
 
   const configuredSocials = settings ? socialsFromSettings(settings.social) : [];
@@ -50,20 +49,10 @@ export async function Footer({ settings }: { settings?: SiteSettings }) {
           <div className="col-span-2 flex max-w-sm flex-col gap-4 sm:col-span-1">
             <Link
               href="/"
-              aria-label={t("header.homeAria", { name: storeName })}
+              aria-label={t("header.homeAria", { name: brand.name })}
               className="text-foreground flex w-fit items-center rounded-lg"
             >
-              {logoUrl ? (
-                <Image
-                  src={logoUrl}
-                  alt={storeName}
-                  width={160}
-                  height={40}
-                  className="h-9 w-auto object-contain"
-                />
-              ) : (
-                <span className="text-lg font-bold tracking-[0.35em]">{siteConfig.wordmark}</span>
-              )}
+              <BrandMark {...brand} className="text-lg sm:text-lg" />
             </Link>
             <p className="text-muted text-sm leading-relaxed">{tagline}</p>
             <ul className="mt-2 flex flex-wrap gap-5">
@@ -104,7 +93,7 @@ export async function Footer({ settings }: { settings?: SiteSettings }) {
         </div>
       </Container>
 
-      <Copyright />
+      <Copyright name={brand.name} />
     </footer>
   );
 }

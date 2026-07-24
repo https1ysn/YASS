@@ -1,7 +1,8 @@
 /** Structural site config — hrefs and stable keys only. Every display label
  * lives in messages/*.json (nav.*, footer.*, announcement, search.*) so the
- * storefront never hardcodes translations here. Used by both the storefront
- * and the admin (wordmark/name are brand constants, never translated). */
+ * storefront never hardcodes translations here. The brand name and logo are
+ * NOT here: they are admin-editable and live in Website Settings
+ * (`branding.websiteName` / `branding.logoUrl`), read via `getSiteSettings`. */
 
 export interface NavLink {
   key: string;
@@ -14,9 +15,6 @@ export interface FooterColumn {
 }
 
 export const siteConfig = {
-  name: "Yasso Store",
-  wordmark: "YASSO",
-
   nav: [
     { key: "shop", href: "/shop" },
     { key: "collections", href: "/collections" },

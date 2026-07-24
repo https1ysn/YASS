@@ -1,4 +1,5 @@
 export { AnnouncementBar } from "./announcement-bar";
+export { BrandMark, brandFromSettings, type BrandIdentity } from "./brand";
 export { CartButton, type CartButtonProps } from "./cart-button";
 export { Copyright } from "./copyright";
 export { DesktopNav } from "./desktop-nav";

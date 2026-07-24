@@ -12,7 +12,11 @@ import { Select } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "@/components/ui/toast";
 import { ColorField } from "./color-field";
-import { siteSettingsSchema, type SiteSettings } from "@/schemas/admin-settings";
+import {
+  DEFAULT_WEBSITE_NAME,
+  siteSettingsSchema,
+  type SiteSettings,
+} from "@/schemas/admin-settings";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import {
   ACCEPTED_IMAGE_ATTR,
@@ -239,7 +243,7 @@ type Section = keyof SiteSettings;
 
 /**
  * The Website Settings dashboard — every global storefront configuration,
- * grouped into nine sections and saved as one blob through the admin RPC.
+ * grouped into sections and saved as one blob through the admin RPC.
  */
 export function SettingsForm({ settings }: SettingsFormProps) {
   const router = useRouter();
@@ -304,32 +308,36 @@ export function SettingsForm({ settings }: SettingsFormProps) {
 
   return (
     <form onSubmit={submit} className="flex flex-col gap-5 sm:gap-6">
-      {/* 1. General */}
-      <FormSection title="General" description="Your store's identity across the storefront.">
+      {/* 1. Branding */}
+      <FormSection
+        title="Branding"
+        description="Your identity across the storefront, the admin and every browser tab."
+      >
         <div className="grid gap-5 sm:grid-cols-2">
           <Input
-            label="Store name"
-            value={form.general.storeName}
-            onChange={(e) => update("general", "storeName", e.target.value)}
-            placeholder="Yasso Store"
-            error={err("general", "storeName")}
+            label="Website name"
+            value={form.branding.websiteName}
+            onChange={(e) => update("branding", "websiteName", e.target.value)}
+            placeholder={DEFAULT_WEBSITE_NAME}
+            hint="Used in the header when no logo is set, in page titles and in the footer."
+            error={err("branding", "websiteName")}
           />
           <Input
-            label="Store tagline"
-            value={form.general.tagline}
-            onChange={(e) => update("general", "tagline", e.target.value)}
+            label="Tagline"
+            value={form.branding.tagline}
+            onChange={(e) => update("branding", "tagline", e.target.value)}
             placeholder="Timeless essentials, made to last."
-            error={err("general", "tagline")}
+            error={err("branding", "tagline")}
           />
         </div>
         <div className="grid gap-5 sm:grid-cols-2">
           <ImageField
-            label="Logo"
+            label="Logo image"
             kind="logo"
-            hint="Shown in the header and footer."
+            hint="Shown in the header and footer in place of the website name."
             aspect="wide"
-            value={form.general.logoUrl}
-            onChange={(url) => update("general", "logoUrl", url)}
+            value={form.branding.logoUrl}
+            onChange={(url) => update("branding", "logoUrl", url)}
             disabled={saving}
           />
           <ImageField
@@ -337,16 +345,16 @@ export function SettingsForm({ settings }: SettingsFormProps) {
             kind="favicon"
             hint="The browser-tab icon — a square PNG works best."
             aspect="square"
-            value={form.general.faviconUrl}
-            onChange={(url) => update("general", "faviconUrl", url)}
+            value={form.branding.faviconUrl}
+            onChange={(url) => update("branding", "faviconUrl", url)}
             disabled={saving}
           />
         </div>
       </FormSection>
 
-      {/* 2. Branding */}
+      {/* 2. Brand colors */}
       <FormSection
-        title="Branding"
+        title="Brand colors"
         description="Brand colors flow into the storefront's design tokens automatically."
       >
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -559,34 +567,6 @@ export function SettingsForm({ settings }: SettingsFormProps) {
 
       {/* 7. Homepage */}
       <FormSection title="Homepage" description="Headline copy across the home page. Leave blank to use the built-in translations.">
-        <div className="grid gap-5 sm:grid-cols-2">
-          <Input
-            label="Hero title"
-            value={form.homepage.heroTitle}
-            onChange={(e) => update("homepage", "heroTitle", e.target.value)}
-            error={err("homepage", "heroTitle")}
-          />
-          <Input
-            label="Hero button text"
-            value={form.homepage.heroButtonText}
-            onChange={(e) => update("homepage", "heroButtonText", e.target.value)}
-            error={err("homepage", "heroButtonText")}
-          />
-        </div>
-        <Textarea
-          label="Hero subtitle"
-          rows={2}
-          value={form.homepage.heroSubtitle}
-          onChange={(e) => update("homepage", "heroSubtitle", e.target.value)}
-          error={err("homepage", "heroSubtitle")}
-        />
-        <Input
-          label="Hero button link"
-          value={form.homepage.heroButtonLink}
-          onChange={(e) => update("homepage", "heroButtonLink", e.target.value)}
-          placeholder="/shop"
-          error={err("homepage", "heroButtonLink")}
-        />
         <Textarea
           label="CTA banner"
           rows={2}

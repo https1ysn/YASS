@@ -1,22 +1,28 @@
 import * as React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { siteConfig } from "@/config/site";
+import { BrandMark, type BrandIdentity } from "@/components/layout";
 import { ArrowRightIcon } from "@/components/layout/icons";
 import { AdminNav } from "./admin-nav";
 import { LogoutButton } from "./logout-button";
 
-/** Sidebar body — wordmark, nav and the back-to-store link. */
-export function AdminSidebarContent({ onNavigate }: { onNavigate?: () => void }) {
+/** Sidebar body — brand mark, nav and the back-to-store link. */
+export function AdminSidebarContent({
+  brand,
+  onNavigate,
+}: {
+  brand: BrandIdentity;
+  onNavigate?: () => void;
+}) {
   return (
     <div className="flex h-full flex-col gap-8">
       <Link
         href="/admin"
         onClick={onNavigate}
-        className="text-foreground flex items-baseline gap-2 text-lg font-bold tracking-[0.35em]"
+        className="text-foreground flex min-w-0 items-baseline gap-2"
       >
-        {siteConfig.wordmark}
-        <span className="text-secondary text-[10px] font-medium tracking-[0.2em] uppercase">
+        <BrandMark {...brand} className="text-lg sm:text-lg" imageClassName="h-8 sm:h-8" />
+        <span className="text-secondary shrink-0 text-[10px] font-medium tracking-[0.2em] uppercase">
           Admin
         </span>
       </Link>
@@ -39,7 +45,13 @@ export function AdminSidebarContent({ onNavigate }: { onNavigate?: () => void })
 }
 
 /** Fixed desktop sidebar (hidden below lg — the topbar drawer takes over). */
-export function AdminSidebar({ className }: { className?: string }) {
+export function AdminSidebar({
+  brand,
+  className,
+}: {
+  brand: BrandIdentity;
+  className?: string;
+}) {
   return (
     <aside
       className={cn(
@@ -47,7 +59,7 @@ export function AdminSidebar({ className }: { className?: string }) {
         className
       )}
     >
-      <AdminSidebarContent />
+      <AdminSidebarContent brand={brand} />
     </aside>
   );
 }

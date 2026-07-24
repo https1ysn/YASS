@@ -1,10 +1,8 @@
 {
   "metadata": {
-    "siteName": "Yasso Store",
-    "defaultTitle": "Yasso Store",
     "defaultDescription": "Premium e-commerce experience.",
     "shopTitle": "Shop",
-    "shopDescription": "Shop the full Yasso catalog — considered pieces in warm neutral tones.",
+    "shopDescription": "Shop the full {name} catalog — considered pieces in warm neutral tones.",
     "collectionsTitle": "Collections",
     "collectionsDescription": "Explore the maison's collections — women, men, accessories and fragrance.",
     "collectionFallbackTitle": "Collection",
@@ -79,17 +77,6 @@
   },
 
   "home": {
-    "hero": {
-      "sectionAriaLabel": "Featured campaign",
-      "badge": "Autumn — Winter 2026",
-      "title": "The art of quiet luxury",
-      "description": "Considered silhouettes in warm neutral tones — cut from certified silk, cashmere and leather, finished by hand in our ateliers.",
-      "shopNewArrivals": "Shop New Arrivals",
-      "exploreCollections": "Explore Collections",
-      "imageAlt": "Autumn–Winter 2026 campaign — warm neutral silhouettes",
-      "justLanded": "Just landed",
-      "autumnCapsule": "The Autumn Capsule"
-    },
     "benefits": {
       "ariaLabel": "Why shop with us",
       "shipping": {
@@ -134,7 +121,7 @@
       "shopAll": "Shop all best sellers"
     },
     "finalCta": {
-      "kicker": "Yasso — Est. 1998",
+      "kicker": "{name} — Est. 1998",
       "title": "Elevate the everyday",
       "description": "Pieces that outlast seasons and trends — made slowly, worn often, kept forever.",
       "shopNewSeason": "Shop the new season",
@@ -287,7 +274,7 @@
       "addCoupon": "Add a coupon code",
       "appliedCode": "{code} — 10% off",
       "remove": "Remove",
-      "placeholder": "e.g. YASSO10",
+      "placeholder": "e.g. WELCOME10",
       "ariaLabel": "Coupon code",
       "apply": "Apply"
     },

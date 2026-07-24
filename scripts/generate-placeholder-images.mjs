@@ -12,8 +12,6 @@ const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "publ
 
 // [file, width, height, gradientFrom, gradientTo, highlight]
 const images = [
-  ["hero/hero.jpg", 1200, 1500, "#d8bfa4", "#8a6647", "#f2e8da"],
-
   ["categories/women.jpg", 900, 1200, "#d3b99e", "#a3784f", "#f0e6d8"],
   ["categories/men.jpg", 900, 1200, "#b6a18a", "#6f5137", "#e5d9c8"],
   ["categories/accessories.jpg", 900, 1200, "#cbb094", "#966b42", "#f4ead9"],
