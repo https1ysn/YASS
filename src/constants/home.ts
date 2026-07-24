@@ -109,28 +109,8 @@ export const bestSellers: PlaceholderProduct[] = [
   },
 ];
 
-// brandStats/benefits/testimonials/instagramPosts text lives in
-// messages/*.json (home_brandStats, home_benefits, home_testimonials,
-// home_instagramAlts) — these arrays keep only the stable/numeric fields;
-// components pair them up by index with the translated text via t.raw().
-
-export const brandStats = [{ value: "1998" }, { value: "3" }, { value: "100%" }] as const;
+// benefits text lives in messages/*.json (home_benefits) — this array keeps
+// only the stable icon keys; the component pairs them up by index with the
+// translated text via t.raw().
 
 export const benefits = [{ icon: "shipping" }, { icon: "returns" }, { icon: "craft" }, { icon: "care" }] as const;
-
-export const testimonials = [
-  { name: "Amelia R.", location: "Paris", rating: 5 },
-  { name: "Karim B.", location: "Dubai", rating: 5 },
-  { name: "Sofia M.", location: "Milan", rating: 5 },
-] as const;
-
-export const instagramPosts = [
-  { imageSrc: "/images/instagram/i1.jpg" },
-  { imageSrc: "/images/instagram/i2.jpg" },
-  { imageSrc: "/images/instagram/i3.jpg" },
-  { imageSrc: "/images/instagram/i4.jpg" },
-  { imageSrc: "/images/instagram/i5.jpg" },
-  { imageSrc: "/images/instagram/i6.jpg" },
-] as const;
-
-export const instagramHandle = "@yasso.maison";

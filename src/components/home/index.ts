@@ -1,10 +1,7 @@
 export { Benefits } from "./benefits";
 export { BestSellers } from "./best-sellers";
-export { BrandStory } from "./brand-story";
 export { CallToAction } from "./cta";
 export { FeaturedCategories } from "./featured-categories";
 export { FeaturedProducts } from "./featured-products";
 export { FinalCtaBanner } from "./final-cta-banner";
 export { Hero } from "./hero";
-export { InstagramGallery } from "./instagram-gallery";
-export { Testimonials } from "./testimonials";

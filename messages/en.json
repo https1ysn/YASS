@@ -120,13 +120,6 @@
       "description": "A tight selection from the new season — chosen by our ateliers.",
       "viewAll": "View all new arrivals"
     },
-    "brandStory": {
-      "imageAlt": "Inside the Yasso atelier",
-      "eyebrow": "The maison",
-      "title": "Made slowly, kept forever",
-      "description": "Since 1998 we have worked with a small circle of family ateliers, choosing certified silk, cashmere and vegetable-tanned leather over volume. Each piece passes through hands, not lines — and is designed to be repaired, not replaced.",
-      "discoverStory": "Discover our story"
-    },
     "cta": {
       "eyebrow": "The maison service",
       "title": "Private styling, at your pace",
@@ -146,16 +139,6 @@
       "description": "Pieces that outlast seasons and trends — made slowly, worn often, kept forever.",
       "shopNewSeason": "Shop the new season",
       "browseCollections": "Browse all collections"
-    },
-    "testimonials": {
-      "eyebrow": "Words from our clients",
-      "title": "Quiet luxury, loudly loved",
-      "ratedAria": "Rated {rating} out of 5"
-    },
-    "instagram": {
-      "eyebrow": "Follow the maison",
-      "description": "Ateliers, campaigns and quiet moments — from our studio to yours.",
-      "openInstagram": "{alt} — opens Instagram"
     }
   },
 
@@ -524,27 +507,6 @@
     "Store folded in the provided cotton pouch, away from direct light.",
     "Steam gently — never iron directly on the surface.",
     "Repairs and refresh services are complimentary for life."
-  ],
-
-  "home_brandStats": [
-    { "label": "Maison founded" },
-    { "label": "Ateliers worldwide" },
-    { "label": "Responsibly sourced" }
-  ],
-
-  "home_testimonials": [
-    "The attention to detail is extraordinary. My coat arrived wrapped like a gift and fits like it was made for me.",
-    "Quiet luxury done right — no logos, just impeccable fabric and cut. I keep coming back every season.",
-    "Their lifetime care service restored my five-year-old tote to new. This is what buying well means."
-  ],
-
-  "home_instagramAlts": [
-    "Model wearing the silk wrap dress in sand",
-    "Close-up of hand-stitched leather tote detail",
-    "Atelier workspace with fabric swatches",
-    "Model in cashmere crewneck, studio portrait",
-    "Flat lay of the summer capsule pieces",
-    "Behind the scenes at the autumn campaign shoot"
   ],
 
   "common": {

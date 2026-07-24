@@ -120,13 +120,6 @@
       "description": "Une sélection resserrée de la nouvelle saison — choisie par nos ateliers.",
       "viewAll": "Voir toutes les nouveautés"
     },
-    "brandStory": {
-      "imageAlt": "Dans l'atelier Yasso",
-      "eyebrow": "La maison",
-      "title": "Fait lentement, gardé pour toujours",
-      "description": "Depuis 1998, nous travaillons avec un cercle restreint d'ateliers familiaux, privilégiant la soie certifiée, le cachemire et le cuir tanné végétal plutôt que le volume. Chaque pièce passe entre des mains, non entre des lignes de production — et est conçue pour être réparée, non remplacée.",
-      "discoverStory": "Découvrir notre histoire"
-    },
     "cta": {
       "eyebrow": "Le service de la maison",
       "title": "Un style privé, à votre rythme",
@@ -146,16 +139,6 @@
       "description": "Des pièces qui traversent les saisons et les tendances — faites lentement, portées souvent, gardées pour toujours.",
       "shopNewSeason": "Découvrir la nouvelle saison",
       "browseCollections": "Parcourir toutes les collections"
-    },
-    "testimonials": {
-      "eyebrow": "La parole de nos clients",
-      "title": "Un luxe discret, hautement apprécié",
-      "ratedAria": "Noté {rating} sur 5"
-    },
-    "instagram": {
-      "eyebrow": "Suivez la maison",
-      "description": "Ateliers, campagnes et instants discrets — de notre studio jusqu'à vous.",
-      "openInstagram": "{alt} — ouvre Instagram"
     }
   },
 
@@ -524,27 +507,6 @@
     "À ranger plié dans la housse en coton fournie, à l'abri de la lumière directe.",
     "Défroisser à la vapeur en douceur — ne jamais repasser directement sur la surface.",
     "Réparations et remises à neuf offertes à vie."
-  ],
-
-  "home_brandStats": [
-    { "label": "Maison fondée en" },
-    { "label": "Ateliers dans le monde" },
-    { "label": "Sourcing responsable" }
-  ],
-
-  "home_testimonials": [
-    "L'attention portée aux détails est extraordinaire. Mon manteau est arrivé emballé comme un cadeau et il me va comme s'il avait été fait pour moi.",
-    "Le luxe discret comme il se doit — aucun logo, juste une matière et une coupe impeccables. Je reviens à chaque saison.",
-    "Leur service d'entretien à vie a redonné à mon sac vieux de cinq ans un aspect neuf. C'est ça, bien acheter."
-  ],
-
-  "home_instagramAlts": [
-    "Mannequin portant la robe portefeuille en soie sable",
-    "Gros plan sur le détail cousu main du sac cabas en cuir",
-    "Espace de travail de l'atelier avec échantillons de tissus",
-    "Mannequin en pull col rond en cachemire, portrait studio",
-    "Mise à plat des pièces de la capsule été",
-    "Coulisses du tournage de la campagne automne"
   ],
 
   "common": {

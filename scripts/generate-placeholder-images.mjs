@@ -28,14 +28,9 @@ const images = [
   ["products/p7.jpg", 800, 1000, "#d0b697", "#966c44", "#f1e6d4"],
   ["products/p8.jpg", 800, 1000, "#c9ad8e", "#8d6543", "#eee1cf"],
 
-  ["story/atelier.jpg", 1200, 1200, "#cdb49e", "#7a5a3c", "#f0e6d8"],
-
-  ["instagram/i1.jpg", 800, 800, "#d7bfa3", "#a3784f", "#f3ead9"],
-  ["instagram/i2.jpg", 800, 800, "#c2a586", "#7d5a38", "#ecdfcd"],
-  ["instagram/i3.jpg", 800, 800, "#d1b697", "#966b42", "#f1e6d4"],
+  // Still referenced by the "summer-capsule" and "atelier" collections.
   ["instagram/i4.jpg", 800, 800, "#c8ab8b", "#87603e", "#eee1cf"],
   ["instagram/i5.jpg", 800, 800, "#dbc4a9", "#ab8055", "#f5eddf"],
-  ["instagram/i6.jpg", 800, 800, "#bda081", "#715335", "#e7dac7"],
 ];
 
 function svgFor(width, height, from, to, highlight) {
