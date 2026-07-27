@@ -1,29 +1,8 @@
 "use client";
 
-import * as React from "react";
 import { useTranslations } from "next-intl";
 import type { ProductSpecification } from "@/types/product";
-import { ChevronDownIcon } from "@/components/layout/icons";
-
-function AccordionItem({
-  title,
-  defaultOpen = false,
-  children,
-}: {
-  title: string;
-  defaultOpen?: boolean;
-  children: React.ReactNode;
-}) {
-  return (
-    <details open={defaultOpen} className="group">
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-sm font-medium tracking-wide select-none [&::-webkit-details-marker]:hidden">
-        {title}
-        <ChevronDownIcon className="text-muted size-4 shrink-0 transition-transform group-open:rotate-180" />
-      </summary>
-      <div className="animate-fade-in pb-5">{children}</div>
-    </details>
-  );
-}
+import { Accordion, AccordionItem } from "@/components/ui/accordion";
 
 export interface ProductAccordionsProps {
   specifications: ProductSpecification[];
@@ -36,7 +15,7 @@ export function ProductAccordions({ specifications, shipping, care }: ProductAcc
   const t = useTranslations("product.accordions");
 
   return (
-    <div className="divide-border border-border divide-y border-y">
+    <Accordion>
       <AccordionItem title={t("specifications")} defaultOpen>
         <dl className="flex flex-col gap-2.5">
           {specifications.map((spec) => (
@@ -69,6 +48,6 @@ export function ProductAccordions({ specifications, shipping, care }: ProductAcc
           ))}
         </ul>
       </AccordionItem>
-    </div>
+    </Accordion>
   );
 }

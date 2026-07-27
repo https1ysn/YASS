@@ -11,6 +11,8 @@ import { DEFAULT_WEBSITE_NAME, type SiteSettings } from "@/schemas/admin-setting
  */
 export interface BrandIdentity {
   name: string;
+  /** Empty string when the admin has not set one — surfaces render nothing. */
+  tagline: string;
   logoUrl: string | null;
 }
 
@@ -18,11 +20,14 @@ export interface BrandIdentity {
 export function brandFromSettings(settings?: SiteSettings | null): BrandIdentity {
   return {
     name: settings?.branding.websiteName?.trim() || DEFAULT_WEBSITE_NAME,
+    tagline: settings?.branding.tagline?.trim() ?? "",
     logoUrl: settings?.branding.logoUrl ?? null,
   };
 }
 
-export interface BrandMarkProps extends BrandIdentity {
+export interface BrandMarkProps {
+  name: string;
+  logoUrl: string | null;
   /** Classes for the text wordmark rendered when no logo is set. */
   className?: string;
   /** Classes for the logo image rendered when one is set. */

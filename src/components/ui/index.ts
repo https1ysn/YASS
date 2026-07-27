@@ -1,3 +1,4 @@
+export { Accordion, AccordionItem, type AccordionProps, type AccordionItemProps } from "./accordion";
 export { Alert, StatusIcon, type AlertProps, type StatusVariant } from "./alert";
 export { Badge, type BadgeProps } from "./badge";
 export { Breadcrumb, type BreadcrumbItem, type BreadcrumbProps } from "./breadcrumb";

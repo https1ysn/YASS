@@ -52,7 +52,7 @@ export async function Footer({ settings }: { settings?: SiteSettings }) {
               aria-label={t("header.homeAria", { name: brand.name })}
               className="text-foreground flex w-fit items-center rounded-lg"
             >
-              <BrandMark {...brand} className="text-lg sm:text-lg" />
+              <BrandMark name={brand.name} logoUrl={brand.logoUrl} className="text-lg sm:text-lg" />
             </Link>
             <p className="text-muted text-sm leading-relaxed">{tagline}</p>
             <ul className="mt-2 flex flex-wrap gap-5">

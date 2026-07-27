@@ -99,7 +99,8 @@
     "featuredCategories": {
       "eyebrow": "Curated for you",
       "title": "Shop by category",
-      "description": "Four worlds, one language — warm neutrals, honest materials, timeless cuts."
+      "description": "Four worlds, one language — warm neutrals, honest materials, timeless cuts.",
+      "viewAllCategories": "View all categories"
     },
     "featuredProducts": {
       "eyebrow": "The edit",

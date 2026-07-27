@@ -18,7 +18,7 @@ export default async function AdminLoginPage() {
       <div className="animate-slide-up flex w-full max-w-md flex-col gap-6">
         <div className="flex flex-col items-center gap-2 text-center">
           <p className="text-foreground flex items-baseline justify-center gap-2">
-            <BrandMark {...brand} className="text-xl sm:text-xl" />
+            <BrandMark name={brand.name} logoUrl={brand.logoUrl} className="text-xl sm:text-xl" />
             <span className="text-secondary shrink-0 text-[10px] font-medium tracking-[0.2em] uppercase">
               Admin
             </span>

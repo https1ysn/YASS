@@ -99,7 +99,8 @@
     "featuredCategories": {
       "eyebrow": "Sélectionné pour vous",
       "title": "Acheter par catégorie",
-      "description": "Quatre univers, un seul langage — tons neutres, matières honnêtes, coupes intemporelles."
+      "description": "Quatre univers, un seul langage — tons neutres, matières honnêtes, coupes intemporelles.",
+      "viewAllCategories": "Voir toutes les catégories"
     },
     "featuredProducts": {
       "eyebrow": "La sélection",

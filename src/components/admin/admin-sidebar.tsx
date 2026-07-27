@@ -21,7 +21,12 @@ export function AdminSidebarContent({
         onClick={onNavigate}
         className="text-foreground flex min-w-0 items-baseline gap-2"
       >
-        <BrandMark {...brand} className="text-lg sm:text-lg" imageClassName="h-8 sm:h-8" />
+        <BrandMark
+          name={brand.name}
+          logoUrl={brand.logoUrl}
+          className="text-lg sm:text-lg"
+          imageClassName="h-8 sm:h-8"
+        />
         <span className="text-secondary shrink-0 text-[10px] font-medium tracking-[0.2em] uppercase">
           Admin
         </span>

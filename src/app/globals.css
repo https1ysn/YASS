@@ -15,28 +15,33 @@
   color-scheme: light dark;
 
   /* Core palette */
-  --background: light-dark(#cdb49e, #14110e);
-  --surface: light-dark(#e9ddcd, #1e1915);
-  --surface-elevated: light-dark(#ffffff, #292219);
-  --foreground: light-dark(#111111, #f4efe8);
-  --muted: light-dark(#6b7280, #a39d94);
+  --background: light-dark(#f8f7f4, #181818);
+  --surface: light-dark(#ffffff, #222222);
+  --surface-elevated: light-dark(#f3f3f3, #2d2d2d);
 
-  --primary: light-dark(#000000, #f4efe8);
-  --primary-foreground: light-dark(#ffffff, #141110);
-  --secondary: light-dark(#ad7d56, #c2916a);
+  --foreground: light-dark(#111111, #ffffff);
+  --muted: light-dark(#6b7280, #b3b3b3);
+
+  /* Brand */
+  --primary: light-dark(#111111, #ffffff);
+  --primary-foreground: light-dark(#ffffff, #111111);
+
+  --secondary: light-dark(#e63946, #ff4d5e);
   --secondary-foreground: #ffffff;
-  --accent: light-dark(#c2916a, #ad7d56);
+
+  --accent: light-dark(#e63946, #ff4d5e);
   --accent-foreground: #ffffff;
 
-  --border: light-dark(rgba(0, 0, 0, 0.08), rgba(255, 255, 255, 0.1));
-  --ring: light-dark(#ad7d56, #c2916a);
-  --overlay: light-dark(rgba(20, 17, 14, 0.45), rgba(0, 0, 0, 0.65));
+  /* UI */
+  --border: light-dark(#e5e7eb, rgba(255, 255, 255, 0.12));
+  --ring: light-dark(#e63946, #ff4d5e);
+  --overlay: light-dark(rgba(17, 17, 17, 0.35), rgba(0, 0, 0, 0.7));
 
   /* Status */
-  --success: light-dark(#3f7a4e, #8bc39a);
-  --warning: light-dark(#9a6b1f, #d9a554);
-  --danger: light-dark(#b3402f, #e08575);
-  --info: light-dark(#4f6b85, #9db2c4);
+  --success: light-dark(#22c55e, #4ade80);
+  --warning: light-dark(#f59e0b, #fbbf24);
+  --danger: light-dark(#ef4444, #f87171);
+  --info: light-dark(#3b82f6, #60a5fa);
 }
 
 .dark {

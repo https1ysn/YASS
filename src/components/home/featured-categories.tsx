@@ -1,9 +1,11 @@
 import * as React from "react";
 import Image from "next/image";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import { Section } from "@/components/ui/section";
+import { ButtonLink } from "@/components/ui/button-link";
 import { Reveal } from "@/components/shared/reveal";
 import { Link } from "@/i18n/navigation";
+import { localeHref } from "@/i18n/alternates";
 import { featuredCategories as defaultCategories } from "@/constants/home";
 
 export interface FeaturedCategoryItem {
@@ -19,6 +21,7 @@ export async function FeaturedCategories({
   categories?: readonly FeaturedCategoryItem[];
 }) {
   const t = await getTranslations("home.featuredCategories");
+  const locale = await getLocale();
 
   return (
     <Section eyebrow={t("eyebrow")} title={t("title")} description={t("description")}>
@@ -50,6 +53,17 @@ export async function FeaturedCategories({
           </Reveal>
         ))}
       </div>
+      <Reveal className="mt-10 flex justify-center sm:mt-14">
+        {/* Scoped premium treatment for this CTA only — the shared Button
+            primitives are intentionally left untouched. `bg-accent` on hover
+            follows the brand accent the admin sets in Website Settings. */}
+        <ButtonLink
+          href={localeHref(locale, "/collections")}
+          className="h-14 w-[300px] max-w-full cursor-pointer rounded-full bg-[#111111] px-8 text-base font-semibold tracking-[0.02em] text-white shadow-soft transition-all duration-[250ms] hover:-translate-y-0.5 hover:bg-accent hover:text-accent-foreground hover:shadow-elevated"
+        >
+          {t("viewAllCategories")}
+        </ButtonLink>
+      </Reveal>
     </Section>
   );
 }
