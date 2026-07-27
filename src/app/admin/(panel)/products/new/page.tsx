@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { ProductForm } from "@/components/admin";
-import { getAdminCategories } from "@/lib/supabase/admin";
+import { getAdminCategories, getAdminSizeOptions } from "@/lib/supabase/admin";
 
 export const metadata: Metadata = { title: "New product" };
 
 export const dynamic = "force-dynamic";
 
 export default async function NewProductPage() {
-  const categories = await getAdminCategories();
+  const [categories, sizes] = await Promise.all([getAdminCategories(), getAdminSizeOptions()]);
 
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col gap-6">
@@ -17,7 +17,7 @@ export default async function NewProductPage() {
           A placeholder gallery is assigned automatically — imagery management comes later.
         </p>
       </div>
-      <ProductForm categories={categories} />
+      <ProductForm categories={categories} sizes={sizes} />
     </div>
   );
 }

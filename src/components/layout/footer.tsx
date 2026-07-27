@@ -36,7 +36,7 @@ export async function Footer({ settings }: { settings?: SiteSettings }) {
   const socials = configuredSocials.length > 0 ? configuredSocials : siteConfig.footer.socials;
 
   return (
-    <footer className="border-border bg-surface mt-auto border-t">
+    <footer className="border-border bg-footer text-footer-text mt-auto border-t">
       <Container>
         <div className="py-12 sm:py-16">
           <NewsletterSection
@@ -50,7 +50,7 @@ export async function Footer({ settings }: { settings?: SiteSettings }) {
             <Link
               href="/"
               aria-label={t("header.homeAria", { name: brand.name })}
-              className="text-foreground flex w-fit items-center rounded-lg"
+              className="text-footer-text flex w-fit items-center rounded-lg"
             >
               <BrandMark name={brand.name} logoUrl={brand.logoUrl} className="text-lg sm:text-lg" />
             </Link>
@@ -81,7 +81,7 @@ export async function Footer({ settings }: { settings?: SiteSettings }) {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-foreground/75 hover:text-foreground text-sm transition-colors"
+                      className="text-footer-link/75 hover:text-footer-link text-sm transition-colors"
                     >
                       {t(`footer.${link.key}`)}
                     </Link>

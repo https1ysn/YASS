@@ -12,6 +12,7 @@ import { Select } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "@/components/ui/toast";
 import { ColorField } from "./color-field";
+import { ThemeEditor } from "./theme-editor";
 import {
   DEFAULT_WEBSITE_NAME,
   siteSettingsSchema,
@@ -255,6 +256,17 @@ export function SettingsForm({ settings }: SettingsFormProps) {
   const [errors, setErrors] = React.useState<Record<string, string>>({});
   const [saving, setSaving] = React.useState(false);
 
+  // Cancel restores the last saved settings, including every theme token.
+  const dirty =
+    JSON.stringify(form) !== JSON.stringify(settings) ||
+    thresholdText.trim() !== String(settings.store.freeShippingThreshold);
+
+  function discard() {
+    setForm(settings);
+    setThresholdText(String(settings.store.freeShippingThreshold));
+    setErrors({});
+  }
+
   function update<S extends Section, K extends keyof SiteSettings[S]>(
     section: S,
     key: K,
@@ -352,44 +364,35 @@ export function SettingsForm({ settings }: SettingsFormProps) {
         </div>
       </FormSection>
 
-      {/* 2. Brand colors */}
-      <FormSection
-        title="Brand colors"
-        description="Brand colors flow into the storefront's design tokens automatically."
-      >
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          <ColorField
-            label="Primary color"
-            value={form.branding.primaryColor}
-            onChange={(v) => update("branding", "primaryColor", v)}
-            error={err("branding", "primaryColor")}
-          />
-          <ColorField
-            label="Secondary color"
-            value={form.branding.secondaryColor}
-            onChange={(v) => update("branding", "secondaryColor", v)}
-            error={err("branding", "secondaryColor")}
-          />
-          <ColorField
-            label="Accent color"
-            value={form.branding.accentColor}
-            onChange={(v) => update("branding", "accentColor", v)}
-            error={err("branding", "accentColor")}
-          />
-          <ColorField
-            label="Success color"
-            value={form.branding.successColor}
-            onChange={(v) => update("branding", "successColor", v)}
-            error={err("branding", "successColor")}
-          />
-          <ColorField
-            label="Error color"
-            value={form.branding.errorColor}
-            onChange={(v) => update("branding", "errorColor", v)}
-            error={err("branding", "errorColor")}
-          />
-        </div>
-      </FormSection>
+      {/* 2. Theme */}
+      <ThemeEditor
+        theme={form.theme}
+        disabled={saving}
+        errors={errors}
+        onChange={(mode, key, value) =>
+          setForm((prev) => ({
+            ...prev,
+            theme: { ...prev.theme, [mode]: { ...prev.theme[mode], [key]: value } },
+          }))
+        }
+        onResetMode={(mode) =>
+          setForm((prev) => ({
+            ...prev,
+            theme: {
+              ...prev.theme,
+              [mode]: Object.fromEntries(
+                Object.keys(prev.theme[mode]).map((key) => [key, ""])
+              ) as SiteSettings["theme"]["light"],
+            },
+          }))
+        }
+        onCopyMode={(from, to) =>
+          setForm((prev) => ({
+            ...prev,
+            theme: { ...prev.theme, [to]: { ...prev.theme[from] } },
+          }))
+        }
+      />
 
       {/* 3. Announcement Bar */}
       <FormSection title="Announcement bar" description="The slim promo banner above the header.">
@@ -652,9 +655,14 @@ export function SettingsForm({ settings }: SettingsFormProps) {
       {/* Sticky save bar */}
       <div className="glass sticky bottom-4 z-10 flex flex-wrap items-center justify-end gap-3 rounded-2xl p-3.5 sm:bottom-6">
         <p className="text-muted mr-auto pl-1 text-xs sm:text-sm">
-          Changes apply to the storefront right after saving.
+          {dirty
+            ? "Unsaved changes — the preview is live, the storefront is not."
+            : "Changes apply to the storefront right after saving."}
         </p>
-        <Button type="submit" isLoading={saving}>
+        <Button type="button" variant="ghost" onClick={discard} disabled={saving || !dirty}>
+          Cancel
+        </Button>
+        <Button type="submit" isLoading={saving} disabled={!dirty}>
           {saving ? "Saving…" : "Save changes"}
         </Button>
       </div>

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { THEME_TOKENS, type ThemeTokenKey } from "@/lib/theme-tokens";
 
 /**
  * Validation for the Website Settings module — shared by the client form and
@@ -54,14 +55,42 @@ export const brandingSchema = z.object({
   tagline: text(200),
   logoUrl: imageUrl,
   faviconUrl: imageUrl,
-
-  // Palette.
-  primaryColor: color("#000000"),
-  secondaryColor: color("#ad7d56"),
-  accentColor: color("#c2916a"),
-  successColor: color("#3f7a4e"),
-  errorColor: color("#b3402f"),
 });
+
+/**
+ * A theme token. "" means "keep the built-in value", which preserves the
+ * storefront's automatic light/dark adaptation for every color the admin has
+ * not deliberately overridden. `catch` keeps one malformed stored token from
+ * invalidating the whole settings blob.
+ */
+const themeColor = z
+  .union([z.literal(""), z.string().trim().regex(HEX_COLOR, "Enter a valid hex color (e.g. #AD7D56).")])
+  .catch("")
+  .default("");
+
+/** One palette — every token, for a single mode. */
+export const themePaletteSchema = z.object(
+  Object.fromEntries(THEME_TOKENS.map((token) => [token.key, themeColor])) as Record<
+    ThemeTokenKey,
+    typeof themeColor
+  >
+);
+
+export type ThemePaletteSettings = z.infer<typeof themePaletteSchema>;
+
+/**
+ * Two independent palettes. The storefront applies `light` outside `.dark` and
+ * `dark` inside it, so each mode is customized without disturbing the other.
+ * Pre-split settings blobs are folded into `light` on read (see
+ * adoptLegacyFlatTheme in lib/settings.ts) and by migration
+ * 20260727140000_theme_light_dark.sql.
+ */
+export const themeSchema = z.object({
+  light: themePaletteSchema.prefault({}),
+  dark: themePaletteSchema.prefault({}),
+});
+
+export type ThemeSettings = z.infer<typeof themeSchema>;
 
 export const announcementSchema = z.object({
   // Enabled by default so the storefront keeps its promo bar out of the box;
@@ -126,6 +155,7 @@ export const siteSettingsSchema = z.object({
   // prefault (not default) applies `{}` on the INPUT side so each section's
   // field-level defaults fill in when the section is missing from the blob.
   branding: brandingSchema.prefault({}),
+  theme: themeSchema.prefault({}),
   announcement: announcementSchema.prefault({}),
   contact: contactSchema.prefault({}),
   social: socialSchema.prefault({}),

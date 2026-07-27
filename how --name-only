@@ -1,0 +1,52 @@
+[33mcommit 07fcdee7d915bd2dfd1737b771b0949d9a761103[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Yassine <elbiadyassin25@gmail.com>
+Date:   Mon Jul 27 11:39:55 2026 +0100
+
+    feat(home): redesign Featured Categories CTA with premium styling
+
+ graphify-out/.graphify_labels.json                 |     1 [32m+[m
+ graphify-out/.graphify_python                      |     1 [32m+[m
+ graphify-out/.graphify_root                        |     1 [32m+[m
+ graphify-out/GRAPH_REPORT.md                       |   314 [32m+[m
+ ...2f60af33085992c27522858590b33a62e1082f9cb1.json |     1 [32m+[m
+ ...b615a856355419ae1330f4391648fa613cdb84a11a.json |     1 [32m+[m
+ graphify-out/cache/last_query_stamp                |     1 [32m+[m
+ ...1bf41d72b715032f5330c764caf35ced497eabac85.json |     1 [32m+[m
+ ...74c5e2ad139879c87b86e9825fc46a6db6606b304c.json |     1 [32m+[m
+ ...7b617d5b8cc88c4950aaf18f70e9681758bf20b152.json |     1 [32m+[m
+ ...8967f0d51a0da93d79d48caa09e9d307ea1c1d3f17.json |     1 [32m+[m
+ ...9a36ba36273cc3c55a431324a5f2512e59597d1f5e.json |     1 [32m+[m
+ ...667bfd20bc006b78d64d40f6521293bd71f06d435e.json |     1 [32m+[m
+ ...169ea1beb737988df30bbcf656be2412968c61acdd.json |     1 [32m+[m
+ ...2d640ae53a93d878492dcc8118f8712149029b5b78.json |     1 [32m+[m
+ ...e179350c9a8e893c25c08cb2e1a8ec25f4f8a33868.json |     1 [32m+[m
+ ...4c0dbf6fcceaf3c3904254c3ccd89dd00644b375ad.json |     1 [32m+[m
+ ...fd3c645085b5ac95063d1d43e481c49520c8792943.json |     1 [32m+[m
+ ...923a9b4b697b3cc5388b07b266ab27eef3fac66ef5.json |     1 [32m+[m
+ ...a6e1499d3fd771ba1e409e12d3d42506bde0df53df.json |     1 [32m+[m
+ ...14e1eef2076ce42c7a9514b0de738c286f443e21ba.json |     1 [32m+[m
+ ...e304568be59562da7573e96e44d207360d32508269.json |     1 [32m+[m
+ ...aa14a79bf784424d7144e1b63dbcbc4b9e32c12474.json |     1 [32m+[m
+ ...d2cc99b5eaf9f0c0141461ebbd7a275c2441bb3e6c.json |     1 [32m+[m
+ ...c3d3e7f88d75e85fdcceb5f84618f75683c720da6d.json |     1 [32m+[m
+ ...8ef3fac36c12f10e55670542986157e0d34e914c05.json |     1 [32m+[m
+ ...a2dbcda672f58d9b45343cd95a45ce1bb0646a741c.json |     1 [32m+[m
+ graphify-out/cache/stat-index.json                 |     1 [32m+[m
+ graphify-out/cost.json                             |    12 [32m+[m
+ graphify-out/graph.html                            |   320 [32m+[m
+ graphify-out/graph.json                            | 40821 [32m+++++++++++++++++++[m
+ graphify-out/manifest.json                         |  1152 [32m+[m
+ messages/ar.json                                   |     3 [32m+[m[31m-[m
+ messages/en.json                                   |     3 [32m+[m[31m-[m
+ messages/fr.json                                   |     3 [32m+[m[31m-[m
+ src/app/admin/login/page.tsx                       |     2 [32m+[m[31m-[m
+ src/app/globals.css                                |    39 [32m+[m[31m-[m
+ src/components/admin/admin-sidebar.tsx             |     7 [32m+[m[31m-[m
+ src/components/home/featured-categories.tsx        |    16 [32m+[m[31m-[m
+ src/components/layout/brand.tsx                    |     7 [32m+[m[31m-[m
+ src/components/layout/footer.tsx                   |     2 [32m+[m[31m-[m
+ src/components/layout/navbar.tsx                   |    36 [32m+[m[31m-[m
+ src/components/product/product-accordions.tsx      |    27 [32m+[m[31m-[m
+ src/components/ui/accordion.tsx                    |    29 [32m+[m
+ src/components/ui/index.ts                         |     1 [32m+[m
+ 45 files changed, 42764 insertions(+), 57 deletions(-)

@@ -55,11 +55,12 @@ export async function FeaturedCategories({
       </div>
       <Reveal className="mt-10 flex justify-center sm:mt-14">
         {/* Scoped premium treatment for this CTA only — the shared Button
-            primitives are intentionally left untouched. `bg-accent` on hover
-            follows the brand accent the admin sets in Website Settings. */}
+            primitives are intentionally left untouched. Both colors are design
+            tokens, so the pill follows the Theme editor and adapts in dark mode
+            (`--primary` is #111111 in light mode, matching the original spec). */}
         <ButtonLink
           href={localeHref(locale, "/collections")}
-          className="h-14 w-[300px] max-w-full cursor-pointer rounded-full bg-[#111111] px-8 text-base font-semibold tracking-[0.02em] text-white shadow-soft transition-all duration-[250ms] hover:-translate-y-0.5 hover:bg-accent hover:text-accent-foreground hover:shadow-elevated"
+          className="text-primary-foreground bg-primary hover:bg-accent hover:text-accent-foreground shadow-soft hover:shadow-elevated h-14 w-[300px] max-w-full cursor-pointer rounded-full px-8 text-base font-semibold tracking-[0.02em] transition-all duration-[250ms] hover:-translate-y-0.5"
         >
           {t("viewAllCategories")}
         </ButtonLink>

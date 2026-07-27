@@ -1,6 +1,9 @@
 import { isSupabaseConfigured } from "./config";
 import { createSupabaseServerClient } from "./server";
 import { isOrderStatus } from "@/lib/order-status";
+import type { AdminSize } from "@/schemas/admin-size";
+
+export type { AdminSize };
 
 /**
  * Admin dashboard read model — a single aggregate RPC so the RLS-protected
@@ -830,4 +833,69 @@ export async function getAdminCategories(): Promise<AdminCategory[]> {
   } catch {
     return [];
   }
+}
+
+/* --------------------------------------------------------- sizes management */
+
+interface AdminSizeDbRow {
+  id: string;
+  name: string;
+  sort_order: number;
+  active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+function mapAdminSize(row: AdminSizeDbRow): AdminSize {
+  return {
+    id: row.id,
+    name: row.name,
+    sortOrder: row.sort_order,
+    active: row.active,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+  };
+}
+
+export type AdminSizesResult =
+  | { ok: true; sizes: AdminSize[] }
+  | { ok: false; error: string };
+
+/**
+ * The full size list in display order — the single source of truth behind both
+ * the Sizes page and the size checkboxes on the product form.
+ */
+export async function getAdminSizes(): Promise<AdminSizesResult> {
+  if (!isSupabaseConfigured) {
+    return { ok: false, error: "Supabase is not configured — check your environment variables." };
+  }
+  try {
+    const { data, error } = await (await adminClient())
+      .from("sizes")
+      .select("id, name, sort_order, active, created_at, updated_at")
+      .order("sort_order", { ascending: true })
+      .order("name", { ascending: true });
+
+    if (error) {
+      // The table only exists once the Sizes migration has been applied.
+      if (error.code === "42P01" || /relation .*sizes.* does not exist/i.test(error.message)) {
+        return {
+          ok: false,
+          error:
+            "Sizes aren't set up yet — apply the latest database migration (20260727120000_sizes.sql) and refresh.",
+        };
+      }
+      return { ok: false, error: friendlyError(error.message, error.code) };
+    }
+    return { ok: true, sizes: ((data ?? []) as AdminSizeDbRow[]).map(mapAdminSize) };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "";
+    return { ok: false, error: friendlyError(message) };
+  }
+}
+
+/** Sizes for the product form — never throws, so the form always renders. */
+export async function getAdminSizeOptions(): Promise<AdminSize[]> {
+  const result = await getAdminSizes();
+  return result.ok ? result.sizes : [];
 }

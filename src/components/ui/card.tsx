@@ -10,7 +10,7 @@ export function Card({ interactive = false, className, ...props }: CardProps) {
   return (
     <div
       className={cn(
-        "border-border bg-surface shadow-soft rounded-2xl border",
+        "border-card-border bg-card shadow-card rounded-2xl border",
         interactive && "hover-lift",
         className
       )}

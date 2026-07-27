@@ -32,7 +32,7 @@ export function Header({
       <header
         className={cn(
           "border-border sticky top-0 z-40 border-b transition-all",
-          scrolled ? "bg-background/75 shadow-soft backdrop-blur-xl" : "bg-background"
+          scrolled ? "bg-navbar/75 shadow-soft backdrop-blur-xl" : "bg-navbar"
         )}
       >
         <div className="relative">

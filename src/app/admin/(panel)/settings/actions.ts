@@ -9,6 +9,11 @@ import { siteSettingsSchema, type SiteSettings } from "@/schemas/admin-settings"
 export type SaveSettingsResult = { ok: true } | { ok: false; error: string };
 
 function friendlyError(message: string, code?: string): string {
+  // A permission failure is not a missing migration — keep the two distinct so
+  // the message points at the real cause.
+  if (code === "42501" || /permission denied/i.test(message)) {
+    return "Your session doesn't have permission to save settings — sign in again and retry.";
+  }
   if (code === "PGRST202" || /admin_save_settings|get_site_settings|site_settings/i.test(message)) {
     return "Settings aren't fully set up yet — apply the latest database migration (20260712120000_site_settings.sql) and try again.";
   }

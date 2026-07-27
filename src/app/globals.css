@@ -42,6 +42,41 @@
   --warning: light-dark(#f59e0b, #fbbf24);
   --danger: light-dark(#ef4444, #f87171);
   --info: light-dark(#3b82f6, #60a5fa);
+
+  /* ---------------------------------------------------------------------
+   * Component tokens. Each defaults to a core token above, so the palette
+   * stays coherent out of the box while Admin → Settings → Theme can retarget
+   * any single surface without disturbing the rest. Overrides arrive as
+   * inline custom properties on <html> (see lib/settings.ts).
+   * ------------------------------------------------------------------- */
+
+  /* Buttons */
+  --button-primary-bg: var(--primary);
+  --button-primary-hover: color-mix(in srgb, var(--primary) 85%, transparent);
+  --button-secondary-bg: var(--secondary);
+  --button-secondary-hover: color-mix(in srgb, var(--secondary) 90%, transparent);
+
+  /* Navbar */
+  --navbar-bg: var(--background);
+  --navbar-text: var(--foreground);
+  --navbar-hover: var(--secondary);
+  --navbar-active: var(--foreground);
+
+  /* Footer */
+  --footer-bg: var(--surface);
+  --footer-text: var(--foreground);
+  --footer-link: var(--foreground);
+
+  /* Cards */
+  --card-bg: var(--surface);
+  --card-border: var(--border);
+  --card-shadow-color: light-dark(#000000, #000000);
+
+  /* Inputs */
+  --input-bg: var(--surface-elevated);
+  --input-border: var(--border);
+  --input-placeholder: var(--muted);
+  --input-focus-border: var(--secondary);
 }
 
 .dark {
@@ -73,6 +108,25 @@
   --color-danger: var(--danger);
   --color-info: var(--info);
 
+  /* Component tokens — utilities like bg-card, border-input, text-navbar-text */
+  --color-button-primary: var(--button-primary-bg);
+  --color-button-primary-hover: var(--button-primary-hover);
+  --color-button-secondary: var(--button-secondary-bg);
+  --color-button-secondary-hover: var(--button-secondary-hover);
+  --color-navbar: var(--navbar-bg);
+  --color-navbar-text: var(--navbar-text);
+  --color-navbar-hover: var(--navbar-hover);
+  --color-navbar-active: var(--navbar-active);
+  --color-footer: var(--footer-bg);
+  --color-footer-text: var(--footer-text);
+  --color-footer-link: var(--footer-link);
+  --color-card: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --color-input: var(--input-bg);
+  --color-input-border: var(--input-border);
+  --color-input-placeholder: var(--input-placeholder);
+  --color-input-focus: var(--input-focus-border);
+
   /* Typography — Arabic (dir="rtl") swaps to Cairo via the override below */
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
@@ -83,6 +137,12 @@
   --default-transition-timing-function: var(--ease-luxury);
 
   /* Soft elegant shadows */
+  /* Card shadow — tinted by --card-shadow-color so the Theme editor can
+   * warm or cool every card's depth without touching the other shadows. */
+  --shadow-card:
+    0 1px 2px color-mix(in srgb, var(--card-shadow-color) 4%, transparent),
+    0 4px 16px color-mix(in srgb, var(--card-shadow-color) 6%, transparent);
+
   --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.04), 0 4px 16px rgb(0 0 0 / 0.06);
   --shadow-elevated: 0 2px 4px rgb(0 0 0 / 0.05), 0 12px 32px rgb(0 0 0 / 0.1);
   --shadow-lift: 0 4px 8px rgb(0 0 0 / 0.06), 0 20px 48px rgb(0 0 0 / 0.14);

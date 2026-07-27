@@ -65,6 +65,16 @@ const items: AdminNavItem[] = [
     ),
   },
   {
+    label: "Sizes",
+    href: "/admin/sizes",
+    icon: (
+      <NavIcon>
+        <path d="M3 6.5h14v7H3v-7Z" />
+        <path d="M6.5 6.5v2.5M10 6.5v3.5M13.5 6.5v2.5" />
+      </NavIcon>
+    ),
+  },
+  {
     label: "Orders",
     href: "/admin/orders",
     icon: (

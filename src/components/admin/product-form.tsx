@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { cn, slugify } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
@@ -13,6 +14,7 @@ import { toast } from "@/components/ui/toast";
 import { filterColors } from "@/constants/shop";
 import { adminProductSchema, HEX_COLOR_RE } from "@/schemas/admin-product";
 import type { AdminCategory, AdminProduct } from "@/lib/supabase/admin";
+import type { AdminSize } from "@/schemas/admin-size";
 import { saveProduct } from "@/app/admin/(panel)/products/actions";
 
 type BadgeValue = "New" | "Best Seller" | "Sale" | null;
@@ -50,7 +52,7 @@ interface FormState {
   compareAtPrice: string;
   availability: "in-stock" | "made-to-order";
   colors: string[];
-  sizes: string;
+  sizes: string[];
   isFeatured: boolean;
   badge: BadgeValue;
 }
@@ -65,7 +67,7 @@ function initialState(product?: AdminProduct): FormState {
     compareAtPrice: product?.compareAtPrice != null ? String(product.compareAtPrice) : "",
     availability: product?.availability ?? "in-stock",
     colors: product?.colors ?? [],
-    sizes: product?.sizes.join(", ") ?? "",
+    sizes: product?.sizes ?? [],
     isFeatured: product?.isFeatured ?? false,
     badge:
       product?.badge === "New" || product?.badge === "Best Seller" || product?.badge === "Sale"
@@ -112,11 +114,13 @@ function Toggle({
 
 export interface ProductFormProps {
   categories: AdminCategory[];
+  /** The global size list (Admin → Sizes) — drives the size checkboxes. */
+  sizes: AdminSize[];
   product?: AdminProduct;
 }
 
 /** Create/edit product form — Zod-validated, saved through the admin RPC. */
-export function ProductForm({ categories, product }: ProductFormProps) {
+export function ProductForm({ categories, sizes, product }: ProductFormProps) {
   const router = useRouter();
   const [form, setForm] = React.useState<FormState>(() => initialState(product));
   const [errors, setErrors] = React.useState<Record<string, string>>({});
@@ -130,6 +134,29 @@ export function ProductForm({ categories, product }: ProductFormProps) {
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
+  }
+
+  /**
+   * Active sizes from the Sizes page, plus any size this product already
+   * carries that has since been hidden or deleted — so editing an older product
+   * never silently drops a size the storefront is still showing.
+   */
+  const sizeOptions = React.useMemo(() => {
+    const options = sizes
+      .filter((size) => size.active)
+      .map((size) => ({ name: size.name, legacy: false }));
+    const known = new Set(options.map((option) => option.name));
+    const legacy = form.sizes
+      .filter((name) => !known.has(name))
+      .map((name) => ({ name, legacy: true }));
+    return [...options, ...legacy];
+  }, [sizes, form.sizes]);
+
+  function toggleSize(name: string, checked: boolean) {
+    update(
+      "sizes",
+      checked ? [...form.sizes, name] : form.sizes.filter((size) => size !== name)
+    );
   }
 
   function setBadge(value: Exclude<BadgeValue, null>, checked: boolean) {
@@ -184,10 +211,7 @@ export function ProductForm({ categories, product }: ProductFormProps) {
       availability: form.availability,
       badge: form.badge,
       colors: form.colors,
-      sizes: form.sizes
-        .split(",")
-        .map((size) => size.trim())
-        .filter(Boolean),
+      sizes: form.sizes,
       isFeatured: form.isFeatured,
     };
 
@@ -395,14 +419,59 @@ export function ProductForm({ categories, product }: ProductFormProps) {
           {errors.colors && <p className="text-danger text-sm">{errors.colors}</p>}
         </div>
 
-        <Input
-          label="Sizes"
-          value={form.sizes}
-          onChange={(event) => update("sizes", event.target.value)}
-          placeholder="XS, S, M, L"
-          hint="Comma separated — e.g. XS, S, M, L or 40, 41, 42."
-          error={errors.sizes}
-        />
+        <div className="flex flex-col gap-3">
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <p className="text-muted text-xs font-medium tracking-[0.15em] uppercase">Sizes</p>
+            <Link
+              href="/admin/sizes"
+              className="text-muted hover:text-foreground text-xs underline-offset-4 transition-colors hover:underline"
+            >
+              Manage sizes
+            </Link>
+          </div>
+
+          {sizeOptions.length === 0 ? (
+            <p className="text-muted text-xs leading-relaxed">
+              No sizes available yet —{" "}
+              <Link href="/admin/sizes" className="underline underline-offset-4">
+                add them on the Sizes page
+              </Link>{" "}
+              and they will appear here automatically.
+            </p>
+          ) : (
+            <ul className="flex flex-wrap gap-2" aria-label="Available sizes">
+              {sizeOptions.map((option) => {
+                const checked = form.sizes.includes(option.name);
+                return (
+                  <li key={option.name}>
+                    <label
+                      className={cn(
+                        "flex cursor-pointer items-center gap-2 rounded-xl border px-3.5 py-2 text-sm font-medium transition-all select-none",
+                        checked
+                          ? "border-secondary bg-secondary/10 text-foreground"
+                          : "border-border bg-surface-elevated text-foreground/75 hover:border-secondary/50"
+                      )}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={checked}
+                        onChange={(event) => toggleSize(option.name, event.target.checked)}
+                        className="accent-secondary size-4 shrink-0 rounded"
+                      />
+                      <span className="uppercase">{option.name}</span>
+                      {option.legacy && (
+                        <span className="text-muted text-[10px] tracking-wide uppercase">
+                          retired
+                        </span>
+                      )}
+                    </label>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+          {errors.sizes && <p className="text-danger text-sm">{errors.sizes}</p>}
+        </div>
       </FormSection>
 
       <FormSection title="Merchandising">

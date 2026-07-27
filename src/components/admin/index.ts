@@ -26,4 +26,5 @@ export { ProductsTable } from "./products-table";
 export { ProductsToolbar } from "./products-toolbar";
 export { RecentOrders } from "./recent-orders";
 export { SettingsForm, type SettingsFormProps } from "./settings-form";
+export { SizesManager, type SizesManagerProps } from "./sizes-manager";
 export { StatCard, type StatCardProps } from "./stat-card";

@@ -26,9 +26,9 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           aria-invalid={error ? true : undefined}
           aria-describedby={describedBy}
           className={cn(
-            "border-border bg-surface-elevated text-foreground shadow-soft min-h-28 w-full rounded-2xl border px-4 py-3 text-sm transition-all",
-            "placeholder:text-muted",
-            "focus:border-secondary focus:ring-secondary/25 focus:ring-2 focus:outline-none",
+            "border-input-border bg-input text-foreground shadow-soft min-h-28 w-full rounded-2xl border px-4 py-3 text-sm transition-all",
+            "placeholder:text-input-placeholder",
+            "focus:border-input-focus focus:ring-input-focus/25 focus:ring-2 focus:outline-none",
             "disabled:cursor-not-allowed disabled:opacity-50",
             error && "border-danger focus:border-danger focus:ring-danger/25",
             className

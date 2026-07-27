@@ -4,9 +4,9 @@ import { Spinner } from "./spinner";
 
 const variants = {
   primary:
-    "bg-primary text-primary-foreground shadow-soft hover:bg-primary/85 hover:shadow-elevated",
+    "bg-button-primary text-primary-foreground shadow-soft hover:bg-button-primary-hover hover:shadow-elevated",
   secondary:
-    "bg-secondary text-secondary-foreground shadow-soft hover:bg-secondary/90 hover:shadow-elevated",
+    "bg-button-secondary text-secondary-foreground shadow-soft hover:bg-button-secondary-hover hover:shadow-elevated",
   outline:
     "border border-primary/70 bg-transparent text-foreground hover:bg-primary hover:text-primary-foreground",
   ghost: "bg-transparent text-foreground hover:bg-foreground/5",

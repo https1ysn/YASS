@@ -10,6 +10,13 @@ export interface ColorFieldProps {
   hint?: string;
   error?: string;
   disabled?: boolean;
+  /**
+   * The built-in value shown in the swatch while `value` is empty. Supplying
+   * it turns the field into an override: blank means "inherit the default".
+   */
+  defaultValue?: string;
+  /** Renders a Reset control whenever the field differs from its default. */
+  onReset?: () => void;
 }
 
 const HEX = /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
@@ -27,15 +34,40 @@ function toColorInputValue(value: string): string {
  * A real color picker: a native swatch (the OS color dialog) sitting flush
  * against a hex text input, kept in sync. Matches the design-system Input.
  */
-export function ColorField({ label, value, onChange, hint, error, disabled }: ColorFieldProps) {
+export function ColorField({
+  label,
+  value,
+  onChange,
+  hint,
+  error,
+  disabled,
+  defaultValue,
+  onReset,
+}: ColorFieldProps) {
   const id = React.useId();
   const describedBy = error ? `${id}-error` : hint ? `${id}-hint` : undefined;
+  // While the field is blank the swatch previews the built-in value, so the
+  // picker always opens on the color actually in effect.
+  const swatchValue = value.trim() || defaultValue || "";
+  const overridden = Boolean(onReset && value.trim());
 
   return (
     <div className="flex w-full flex-col gap-2">
-      <label htmlFor={`${id}-hex`} className="text-foreground text-sm font-medium tracking-wide">
-        {label}
-      </label>
+      <div className="flex items-baseline justify-between gap-2">
+        <label htmlFor={`${id}-hex`} className="text-foreground text-sm font-medium tracking-wide">
+          {label}
+        </label>
+        {overridden && (
+          <button
+            type="button"
+            onClick={onReset}
+            disabled={disabled}
+            className="text-muted hover:text-foreground text-xs underline-offset-4 transition-colors hover:underline focus-visible:ring-ring focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
+          >
+            Reset
+          </button>
+        )}
+      </div>
       <div
         className={cn(
           "border-border bg-surface-elevated shadow-soft flex h-11 items-center gap-2 rounded-2xl border pr-3 pl-1.5 transition-all",
@@ -48,7 +80,7 @@ export function ColorField({ label, value, onChange, hint, error, disabled }: Co
           <input
             type="color"
             aria-label={`${label} swatch`}
-            value={toColorInputValue(value)}
+            value={toColorInputValue(swatchValue)}
             disabled={disabled}
             onChange={(event) => onChange(event.target.value)}
             className="absolute -inset-1 size-[calc(100%+8px)] cursor-pointer border-0 bg-transparent p-0"
@@ -70,7 +102,7 @@ export function ColorField({ label, value, onChange, hint, error, disabled }: Co
             if (next && !next.startsWith("#")) next = `#${next}`;
             onChange(next);
           }}
-          placeholder="#000000"
+          placeholder={defaultValue ? `${defaultValue.toUpperCase()} (default)` : "#000000"}
           className="text-foreground placeholder:text-muted h-full w-full min-w-0 bg-transparent font-mono text-sm uppercase focus:outline-none"
         />
       </div>
