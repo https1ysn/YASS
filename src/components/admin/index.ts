@@ -7,6 +7,7 @@ export { CategoriesToolbar } from "./categories-toolbar";
 export { CategoryForm, type CategoryFormProps } from "./category-form";
 export { CategoryRowActions } from "./category-row-actions";
 export { ColorField, type ColorFieldProps } from "./color-field";
+export { ContentEditor, type ContentEditorProps } from "./content-editor";
 export { CustomersTable } from "./customers-table";
 export { CustomersToolbar } from "./customers-toolbar";
 export { LoginForm } from "./login-form";
